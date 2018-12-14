@@ -34,7 +34,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Comptechsoft\\Usermanagement\\": "packages/comptech-soft/users-management/src/"
+            "Comptechsoft\\Usermanagement\\": "packages/comptech-soft/users-management/src/",
+            "Comptechsoft\\Adminmodern\\": "packages/comptech-soft/admin-modern/src/"
         },
         "classmap": [
             "database/seeds",
