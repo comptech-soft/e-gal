@@ -55,7 +55,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Comptechsoft\Usermanagement\Providers\UsersManagementServiceProvider::class,
         /*
          * Application Service Providers...
          */
