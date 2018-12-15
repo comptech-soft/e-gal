@@ -1,12 +1,16 @@
 class Launcher {
 
     constructor(name, window, plugins) {
-        console.log('I am the App Launcher: (' + name + ')');
 
+        /**
+         * App name global scope
+         */
         this.name = name
-
         window[name] = {}
 
+        /**
+         * Attach pugins
+         */
         this.CreatePlugins(plugins, window[name])
     }
 
@@ -14,6 +18,10 @@ class Launcher {
         for(let key in plugins) {
             app[key] = plugins[key]
         }
+
+        /**
+         * 
+         */
     }
 }
 

@@ -102,7 +102,14 @@
                     email: null,
                     password: null,
                     remember_me: false,
-                }
+                },
+
+                /**
+                 * Intr-un formular tre sa pun un obiect FormManager
+                 * Acestuia i se transmite o referinta catre componenta
+                 * Componenta tre sa aiba "record"
+                 */
+                formManager: null,
             }
         },
 
@@ -114,7 +121,7 @@
 
         methods: {
             onClickLogin(e) {
-                alert('I try to login...');
+                this.formManager.onSubmit()
             },
 
             onClickForgetPassword(e) {
@@ -128,6 +135,12 @@
             onClickCreateAccount(e) {
                 alert('Create account?');
             },
+        },
+
+        mounted() {
+            this.formManager = new ComptechApp.FormManager(this, 'aaaaaaaa', data => {
+                console.log(data)
+            })
         },
 
         components: {

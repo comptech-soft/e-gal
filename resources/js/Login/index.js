@@ -7,6 +7,11 @@ $(document).ready( () => {
     }
     const AppLauncherClass = require('./../Libs/App/Launcher')
 
+    const Axios = require('axios')
+    Axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    Axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]').content
+    Axios.defaults.baseURL = document.head.querySelector('meta[name="base-url"]').content + '/'
+
     let launcher = new AppLauncherClass('ComptechApp', window, {
 
         '_': require('lodash'),
@@ -14,7 +19,9 @@ $(document).ready( () => {
         'Vue': require('vue'),
         'VueRouter': require('vue-router').default,
         'Vuex': require('vuex'),
-        'Axios': require('axios'),
+        'Axios': Axios,
+
+        'FormManager': require('./../Libs/Form/Manager')
     
     })
 
