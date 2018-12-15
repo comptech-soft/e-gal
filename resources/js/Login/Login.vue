@@ -1,58 +1,147 @@
 <template>
-        <section class="flexbox-container">
-            <div class="col-12 d-flex align-items-center justify-content-center">
-        <div class="col-md-4 col-10 box-shadow-2 p-0">
-            <div class="card border-grey border-lighten-3 m-0">
-                <div class="card-header border-0">
-                    <div class="card-title text-center">
-                        <div class="p-1"><img src="../../../app-assets/images/logo/logo-dark.png" alt="branding logo"></div>
-                    </div>
-                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Login with Modern</span></h6>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <form class="form-horizontal form-simple" action="index.html" novalidate>
-                            <fieldset class="form-group position-relative has-icon-left mb-0">
-                                <input type="text" class="form-control form-control-lg input-lg" id="user-name" placeholder="Your Username" required>
-                                <div class="form-control-position">
-                                    <i class="ft-user"></i>
-                                </div>
-                            </fieldset>
-                            <fieldset class="form-group position-relative has-icon-left">
-                                <input type="password" class="form-control form-control-lg input-lg" id="user-password" placeholder="Enter Password" required>
-                                <div class="form-control-position">
-                                    <i class="la la-key"></i>
-                                </div>
-                            </fieldset>
+    <section class="flexbox-container">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="col-md-4 col-10 box-shadow-2 p-0">
+
+                <vt-card>
+                    <template slot="card-header">
+                        <div class="card-title text-center">
+                            <div class="p-1">
+                                <vt-img
+                                    :src="url + '/app-assets/images/logo/logo-dark.png'"
+                                    alt="Branding Logo"
+                                >
+                                </vt-img>
+                            </div>
+                        </div>
+                        <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+                            <span>Login with Modern</span>
+                        </h6>
+                    </template>
+
+                    <vt-form slot="card-body">
+                        <template slot="form-controls">
+
+                            {{ record }}
+
+                            <vt-textbox 
+                                id="user-name"
+                                placeholder="Your user name"
+                                v-model="record.email"
+                            />
+
+                            <vt-password
+                                id="user-password"
+                                placeholder="Your password"
+                                v-model="record.password"
+                            >
+                            </vt-password>
+
                             <div class="form-group row">
                                 <div class="col-md-6 col-12 text-center text-md-left">
-                                    <fieldset>
-                                        <input type="checkbox" id="remember-me" class="chk-remember">
-                                        <label for="remember-me"> Remember Me</label>
-                                    </fieldset>
+                                    <vt-checkbox
+                                        id="remember-me"
+                                        label="Tine-mă minte!"
+                                        v-model="record.remember_me"
+                                    >
+                                    </vt-checkbox>
                                 </div>
-                                <div class="col-md-6 col-12 text-center text-md-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
+
+                                <div class="col-md-6 col-12 text-center text-md-right">
+                                    <vt-link
+                                        caption="Ai uitat parola?"
+                                        @click="onClickForgetPassword"
+                                    >
+                                    </vt-link>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-info btn-lg btn-block"><i class="ft-unlock"></i> Login</button>
-                        </form>
+                        </template>
+
+                        <template slot="form-actions">
+                            
+                            
+                            <vt-button 
+                                caption="Login"
+                                icon="ft-unlock"
+                                @click="onClickLogin"
+                            >
+                            </vt-button>
+                        </template>
+                    </vt-form>
+
+                    <div class="" slot="card-footer">
+                        <p class="float-sm-left text-center m-0">
+                            <vt-link
+                                caption="Recupereaza parola"
+                                @click="onClickRecoverPassword"
+                            >
+                            </vt-link>
+                        </p>
+                        
+                        <p class="float-sm-right text-center m-0">
+                            Ești nou pe aici? 
+                            <vt-link
+                                caption="Crează-ți un cont"
+                                @click="onClickCreateAccount"
+                            >
+                            </vt-link>
+                        </p>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="">
-                        <p class="float-sm-left text-center m-0"><a href="recover-password.html" class="card-link">Recover password</a></p>
-                        <p class="float-sm-right text-center m-0">New to Moden Admin? <a href="register-simple.html" class="card-link">Sign Up</a></p>
-                    </div>
-                </div>
+                </vt-card>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </template>
 
 <script>
-export default {
-    
-}
+    export default {
+
+        data() {
+            return {
+                record: {
+                    email: null,
+                    password: null,
+                    remember_me: false,
+                }
+            }
+        },
+
+        computed: {
+            url() {
+                return document.head.querySelector('meta[name="base-url"]').content
+            }
+        },
+
+        methods: {
+            onClickLogin(e) {
+                alert('I try to login...');
+            },
+
+            onClickForgetPassword(e) {
+                alert('Forget your password?');
+            },
+
+            onClickRecoverPassword(e) {
+                alert('Recover password?');
+            },
+
+            onClickCreateAccount(e) {
+                alert('Create account?');
+            },
+        },
+
+        components: {
+            'vt-card': require('./Card'),
+            'vt-form': require('./Form'),
+
+            'vt-img': require('./Image'),
+            'vt-textbox': require('./Textbox'),
+            'vt-password': require('./Password'),
+            'vt-checkbox': require('./Checkbox'),
+            'vt-link': require('./Link'),
+            'vt-button': require('./Button'),
+        }
+    }
 </script>
 
 
