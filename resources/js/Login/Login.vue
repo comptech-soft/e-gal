@@ -19,21 +19,29 @@
                         </h6>
                     </template>
 
-                    <vt-form slot="card-body">
+                    <vt-form 
+                        slot="card-body"
+                        :result="formManager ? formManager.result : null"
+                        @close="formManager.result = null"
+                    >
                         <template slot="form-controls">
-
-                            {{ record }}
 
                             <vt-textbox 
                                 id="user-name"
+                                field="email"
                                 placeholder="Your user name"
                                 v-model="record.email"
+                                :show_error="false"
+                                :errors="formManager ? formManager.getErrors() : null"
                             />
 
                             <vt-password
                                 id="user-password"
+                                field="password"
                                 placeholder="Your password"
                                 v-model="record.password"
+                                :show_error="false"
+                                :errors="formManager ? formManager.getErrors() : null"
                             >
                             </vt-password>
 
@@ -138,7 +146,9 @@
         },
 
         mounted() {
-            this.formManager = new ComptechApp.FormManager(this, 'aaaaaaaa', data => {
+            this.formManager = new ComptechApp.FormManager(this, 'login', data => {
+                console.log(data)
+            }, data => {
                 console.log(data)
             })
         },

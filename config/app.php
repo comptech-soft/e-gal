@@ -55,6 +55,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Comptechsoft\Appcore\Providers\AppCoreServiceProvider::class,
         Comptechsoft\Usermanagement\Providers\UsersManagementServiceProvider::class,
         Comptechsoft\Adminmodern\Providers\AdminmodernServiceProvider::class,
 

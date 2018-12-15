@@ -1,5 +1,5 @@
 <template>
-    <fieldset class="form-group position-relative has-icon-left">
+    <fieldset :class="'form-group position-relative has-icon-left' + (has_error ? ' has-danger' : '')">
         <input 
             type="password"
             :id="id"
@@ -13,6 +13,8 @@
         <div class="form-control-position">
             <i class="la la-key"></i>
         </div>
+
+        {{ error_to_string }}
     </fieldset>
 </template>
 
@@ -22,9 +24,19 @@
             id: {type:String, required: true},
             placeholder: {type:String, required: true},
             value: {},
-        }
+        },
 
-        // user-password
-        // Enter Password
+        mixins: [
+            require('./~mixins/errors')
+        ]
     }
 </script>
+
+<style lang="scss" scoped>
+    fieldset.has-danger {
+        input {
+            border-color: #ff4961 !important;
+        }
+
+    }
+</style>

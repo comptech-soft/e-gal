@@ -28,6 +28,10 @@ class Manager {
         this.errors_bag = null
     }
 
+    getErrors() {
+        return this.errors_bag
+    }
+
     resetResults() {
         this.success = null
         this.result = null

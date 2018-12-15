@@ -1,0 +1,27 @@
+{
+    "name": "comptech-soft/app-core",
+    "description": "Laravel application core classes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ovidiu Andrus",
+            "email": "ovidiu.andrus@comptech.ro"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Comptechsoft\\Appcore\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Comptechsoft\\Appcore\\Providers\\AppCoreServiceProvider"
+            ]
+        }
+    } 
+}
