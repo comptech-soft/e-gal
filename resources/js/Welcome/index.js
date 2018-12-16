@@ -23,16 +23,24 @@ $(document).ready( () => {
         'Vuex': require('vuex'),
         'Axios': Axios,
 
-        'FormManager': require('./../Libs/Form/Manager')
+        'vueInstances': {},
+
+        // 'FormManager': require('./../Libs/Form/Manager')
     
     })
 
-    new window.ComptechApp.Vue({
-        el: '#app',
+    window.ComptechApp.Vue.use(window.ComptechApp.Vuex)
+
+    window.ComptechApp.vueInstances['nav'] = new window.ComptechApp.Vue({
+        el: '#app-nav',
         // router: new VueRouter({routes: require('./routes/routes')}),
-        // store: new Vuex.Store(require('./store/store')),
+        store: new window.ComptechApp.Vuex.Store(require('./Store/store')),
         components: {
-            'login-form': require('comptechsoft-admin-modern').pages.login,
-        }
+            'top-navigation': require('./Nav')
+        },
+        mounted(){
+            this.$store.commit('getConfig')
+        },
     })
+
 })
