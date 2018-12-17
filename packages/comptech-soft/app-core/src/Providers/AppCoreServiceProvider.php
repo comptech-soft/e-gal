@@ -12,6 +12,13 @@ class AppCoreServiceProvider extends ServiceProvider {
          * Se incarca rutele definite
          */
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
+
+        /**
+         * Fisierul de configurare
+         */
+        $this->publishes([
+            __DIR__ . '/../Config/comptechsoft.core.php' => config_path('comptechsoft.core.php'),
+        ]);
     }
 
     public function register() {

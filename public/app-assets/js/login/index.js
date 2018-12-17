@@ -59869,7 +59869,7 @@ var install = VeeValidate$1.install;
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 module.exports = {
-    computed: _extends({}, Vuex.mapGetters(['user', 'config', 'role', 'ready']), {
+    computed: _extends({}, Vuex.mapGetters(['user', 'config', 'role', 'sidebar', 'ready']), {
         url: function url() {
             return this.$store.getters.config ? this.$store.getters.config.base_url : null;
         },
@@ -59905,6 +59905,11 @@ module.exports = {
 
     role: null,
 
+    sidebar: {
+        ready: null,
+        options: {}
+    },
+
     ready: false
 
 };
@@ -59925,6 +59930,10 @@ module.exports = {
 
     role: function role(state) {
         return state.role;
+    },
+
+    sidebar: function sidebar(state) {
+        return state.sidebar;
     },
 
     ready: function ready(state) {
@@ -59954,6 +59963,20 @@ module.exports = {
             console.log('ERROR.Store Mutations::getConfig()');
             console.log(error);
         });
+    },
+    getSidebar: function getSidebar(state) {
+        state.sidebar.ready = false;
+        return axios.request({
+            method: 'post',
+            url: 'get-left-sidebar',
+            data: {}
+        }).then(function (r) {
+            state.sidebar.options = r.data.sidebar;
+            state.sidebar.ready = true;
+        }).catch(function (error) {
+            console.log('ERROR.Store Mutations::getSidebar()');
+            console.log(error);
+        });
     }
 };
 
@@ -59963,10 +59986,21 @@ module.exports = {
 
 module.exports = {
 
-    getConfig: function getConfig(_ref) {
-        var commit = _ref.commit;
-        return commit('getConfig');
-    }
+  /**
+   * App configuration
+   */
+  getConfig: function getConfig(_ref) {
+    var commit = _ref.commit;
+    return commit('getConfig');
+  },
+
+  /**
+   * App left Sidebar
+   */
+  getSidebar: function getSidebar(_ref2) {
+    var commit = _ref2.commit;
+    return commit('getSidebar');
+  }
 
 };
 
@@ -61225,6 +61259,7 @@ var render = function() {
       attrs: { href: _vm.url_to },
       on: {
         click: function($event) {
+          $event.preventDefault()
           _vm.$emit("click")
         }
       }
@@ -61755,6 +61790,19 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 exports.default = {
@@ -61776,15 +61824,12 @@ exports.default = {
     },
 
 
-    // computed: {
-    //     url() {
-    //         return document.head.querySelector('meta[name="base-url"]').content
-    //     }
-    // },
-
     methods: {
         onClickLogin: function onClickLogin(e) {
             this.formManager.onSubmit();
+        },
+        onClickCancelLogin: function onClickCancelLogin() {
+            this.app.Http.redirect();
         },
         onClickForgetPassword: function onClickForgetPassword(e) {
             alert('Forget your password?');
@@ -61993,32 +62038,50 @@ var render = function() {
                   "div",
                   { attrs: { slot: "card-footer" }, slot: "card-footer" },
                   [
-                    _c(
-                      "p",
-                      { staticClass: "float-sm-left text-center m-0" },
-                      [
-                        _c("vt-link", {
-                          attrs: { caption: "Recupereaza parola" },
-                          on: { click: _vm.onClickRecoverPassword }
-                        })
-                      ],
-                      1
-                    ),
+                    _c("div", [
+                      _c(
+                        "p",
+                        { staticClass: "float-sm-left text-center m-0" },
+                        [
+                          _c("vt-link", {
+                            attrs: { caption: "Recuperează parola" },
+                            on: { click: _vm.onClickRecoverPassword }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "float-sm-right text-center m-0" },
+                        [
+                          _vm._v(
+                            "\n                            Ești nou pe aici? \n                            "
+                          ),
+                          _c("vt-link", {
+                            attrs: { caption: "Crează-ți un cont" },
+                            on: { click: _vm.onClickCreateAccount }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticStyle: { clear: "both" } })
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticClass: "float-sm-right text-center m-0" },
-                      [
-                        _vm._v(
-                          "\n                        Ești nou pe aici? \n                        "
-                        ),
-                        _c("vt-link", {
-                          attrs: { caption: "Crează-ți un cont" },
-                          on: { click: _vm.onClickCreateAccount }
-                        })
-                      ],
-                      1
-                    )
+                    _c("div", [
+                      _c(
+                        "p",
+                        { staticClass: "float-sm-left text-center m-0" },
+                        [
+                          _c("vt-link", {
+                            attrs: { caption: "Renunț la login" },
+                            on: { click: _vm.onClickCancelLogin }
+                          })
+                        ],
+                        1
+                      )
+                    ])
                   ]
                 )
               ],

@@ -4,7 +4,7 @@
             <i class="ficon ft-search"></i>
         </a>
         <div class="search-input">
-            <input class="input" type="text" placeholder="Explore Modern...">
+            <input class="input" type="text" placeholder="Caută...">
         </div>
     </li>
 </template>

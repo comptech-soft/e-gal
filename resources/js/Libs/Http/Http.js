@@ -4,7 +4,7 @@ class Http {
         this.app = app
     }
     
-    redirect(timeout = 1000, url = null) {
+    redirect(timeout = 250, url = null) {
         if( ! url ) 
         {
             url = document.head.querySelector('meta[name="base-url"]').content

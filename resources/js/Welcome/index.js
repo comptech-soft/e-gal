@@ -1,5 +1,7 @@
 const Launcher = require('./../Libs/App/Launcher')
-    
+const Sidebar = require('./../EGal/Sidebar/Sidebar')
+//  router: new VueRouter({routes: require('./routes/routes')}),   
+
 $(document).ready( () => {
 
     let plugins = {
@@ -11,15 +13,34 @@ $(document).ready( () => {
         require('./../EGal/Mixins/Store')
     ])
 
+    let store = new Vuex.Store(require('./../EGal/Store/store'))
+
     app.CreateVueObject('app-nav', {
         el: '#app-nav',
-        // router: new VueRouter({routes: require('./routes/routes')}),
-        store: new Vuex.Store(require('./../EGal/Store/store')),
+        store,
         components: {
             'top-navigation': require('./Nav')
         },
         mounted(){
             this.$store.commit('getConfig')
+        },
+    })
+
+    app.CreateVueObject('left-sidebar', {
+        el: '#left-sidebar',
+        store,
+        components: {
+            'left-sidebar': require('./Sidebar/Sidebar')
+        },
+        methods: {
+            onSidebarClick(option) {
+                console.log('Side bar click....', option);
+                let sidebar = new Sidebar(app, this)
+                return sidebar.Dispatch(option)
+            }
+        },
+        mounted(){
+            this.$store.commit('getSidebar')
         },
     })
 

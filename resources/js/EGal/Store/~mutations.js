@@ -20,5 +20,22 @@ module.exports = {
         })
     },
 
+    getSidebar(state) {
+        state.sidebar.ready = false
+        return axios.request({
+            method: 'post', 
+            url: 'get-left-sidebar', 
+            data: {},
+        })
+        .then( r => {
+            state.sidebar.options = r.data.sidebar
+            state.sidebar.ready = true
+        })
+        .catch( error => {
+            console.log('ERROR.Store Mutations::getSidebar()')
+            console.log(error)
+        })
+    },
+
 
 }

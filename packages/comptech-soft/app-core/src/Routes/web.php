@@ -6,6 +6,7 @@ Route::middleware('web')->group(function(){
     Route::namespace('Comptechsoft\Appcore\Controllers')->group(function(){
 
         Route::post('get-app-configs', 'ConfigController@getConfig');
+        Route::post('get-left-sidebar', 'ConfigController@getLeftSidebar');
 
     });    
 });

@@ -6,6 +6,8 @@ module.exports = {
 
     role: state => state.role,
 
+    sidebar: state => state.sidebar,
+
     ready: state => state.ready,
 
 }

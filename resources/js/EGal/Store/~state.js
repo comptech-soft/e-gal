@@ -6,6 +6,11 @@ module.exports = {
 
     role: null,
 
+    sidebar: {
+        ready: null,
+        options: {},
+    },
+
     ready: false,
 
 }
