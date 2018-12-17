@@ -3,7 +3,7 @@ module.exports = {
     getConfig(state) {
 
         state.ready = false
-        return ComptechApp.Axios.request({
+        return axios.request({
             method: 'post', 
             url: 'get-app-configs', 
             data: {},

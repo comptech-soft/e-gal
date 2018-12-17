@@ -1,7 +1,7 @@
 module.exports = {
     computed: {
 
-        ...ComptechApp.Vuex.mapGetters(['user', 'config', 'role', 'ready']),
+        ...Vuex.mapGetters(['user', 'config', 'role', 'ready']),
 
         url() {
             return document.head.querySelector('meta[name="base-url"]').content

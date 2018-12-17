@@ -57,7 +57,6 @@ class Manager {
     }
 
     onSuccessResponse(response, onSuccess) {
-        alert(this.result.message)
         onSuccess(response)
     }
 
@@ -94,7 +93,7 @@ class Manager {
         this.resetResults()
         try
         {
-            return ComptechApp.Axios.request({
+            return axios.request({
                 method: 'post', 
                 url: options.endpoint, 
                 data: options.record,

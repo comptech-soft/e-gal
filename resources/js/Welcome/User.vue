@@ -23,18 +23,22 @@
                 <i class="ft-message-square"></i> Chats
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" @click="onLogout">
+            <a class="dropdown-item"  @click="onLogout">
 
                 <i class="ft-power"></i> Logout
             </a>
         </div>
     </li>
+    <li v-else class="dropdown dropdown-user nav-item">
+        <a class="nav-link" :href="url + '/login'">
+            <span class="mr-1">
+                Login
+            </span>
+        </a>
+    </li>
 </template>
 
 <script>
-
-   
-
     export default {
         
         mixins: [
@@ -43,7 +47,7 @@
 
         methods: {
             onLogout() {
-                alert('Logout....');
+                ComptechApp.Auth.logout(this.url)
             }
         }
 
