@@ -13,9 +13,11 @@ class Generator {
          */
         if( ! $user ) {
 
-            $menu->addOption('login', new Navigation('Login', 'la la-key', 'login'));
+            $menu->addOption('login', new Navigation('Login', 'la la-sign-in', 'login'));
             return $menu;
         }
+        $menu->addOption('logout', new Navigation('Logout', 'la la-sign-out', 'logout'));
+        return $menu;
     }
 
     public static function makeSidebar($user) {

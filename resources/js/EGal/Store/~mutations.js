@@ -30,6 +30,36 @@ module.exports = {
         .then( r => {
             state.sidebar.options = r.data.sidebar
             state.sidebar.ready = true
+
+            let i = setInterval( () => {
+                if(state.ready && state.config)
+                {
+                    if(state.config.base_url) 
+                    {
+                        /**
+                         * Cu patch-ul asta am reusit sa fac sa se vada meniurile
+                         * asa ca in html-ul primit
+                         */
+                        if(
+                            $('i#icon-toggle').length * 
+                            $('#main-menu-navigation').length * 
+                            $('#navbar-mobile').length * 
+                            $('li.dropdown-notification').length
+                        )
+                        {
+                            clearInterval(i);
+                            $.app.menu.init(false);
+                            $.app.nav.init({speed: 300})
+                            if($('.scrollable-container').length > 0){
+                                $('.scrollable-container').perfectScrollbar({
+                                    theme:"dark"
+                                });
+                            }
+                        }                        
+                    }
+                }
+            }, 100)
+
         })
         .catch( error => {
             console.log('ERROR.Store Mutations::getSidebar()')

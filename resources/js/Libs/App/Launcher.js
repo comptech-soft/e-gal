@@ -1,6 +1,7 @@
 const VueManager = require('./../Vue/Manager')
 const Http = require('./../Http/Http')
 const Auth = require('./../Auth/Auth')
+const Dom = require('./../DOM/Dom')
 
 class Launcher {
 
@@ -63,11 +64,13 @@ class Launcher {
 
         app['Http'] = new Http(this.window[this.name])
         app['Auth'] = new Auth(this.window[this.name])
+        app['DOM'] = new Dom(this.window[this.name])
 
         for(let key in plugins) {
             app[key] = plugins[key]
         }
     }
+
 }
 
 module.exports = Launcher

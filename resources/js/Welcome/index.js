@@ -34,7 +34,6 @@ $(document).ready( () => {
         },
         methods: {
             onSidebarClick(option) {
-                console.log('Side bar click....', option);
                 let sidebar = new Sidebar(app, this)
                 return sidebar.Dispatch(option)
             }

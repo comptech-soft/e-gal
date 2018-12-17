@@ -10,15 +10,14 @@
 
 (function(window, document, $) {
     'use strict';
-    var $html = $('html');
-    var $body = $('body');
-
-
+    var $html = $('html'), $body = $('body');
+    
     $(window).on('load',function(){
         var rtl;
-        var compactMenu = false; // Set it to true, if you want default menu to be compact
+        var compactMenu = false; 
 
-        if($('html').data('textdirection') == 'rtl'){
+        if($('html').data('textdirection') == 'rtl')
+        {
             rtl = true;
         }
 
@@ -26,12 +25,15 @@
             $html.removeClass('loading').addClass('loaded');
         }, 1200);
 
+        /**
+         * Aici se initializeaza $.app.menu = Sidebar Menu
+         */
         $.app.menu.init(compactMenu);
 
-        // Navigation configurations
-        var config = {
-            speed: 300 // set speed to expand / collpase menu
-        };
+        /**
+         * Top Navigation configurations and init
+        */
+        var config = {speed: 300};
         if($.app.nav.initialized === false){
             $.app.nav.init(config);
         }
@@ -215,6 +217,7 @@
 
 
     $(document).on('click', '.menu-toggle, .modern-nav-toggle', function(e) {
+
         e.preventDefault();
 
         // Toggle menu
@@ -238,21 +241,6 @@
         return false;
     });
 
-    /*$('.modern-nav-toggle').on('click',function(){
-        var $this = $(this),
-        icon = $this.find('.toggle-icon').attr('data-ticon');
-
-        if(icon == 'ft-toggle-right'){
-            $this.find('.toggle-icon').attr('data-ticon','ft-toggle-left')
-            .removeClass('ft-toggle-right').addClass('ft-toggle-left');
-        }
-        else{
-            $this.find('.toggle-icon').attr('data-ticon','ft-toggle-right')
-            .removeClass('ft-toggle-left').addClass('ft-toggle-right');
-        }
-
-        $.app.menu.toggle();
-    });*/
 
     $(document).on('click', '.open-navbar-container', function(e) {
 
@@ -286,6 +274,7 @@
             }
         }
     });
+
     if (typeof screenfull != 'undefined'){
         if (screenfull.enabled) {
             $(document).on(screenfull.raw.fullscreenchange, function(){

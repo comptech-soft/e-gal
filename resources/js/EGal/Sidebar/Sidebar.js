@@ -6,12 +6,14 @@ class Sidebar {
     }
 
     onLogin() {
-        console.log(this.app[this.app.name]);
         window[this.app.name].Http.redirect(100, this.vue.url + '/login')
     }
 
+    onLogout() {
+        window[this.app.name].Auth.logout(this.vue.url)
+    }
+
     Dispatch(option) {
-        console.log('Sidebar Dispatch >> ' + option.event);
         let method = 'on' + _.capitalize(option.event)
         try
         {
