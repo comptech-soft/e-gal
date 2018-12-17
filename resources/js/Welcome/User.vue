@@ -41,13 +41,9 @@
 <script>
     export default {
         
-        mixins: [
-            require('./~mixins')
-        ],
-
         methods: {
             onLogout() {
-                ComptechApp.Auth.logout(this.url)
+                this.app.Auth.logout(this.url)
             }
         }
 

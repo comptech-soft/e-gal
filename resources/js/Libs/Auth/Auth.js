@@ -1,7 +1,7 @@
 class Auth {
 
-    constructor() {
-
+    constructor(app) {
+        this.app = app
     }
 
     logout(url) {
@@ -13,7 +13,7 @@ class Auth {
                 data: {},
             })
             .then( r => {
-                location.href = url
+                this.app.Http.redirect(url)
             })
             .catch( error => {
                 console.log('ERROR. Auth::logout()')
@@ -28,4 +28,4 @@ class Auth {
     }
 }
 
-module.exports = new Auth()
+module.exports = Auth

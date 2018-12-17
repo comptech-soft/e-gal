@@ -4,11 +4,15 @@ module.exports = {
         ...Vuex.mapGetters(['user', 'config', 'role', 'ready']),
 
         url() {
-            return document.head.querySelector('meta[name="base-url"]').content
+            return this.$store.getters.config ? this.$store.getters.config.base_url : null
         },
 
-        appName() {
+        app_name() {
             return this.$store.getters.config ? this.$store.getters.config.name : null
+        },
+
+        app() {
+            return window.ComptechApp
         }
     },
 }

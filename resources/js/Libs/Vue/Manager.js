@@ -1,7 +1,8 @@
 class Manager {
 
-    constructor() {
+    constructor(app) {
         
+        this.app = app
         this.instances = {}
 
     }

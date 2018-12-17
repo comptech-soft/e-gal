@@ -7,14 +7,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" :href="url">
+                <a v-if="url" class="navbar-brand" :href="url">
                     <img 
                         class="brand-logo" 
                         alt="modern admin logo" 
                         :src="url + '/app-assets/images/logo/logo.png'"
                     />
                     <h3 class="brand-text">
-                        {{ appName }}
+                        {{ app_name }}
                     </h3>
                 </a>
             </li>
@@ -25,13 +25,3 @@
             </ul>
     </div>
 </template>
-
-<script>
-    export default {
-        
-        mixins: [
-            require('./~mixins')
-        ],
-
-    }
-</script>

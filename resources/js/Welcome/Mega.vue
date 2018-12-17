@@ -4,7 +4,9 @@
               <li class="col-md-2">
                 <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="la la-newspaper-o"></i> News</h6>
                 <div id="mega-menu-carousel-example">
-                  <div><img class="rounded img-fluid mb-1" :src="url + '/app-assets/images/slider/slider-2.png'" alt="First slide"><a class="news-title mb-0" href="#">Poster Frame PSD</a>
+                  <div>
+                      <img v-if="url" class="rounded img-fluid mb-1" :src="url + '/app-assets/images/slider/slider-2.png'" alt="First slide">
+                      <a class="news-title mb-0" href="#">Poster Frame PSD</a>
                     <p class="news-content"><span class="font-small-2">January 26, 2018</span></p>
                   </div>
                 </div>
@@ -108,10 +110,5 @@
 
 <script>
     export default {
-        
-        mixins: [
-            require('./~mixins')
-        ],
-
     }
 </script>
