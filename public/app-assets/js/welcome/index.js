@@ -60403,20 +60403,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return false
-    ? _c("li", { staticClass: "nav-item d-none d-md-block" }, [_vm._m(0)])
-    : _vm._e()
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "nav-link nav-link-expand", attrs: { href: "#" } },
-      [_c("i", { staticClass: "ficon ft-maximize" })]
-    )
+    return _c("li", { staticClass: "nav-item d-none d-md-block" }, [
+      _c(
+        "a",
+        { staticClass: "nav-link nav-link-expand", attrs: { href: "#" } },
+        [_c("i", { staticClass: "ficon ft-maximize" })]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -62204,9 +62204,9 @@ var render = function() {
               [
                 _c("leftmenu-toggle-item"),
                 _vm._v(" "),
-                _c("maximize-item"),
+                false ? _c("maximize-item") : _vm._e(),
                 _vm._v(" "),
-                _c("mega-nav-item"),
+                _vm.user ? _c("mega-nav-item") : _vm._e(),
                 _vm._v(" "),
                 _c("search-item")
               ],
@@ -62221,9 +62221,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("language-item"),
                 _vm._v(" "),
-                _c("notifications-item"),
+                _vm.user ? _c("notifications-item") : _vm._e(),
                 _vm._v(" "),
-                _c("messages-item")
+                _vm.user ? _c("messages-item") : _vm._e()
               ],
               1
             )

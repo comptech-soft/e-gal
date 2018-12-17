@@ -1,19 +1,19 @@
 <template>
     <div class="navbar-wrapper">
         <nav-header></nav-header>
-        <div  class="navbar-container content">
+        <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav mr-auto float-left">
                     <leftmenu-toggle-item></leftmenu-toggle-item>
-                    <maximize-item></maximize-item>
-                    <mega-nav-item></mega-nav-item>
+                    <maximize-item v-if="false"></maximize-item>
+                    <mega-nav-item v-if="user"></mega-nav-item>
                     <search-item></search-item>
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <user-item></user-item>
                     <language-item></language-item>
-                    <notifications-item></notifications-item>
-                    <messages-item></messages-item>
+                    <notifications-item v-if="user"></notifications-item> 
+                    <messages-item v-if="user"></messages-item>
                 </ul>
             </div>
         </div>
