@@ -1,11 +1,13 @@
 const Breadcrumbs = require('./Breadcrumbs')
+const Actions = require('./Actions')
 
 class Header {
 
     constructor() {
-        this.className = 'PageHeader'
+        this.className = 'page-header'
         this.title = ''
         this.breadcrumbs = new Breadcrumbs()
+        this.actions = new Actions()
     }
 
     setTitle(title) {

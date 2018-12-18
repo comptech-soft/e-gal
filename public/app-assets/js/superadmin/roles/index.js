@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 259);
+/******/ 	return __webpack_require__(__webpack_require__.s = 263);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -64774,14 +64774,16 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Breadcrumbs = __webpack_require__(247);
+var Actions = __webpack_require__(248);
 
 var Header = function () {
     function Header() {
         _classCallCheck(this, Header);
 
-        this.className = 'PageHeader';
+        this.className = 'page-header';
         this.title = '';
         this.breadcrumbs = new Breadcrumbs();
+        this.actions = new Actions();
     }
 
     _createClass(Header, [{
@@ -64809,7 +64811,7 @@ var Breadcrumbs = function () {
     function Breadcrumbs() {
         _classCallCheck(this, Breadcrumbs);
 
-        this.className = 'PageBreadcrumbs';
+        this.className = 'page-header-breadcrumbs';
         this.list = {};
     }
 
@@ -64828,14 +64830,57 @@ module.exports = Breadcrumbs;
 
 /***/ }),
 /* 248 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Actions = function () {
+    function Actions() {
+        _classCallCheck(this, Actions);
+
+        this.className = 'page-header-actions';
+        this.title = null;
+        this.icon = null;
+        this.list = {};
+    }
+
+    _createClass(Actions, [{
+        key: 'setTitle',
+        value: function setTitle(title) {
+            this.title = title;
+            return this;
+        }
+    }, {
+        key: 'setIcon',
+        value: function setIcon(icon) {
+            this.icon = icon;
+            return this;
+        }
+    }, {
+        key: 'AddItem',
+        value: function AddItem(key, item) {
+            this.list[key] = item;
+            return this;
+        }
+    }]);
+
+    return Actions;
+}();
+
+module.exports = Actions;
+
+/***/ }),
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(249)
+var __vue_script__ = __webpack_require__(250)
 /* template */
-var __vue_template__ = __webpack_require__(253)
+var __vue_template__ = __webpack_require__(257)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64874,7 +64919,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64898,33 +64943,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
         title: { type: String, default: 'My Page Title' },
-        breadcrumbs: { default: null }
+        breadcrumbs: { default: null },
+        actions: { default: null }
     },
 
     components: {
-        breadcrumbs: __webpack_require__(250)
+        breadcrumbs: __webpack_require__(251),
+        actions: __webpack_require__(254)
     }
 });
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(251)
+var __vue_script__ = __webpack_require__(252)
 /* template */
-var __vue_template__ = __webpack_require__(252)
+var __vue_template__ = __webpack_require__(253)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64963,7 +65005,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65015,7 +65057,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65077,7 +65119,188 @@ if (false) {
 }
 
 /***/ }),
-/* 253 */
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(255)
+/* template */
+var __vue_template__ = __webpack_require__(256)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Superadmin/Actions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d1653ec0", Component.options)
+  } else {
+    hotAPI.reload("data-v-d1653ec0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 255 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        actions: { type: Object }
+    },
+
+    methods: {
+        onClick: function onClick(item) {
+            if (item.click == null) {
+                return false;
+            }
+            try {
+                this.$emit('breadcrump-click', item);
+                if (_.isFunction(item.click)) {
+                    item.click(this);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "btn-group float-md-right",
+      attrs: {
+        role: "group",
+        "aria-label": "Button group with nested dropdown"
+      }
+    },
+    [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2",
+          attrs: {
+            id: "btnGroupDrop1",
+            type: "button",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }
+        },
+        [
+          _c("i", { class: _vm.actions.icon + " icon-left" }),
+          _vm._v(" \n        " + _vm._s(_vm.actions.title) + "\n    ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "btnGroupDrop1" }
+        },
+        _vm._l(_vm.actions.list, function(item, key, index) {
+          return _c(
+            "a",
+            {
+              key: "action-item-" + key,
+              staticClass: "dropdown-item",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  _vm.onClick(item)
+                }
+              }
+            },
+            [
+              item.icon ? _c("i", { class: item.icon }) : _vm._e(),
+              _vm._v("\n            " + _vm._s(item.caption) + "\n        ")
+            ]
+          )
+        }),
+        0
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d1653ec0", module.exports)
+  }
+}
+
+/***/ }),
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65100,74 +65323,17 @@ var render = function() {
         : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(0)
+    _vm.actions
+      ? _c(
+          "div",
+          { staticClass: "content-header-right col-md-6 col-12" },
+          [_c("actions", { attrs: { actions: _vm.actions } })],
+          1
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header-right col-md-6 col-12" }, [
-      _c(
-        "div",
-        {
-          staticClass: "btn-group float-md-right",
-          attrs: {
-            role: "group",
-            "aria-label": "Button group with nested dropdown"
-          }
-        },
-        [
-          _c(
-            "button",
-            {
-              staticClass:
-                "btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2",
-              attrs: {
-                id: "btnGroupDrop1",
-                type: "button",
-                "data-toggle": "dropdown",
-                "aria-haspopup": "true",
-                "aria-expanded": "false"
-              }
-            },
-            [
-              _c("i", { staticClass: "ft-settings icon-left" }),
-              _vm._v(" Settings")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "dropdown-menu",
-              attrs: { "aria-labelledby": "btnGroupDrop1" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "dropdown-item",
-                  attrs: { href: "card-bootstrap.html" }
-                },
-                [_vm._v("Cards")]
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "dropdown-item",
-                  attrs: { href: "component-buttons-extended.html" }
-                },
-                [_vm._v("Buttons")]
-              )
-            ]
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -65178,19 +65344,19 @@ if (false) {
 }
 
 /***/ }),
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
 /* 258 */,
-/* 259 */
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(260);
+module.exports = __webpack_require__(264);
 
 
 /***/ }),
-/* 260 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Launcher = __webpack_require__(149);
@@ -65203,15 +65369,15 @@ $(document).ready(function () {
     launcher.Init().RegisterApps({
         'app-nav': __webpack_require__(242)(store, launcher.App()),
         'left-sidebar': __webpack_require__(243)(store, launcher.App()),
-        'roles': __webpack_require__(261)(store, launcher.App(), __webpack_require__(263))
+        'roles': __webpack_require__(265)(store, launcher.App(), __webpack_require__(267))
     });
 });
 
 /***/ }),
-/* 261 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var PageManager = __webpack_require__(262);
+var PageManager = __webpack_require__(266);
 
 module.exports = function (store, App, component) {
 
@@ -65240,7 +65406,7 @@ module.exports = function (store, App, component) {
 };
 
 /***/ }),
-/* 262 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -65285,6 +65451,19 @@ var Manager = function () {
                 caption: 'Roluri',
                 click: null
             });
+
+            /**
+             * HEADER. Actions
+             */
+            this.page_manager.header.actions.setTitle(null);
+            this.page_manager.header.actions.setIcon('ft-more-horizontal');
+            this.page_manager.header.actions.AddItem('1', {
+                caption: 'Action #1',
+                icon: 'la la-user',
+                click: function click() {
+                    alert('Action #1');
+                }
+            });
         }
     }]);
 
@@ -65294,15 +65473,15 @@ var Manager = function () {
 module.exports = Manager;
 
 /***/ }),
-/* 263 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(264)
+var __vue_script__ = __webpack_require__(268)
 /* template */
-var __vue_template__ = __webpack_require__(265)
+var __vue_template__ = __webpack_require__(269)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65341,11 +65520,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 264 */
+/* 268 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -65366,12 +65546,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     components: {
-        'content-header': __webpack_require__(248)
+        'content-header': __webpack_require__(249)
     }
 });
 
 /***/ }),
-/* 265 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65385,7 +65565,8 @@ var render = function() {
       _c("content-header", {
         attrs: {
           title: _vm.page_manager.header.title,
-          breadcrumbs: _vm.page_manager.header.breadcrumbs.list
+          breadcrumbs: _vm.page_manager.header.breadcrumbs.list,
+          actions: _vm.page_manager.header.actions
         }
       })
     ],

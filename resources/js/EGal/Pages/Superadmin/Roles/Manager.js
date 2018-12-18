@@ -34,6 +34,18 @@ class Manager {
             click: null
         })
 
+        /**
+         * HEADER. Actions
+         */
+        this.page_manager.header.actions.setTitle(null)
+        this.page_manager.header.actions.setIcon('ft-more-horizontal')
+        this.page_manager.header.actions.AddItem('1', {
+            caption: 'Action #1',
+            icon: 'la la-user',
+            click: () => {
+                alert('Action #1')
+            }
+        })
     }
 }
 

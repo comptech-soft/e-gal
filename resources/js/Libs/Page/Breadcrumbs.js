@@ -1,7 +1,7 @@
 class Breadcrumbs {
 
     constructor() {
-        this.className = 'PageBreadcrumbs'
+        this.className = 'page-header-breadcrumbs'
         this.list = {}
     }
 
