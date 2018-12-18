@@ -11,6 +11,10 @@ module.exports = {
             return this.$store.getters.config ? this.$store.getters.config.name : null
         },
 
+        /**
+         * ???? Asta-i un pic "Hardcoded"
+         * Aici continuam ....
+         */
         app() {
             return window.ComptechApp
         }

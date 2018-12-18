@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 244);
+/******/ 	return __webpack_require__(__webpack_require__.s = 248);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -18375,7 +18375,7 @@ var Auth = __webpack_require__(151);
 var Dom = __webpack_require__(152);
 
 var Launcher = function () {
-    function Launcher(name, window, plugins) {
+    function Launcher(name, window) {
         _classCallCheck(this, Launcher);
 
         this.name = name;
@@ -18417,7 +18417,9 @@ var Launcher = function () {
         /**
          * Attach pugins
          */
-        this.CreatePlugins(plugins, this.window[name]);
+        this.CreatePlugins({
+            'FormManager': __webpack_require__(179)
+        }, this.window[name]);
     }
 
     _createClass(Launcher, [{
@@ -60688,6 +60690,11 @@ module.exports = {
         app_name: function app_name() {
             return this.$store.getters.config ? this.$store.getters.config.name : null;
         },
+
+
+        /**
+         * ???? Asta-i un pic "Hardcoded"
+         */
         app: function app() {
             return window.ComptechApp;
         }
@@ -64632,66 +64639,7 @@ if (false) {
 }
 
 /***/ }),
-/* 242 */,
-/* 243 */,
-/* 244 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(245);
-
-
-/***/ }),
-/* 245 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Launcher = __webpack_require__(148);
-var Sidebar = __webpack_require__(246);
-var AdminModern = __webpack_require__(187).layout;
-
-//  router: new VueRouter({routes: require('./routes/routes')}),   
-
-$(document).ready(function () {
-
-    var plugins = {
-        'FormManager': __webpack_require__(179)
-    };
-
-    var app = new Launcher('ComptechApp', window, plugins);
-    app.VueMixins([__webpack_require__(181)]);
-
-    var store = new Vuex.Store(__webpack_require__(182));
-
-    app.CreateVueObject('app-nav', {
-        el: '#app-nav',
-        store: store,
-        components: {
-            'top-navigation': AdminModern.nav
-        },
-        mounted: function mounted() {
-            this.$store.commit('getConfig');
-        }
-    });
-
-    app.CreateVueObject('left-sidebar', {
-        el: '#left-sidebar',
-        store: store,
-        components: {
-            'left-sidebar': AdminModern.sidebar
-        },
-        methods: {
-            onSidebarClick: function onSidebarClick(option) {
-                var sidebar = new Sidebar(app, this);
-                return sidebar.Dispatch(option);
-            }
-        },
-        mounted: function mounted() {
-            this.$store.commit('getSidebar');
-        }
-    });
-});
-
-/***/ }),
-/* 246 */
+/* 242 */
 /***/ (function(module, exports) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -64724,7 +64672,7 @@ var Sidebar = function () {
     }, {
         key: 'onUsers',
         value: function onUsers() {
-            alert('Do you ??? Users');
+            window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/users');
         }
     }, {
         key: 'Dispatch',
@@ -64742,6 +64690,64 @@ var Sidebar = function () {
 }();
 
 module.exports = Sidebar;
+
+/***/ }),
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(249);
+
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Launcher = __webpack_require__(148);
+var Sidebar = __webpack_require__(242);
+var AdminModern = __webpack_require__(187).layout;
+
+//  router: new VueRouter({routes: require('./routes/routes')}),   
+
+$(document).ready(function () {
+
+    var app = new Launcher('ComptechApp', window);
+    app.VueMixins([__webpack_require__(181)]);
+
+    var store = new Vuex.Store(__webpack_require__(182));
+
+    app.CreateVueObject('app-nav', {
+        el: '#app-nav',
+        store: store,
+        components: {
+            'top-navigation': AdminModern.nav
+        },
+        mounted: function mounted() {
+            this.$store.commit('getConfig');
+        }
+    });
+
+    app.CreateVueObject('left-sidebar', {
+        el: '#left-sidebar',
+        store: store,
+        components: {
+            'left-sidebar': AdminModern.sidebar
+        },
+        methods: {
+            onSidebarClick: function onSidebarClick(option) {
+                var sidebar = new Sidebar(app, this);
+                return sidebar.Dispatch(option);
+            }
+        },
+        mounted: function mounted() {
+            this.$store.commit('getSidebar');
+        }
+    });
+});
 
 /***/ })
 /******/ ]);

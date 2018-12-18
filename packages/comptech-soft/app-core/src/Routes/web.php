@@ -20,6 +20,7 @@ Route::middleware('web')->group(function(){
 
             Route::middleware(['is-superadmin'])->prefix('superadmin')->namespace('Superadmin')->group(function(){
                 Route::get('roles', 'RolesController@index')->name('roles-index');
+                Route::get('users', 'UsersController@index')->name('users-index');
             });
 
         });

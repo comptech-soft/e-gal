@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 246);
+/******/ 	return __webpack_require__(__webpack_require__.s = 250);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -64639,38 +64639,424 @@ if (false) {
 }
 
 /***/ }),
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */
+/* 242 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Sidebar = function () {
+    function Sidebar(app, vue) {
+        _classCallCheck(this, Sidebar);
+
+        this.app = app;
+        this.vue = vue;
+    }
+
+    _createClass(Sidebar, [{
+        key: 'onLogin',
+        value: function onLogin() {
+            window[this.app.name].Http.redirect(100, this.vue.url + '/login');
+        }
+    }, {
+        key: 'onLogout',
+        value: function onLogout() {
+            window[this.app.name].Auth.logout(this.vue.url);
+        }
+    }, {
+        key: 'onRoles',
+        value: function onRoles() {
+            window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/roles');
+        }
+    }, {
+        key: 'onUsers',
+        value: function onUsers() {
+            window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/users');
+        }
+    }, {
+        key: 'Dispatch',
+        value: function Dispatch(option) {
+            var method = 'on' + _.capitalize(option.event);
+            try {
+                this[method]();
+            } catch (error) {
+                console.log(method, error);
+            }
+        }
+    }]);
+
+    return Sidebar;
+}();
+
+module.exports = Sidebar;
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Manager = function Manager() {
+    _classCallCheck(this, Manager);
+};
+
+module.exports = Manager;
+
+/***/ }),
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(247);
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(245)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Superadmin/Header.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-67173dba", Component.options)
+  } else {
+    hotAPI.reload("data-v-67173dba", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
 
 
 /***/ }),
-/* 247 */
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header row" }, [
+      _c("div", { staticClass: "content-header-left col-md-6 col-12 mb-2" }, [
+        _c("h3", { staticClass: "content-header-title" }, [_vm._v("Contacts")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row breadcrumbs-top" }, [
+          _c("div", { staticClass: "breadcrumb-wrapper col-12" }, [
+            _c("ol", { staticClass: "breadcrumb" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "index.html" } }, [_vm._v("Home")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Apps")])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Contacts\n                ")
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "content-header-right col-md-6 col-12" }, [
+        _c(
+          "div",
+          {
+            staticClass: "btn-group float-md-right",
+            attrs: {
+              role: "group",
+              "aria-label": "Button group with nested dropdown"
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2",
+                attrs: {
+                  id: "btnGroupDrop1",
+                  type: "button",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [
+                _c("i", { staticClass: "ft-settings icon-left" }),
+                _vm._v(" Settings")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu",
+                attrs: { "aria-labelledby": "btnGroupDrop1" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "card-bootstrap.html" }
+                  },
+                  [_vm._v("Cards")]
+                ),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "component-buttons-extended.html" }
+                  },
+                  [_vm._v("Buttons")]
+                )
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-67173dba", module.exports)
+  }
+}
+
+/***/ }),
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(251);
+
+
+/***/ }),
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Launcher = __webpack_require__(148);
+var Sidebar = __webpack_require__(242);
+var AdminModern = __webpack_require__(187).layout;
+
+var Page = __webpack_require__(252);
 
 $(document).ready(function () {
 
     var app = new Launcher('ComptechApp', window);
     app.VueMixins([__webpack_require__(181)]);
 
-    app.CreateVueObject('app', {
-        el: '#app',
-        store: new Vuex.Store(__webpack_require__(182)),
+    var store = new Vuex.Store(__webpack_require__(182));
+
+    app.CreateVueObject('app-nav', {
+        el: '#app-nav',
+        store: store,
         components: {
-            'login-form': __webpack_require__(187).pages.login
+            'top-navigation': AdminModern.nav
         },
         mounted: function mounted() {
             this.$store.commit('getConfig');
         }
     });
+
+    app.CreateVueObject('left-sidebar', {
+        el: '#left-sidebar',
+        store: store,
+        components: {
+            'left-sidebar': AdminModern.sidebar
+        },
+        methods: {
+            onSidebarClick: function onSidebarClick(option) {
+                var sidebar = new Sidebar(app, this);
+                return sidebar.Dispatch(option);
+            }
+        },
+        mounted: function mounted() {
+            this.$store.commit('getSidebar');
+        }
+    });
+
+    app.CreateVueObject('roles', {
+        el: '#app',
+        data: {
+            page: null
+        },
+        store: store,
+        components: {
+            'roles-page': __webpack_require__(253)
+        },
+        methods: {
+            init: function init() {
+                this.page = new Page();
+                this.page.initPage();
+            }
+        },
+        mounted: function mounted() {
+            this.init();
+        }
+    });
 });
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PageManager = __webpack_require__(243);
+
+var Roles = function () {
+    function Roles() {
+        _classCallCheck(this, Roles);
+
+        this.page_manager = new PageManager();
+    }
+
+    _createClass(Roles, [{
+        key: 'initPage',
+        value: function initPage() {
+            alert('Init Roles Page...');
+        }
+    }]);
+
+    return Roles;
+}();
+
+module.exports = Roles;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(254)
+/* template */
+var __vue_template__ = __webpack_require__(255)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Superadmin/Roles/Roles.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7a221824", Component.options)
+  } else {
+    hotAPI.reload("data-v-7a221824", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 254 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'content-header': __webpack_require__(244)
+    }
+});
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "content-wrapper" },
+    [_c("content-header")],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7a221824", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

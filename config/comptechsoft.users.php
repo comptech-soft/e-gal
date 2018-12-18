@@ -3,7 +3,7 @@
 return [
 
     'login' => [
-        'view' => 'login'
+        'view' => 'auth.login.index'
     ],
 
     'routes' => [

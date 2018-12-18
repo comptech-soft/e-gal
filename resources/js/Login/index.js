@@ -2,11 +2,8 @@ const Launcher = require('./../Libs/App/Launcher')
     
 $(document).ready( () => {
 
-    let plugins = {
-        'FormManager': require('./../Libs/Form/Manager'),
-    }
-    
-    let app = new Launcher('ComptechApp', window, plugins)
+    let app = new Launcher('ComptechApp', window)
+
     app.VueMixins([
         require('./../EGal/Mixins/Store')
     ])

@@ -5,7 +5,7 @@ const Dom = require('./../DOM/Dom')
 
 class Launcher {
 
-    constructor(name, window, plugins) {
+    constructor(name, window) {
 
         this.name = name
         this.window = window
@@ -47,7 +47,9 @@ class Launcher {
         /**
          * Attach pugins
          */
-        this.CreatePlugins(plugins, this.window[name])
+        this.CreatePlugins({
+            'FormManager': require('./../Form/Manager'),
+        }, this.window[name])
     }
 
     CreateVueObject(key, vue) {

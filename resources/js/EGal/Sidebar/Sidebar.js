@@ -18,7 +18,7 @@ class Sidebar {
     }
 
     onUsers() {
-        alert('Do you ??? Users');
+        window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/users')
     }
 
     Dispatch(option) {

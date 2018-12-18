@@ -15,15 +15,15 @@ class IsSuperadmin
         {
             if( $user->roles->count() == 0)
             {
-                return redirect( config('comptechsoft.users.routes.welcome') );
+                return redirect( route(config('comptechsoft.users.routes.welcome')) );
             }
             if( $user->roles->first()->slug != 'superadmin')
             {
-                return redirect( config('comptechsoft.users.routes.welcome') );
+                return redirect( route(config('comptechsoft.users.routes.welcome')) );
             }
             return $next($request);
         }
-        return redirect( config('comptechsoft.users.routes.welcome') );
+        return redirect( route(config('comptechsoft.users.routes.welcome')) );
     }
 
 }

@@ -1,17 +1,18 @@
-const Launcher = require('./../Libs/App/Launcher')
-const Sidebar = require('./../EGal/Sidebar/Sidebar')
+const Launcher = require('./../../Libs/App/Launcher')
+const Sidebar = require('./../../EGal/Sidebar/Sidebar')
 const AdminModern = require('comptechsoft-admin-modern').layout
 
-//  router: new VueRouter({routes: require('./routes/routes')}),   
+const Page = require('./../../EGal/Pages/Superadmin/Roles/Roles')
 
 $(document).ready( () => {
 
+  
     let app = new Launcher('ComptechApp', window)
     app.VueMixins([
-        require('./../EGal/Mixins/Store')
+        require('./../../EGal/Mixins/Store')
     ])
 
-    let store = new Vuex.Store(require('./../EGal/Store/store'))
+    let store = new Vuex.Store(require('./../../EGal/Store/store'))
 
     app.CreateVueObject('app-nav', {
         el: '#app-nav',
@@ -38,6 +39,26 @@ $(document).ready( () => {
         },
         mounted(){
             this.$store.commit('getSidebar')
+        },
+    })
+
+    app.CreateVueObject('roles', {
+        el: '#app',
+        data: {
+            page: null,
+        },
+        store,
+        components: {
+            'roles-page': require('./Roles'),
+        },
+        methods: {
+            init() {
+                this.page = new Page()
+                this.page.initPage()
+            }
+        },
+        mounted(){
+            this.init()
         },
     })
 
