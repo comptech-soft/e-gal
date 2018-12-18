@@ -62554,17 +62554,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: {
 		item: { type: Object, required: true }
 	},
 
+	computed: {
+		has_options: function has_options() {
+			if (_.is_array(this.item.options)) {
+				return this.item.options.length > 0;
+			}
+			return _.keys(this.item.options).length > 0;
+		}
+	},
+
 	methods: {
 		onClick: function onClick(item) {
-			this.$emit('option-click', item);
+			if (item.event) {
+				this.$emit('option-click', item);
+			}
 		}
-	}
+	},
+
+	name: 'menu-item'
 });
 
 /***/ }),
@@ -62594,6 +62616,23 @@ var render = function() {
           _vm._v("\n\t\t\t\t" + _vm._s(_vm.item.caption) + "\n\t\t\t")
         ])
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "menu-content" },
+      _vm._l(_vm.item.options, function(subitem, key) {
+        return _c("menu-item", {
+          key: "menu-item-" + key,
+          attrs: { item: subitem },
+          on: {
+            "option-click": function($event) {
+              _vm.onClick(subitem)
+            }
+          }
+        })
+      }),
+      1
     )
   ])
 }

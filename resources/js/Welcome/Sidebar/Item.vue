@@ -10,6 +10,15 @@
 				{{ item.caption}}
 			</span>
 		</a>
+		<ul class="menu-content">
+			<menu-item
+				v-for="(subitem, key) in item.options"
+				:key="'menu-item-' + key"
+				:item="subitem"
+				@option-click="onClick(subitem)"
+			>
+			</menu-item>
+		</ul>
       </li>
 </template>
 
@@ -19,10 +28,27 @@
 			item: {type: Object, required: true}
 		},
 
+		computed: {
+			has_options() {
+				if( _.is_array(this.item.options) )
+				{
+					return this.item.options.length > 0
+				}
+				return _.keys(this.item.options).length > 0
+			}
+		},
+
 		methods: {
 			onClick(item) {
-				this.$emit('option-click', item)
+				if(item.event)
+				{
+					this.$emit('option-click', item)
+				}
 			}
-		}
+		},
+
+		name: 'menu-item',
 	}
 </script>
+
+
