@@ -1,10 +1,13 @@
-const Page = require('./../../Pages/Superadmin/Roles/Roles')
+const PageManager = require('../../Pages/Superadmin/Roles/Manager')
 
 module.exports = (store, App, component) => {
 
     return {
         el: '#app',
         data: {
+            /**
+             * The page manager container object
+             */
             page: null,
         },
         store,
@@ -13,8 +16,8 @@ module.exports = (store, App, component) => {
         },
         methods: {
             init() {
-                this.page = new Page()
-                this.page.initPage()
+                this.page = new PageManager()
+                this.page.Init()
             }
         },
         mounted(){

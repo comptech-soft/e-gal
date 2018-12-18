@@ -1,17 +1,20 @@
 <template>
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-            <h3 class="content-header-title">Contacts</h3>
+            <!-- Header page title -->
+            <h3 class="content-header-title">{{ title }}</h3>
+            
+            <!-- Breadcrumbs -->
             <div class="row breadcrumbs-top">
                 <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="#">Apps</a>
-                    </li>
-                    <li class="breadcrumb-item active">Contacts
-                    </li>
-                </ol>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Apps</a>
+                        </li>
+                        <li class="breadcrumb-item active">Contacts
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -23,3 +26,12 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: {
+            title: {type: String, default: 'My Page Title'}            
+        }
+    }
+</script>
+

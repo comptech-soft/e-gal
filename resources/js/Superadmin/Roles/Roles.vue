@@ -1,16 +1,23 @@
 <template>
     
     <div class="content-wrapper">
-        <content-header>
+        <content-header
+            :title="page_manager.header.title"
+        >
         </content-header>    
     </div>
 
 </template>
 
 <script>
-export default {
-    components: {
-        'content-header': require('./../Header')
+    export default {
+        
+        props: {
+            page_manager: {type: Object, required: true}
+        },
+        
+        components: {
+            'content-header': require('./../Header')
+        }
     }
-}
 </script>

@@ -2,7 +2,6 @@ const Launcher = require('./../../Libs/App/Launcher')
 
 $(document).ready( () => {
 
-  
     let launcher = new Launcher('ComptechApp', window)
     let store = new Vuex.Store(require('./../../EGal/Store/store'))
 

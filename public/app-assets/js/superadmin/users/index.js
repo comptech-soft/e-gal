@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 260);
+/******/ 	return __webpack_require__(__webpack_require__.s = 263);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -64750,26 +64750,91 @@ module.exports = Sidebar;
 
 /***/ }),
 /* 245 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var Header = __webpack_require__(246);
+var Breadcrumbs = __webpack_require__(247);
+
 var Manager = function Manager() {
     _classCallCheck(this, Manager);
+
+    this.className = 'PageManager';
+    this.header = new Header();
+    this.breadcrumbs = new Breadcrumbs();
 };
 
 module.exports = Manager;
 
 /***/ }),
 /* 246 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Header = function () {
+    function Header() {
+        _classCallCheck(this, Header);
+
+        this.className = 'PageHeader';
+        this.title = '';
+    }
+
+    _createClass(Header, [{
+        key: 'setTitle',
+        value: function setTitle(title) {
+            this.title = title;
+            return this;
+        }
+    }]);
+
+    return Header;
+}();
+
+module.exports = Header;
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Breadcrumbs = function () {
+    function Breadcrumbs() {
+        _classCallCheck(this, Breadcrumbs);
+
+        this.className = 'PageBreadcrumbs';
+        this.list = {};
+    }
+
+    _createClass(Breadcrumbs, [{
+        key: 'AddItem',
+        value: function AddItem(key, item) {
+            this.list[key] = item;
+            return this;
+        }
+    }]);
+
+    return Breadcrumbs;
+}();
+
+module.exports = Breadcrumbs;
+
+/***/ }),
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(249)
 /* template */
-var __vue_template__ = __webpack_require__(247)
+var __vue_template__ = __webpack_require__(250)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64808,101 +64873,151 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 247 */
+/* 249 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        title: { type: String, default: 'My Page Title' }
+    }
+});
+
+/***/ }),
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "content-header row" }, [
+    _c("div", { staticClass: "content-header-left col-md-6 col-12 mb-2" }, [
+      _c("h3", { staticClass: "content-header-title" }, [
+        _vm._v(_vm._s(_vm.title))
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header row" }, [
-      _c("div", { staticClass: "content-header-left col-md-6 col-12 mb-2" }, [
-        _c("h3", { staticClass: "content-header-title" }, [_vm._v("Contacts")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row breadcrumbs-top" }, [
-          _c("div", { staticClass: "breadcrumb-wrapper col-12" }, [
-            _c("ol", { staticClass: "breadcrumb" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "index.html" } }, [_vm._v("Home")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Apps")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Contacts\n                ")
-              ])
-            ])
+    return _c("div", { staticClass: "row breadcrumbs-top" }, [
+      _c("div", { staticClass: "breadcrumb-wrapper col-12" }, [
+        _c("ol", { staticClass: "breadcrumb" }, [
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "index.html" } }, [_vm._v("Home")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Apps")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "breadcrumb-item active" }, [
+            _vm._v("Contacts\n                    ")
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content-header-right col-md-6 col-12" }, [
-        _c(
-          "div",
-          {
-            staticClass: "btn-group float-md-right",
-            attrs: {
-              role: "group",
-              "aria-label": "Button group with nested dropdown"
-            }
-          },
-          [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2",
-                attrs: {
-                  id: "btnGroupDrop1",
-                  type: "button",
-                  "data-toggle": "dropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("i", { staticClass: "ft-settings icon-left" }),
-                _vm._v(" Settings")
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "dropdown-menu",
-                attrs: { "aria-labelledby": "btnGroupDrop1" }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "card-bootstrap.html" }
-                  },
-                  [_vm._v("Cards")]
-                ),
-                _c(
-                  "a",
-                  {
-                    staticClass: "dropdown-item",
-                    attrs: { href: "component-buttons-extended.html" }
-                  },
-                  [_vm._v("Buttons")]
-                )
-              ]
-            )
-          ]
-        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-header-right col-md-6 col-12" }, [
+      _c(
+        "div",
+        {
+          staticClass: "btn-group float-md-right",
+          attrs: {
+            role: "group",
+            "aria-label": "Button group with nested dropdown"
+          }
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-info round dropdown-toggle dropdown-menu-right box-shadow-2 px-2",
+              attrs: {
+                id: "btnGroupDrop1",
+                type: "button",
+                "data-toggle": "dropdown",
+                "aria-haspopup": "true",
+                "aria-expanded": "false"
+              }
+            },
+            [
+              _c("i", { staticClass: "ft-settings icon-left" }),
+              _vm._v(" Settings")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dropdown-menu",
+              attrs: { "aria-labelledby": "btnGroupDrop1" }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  attrs: { href: "card-bootstrap.html" }
+                },
+                [_vm._v("Cards")]
+              ),
+              _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  attrs: { href: "component-buttons-extended.html" }
+                },
+                [_vm._v("Buttons")]
+              )
+            ]
+          )
+        ]
+      )
     ])
   }
 ]
@@ -64916,9 +65031,6 @@ if (false) {
 }
 
 /***/ }),
-/* 248 */,
-/* 249 */,
-/* 250 */,
 /* 251 */,
 /* 252 */,
 /* 253 */,
@@ -64928,14 +65040,17 @@ if (false) {
 /* 257 */,
 /* 258 */,
 /* 259 */,
-/* 260 */
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(261);
+module.exports = __webpack_require__(264);
 
 
 /***/ }),
-/* 261 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Launcher = __webpack_require__(149);
@@ -64948,21 +65063,24 @@ $(document).ready(function () {
     launcher.Init().RegisterApps({
         'app-nav': __webpack_require__(242)(store, launcher.App()),
         'left-sidebar': __webpack_require__(243)(store, launcher.App()),
-        'users': __webpack_require__(262)(store, launcher.App(), __webpack_require__(264))
+        'users': __webpack_require__(265)(store, launcher.App(), __webpack_require__(267))
     });
 });
 
 /***/ }),
-/* 262 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Page = __webpack_require__(263);
+var PageManager = __webpack_require__(266);
 
 module.exports = function (store, App, component) {
 
     return {
         el: '#app',
         data: {
+            /**
+             * The page manager container object
+             */
             page: null
         },
         store: store,
@@ -64971,8 +65089,8 @@ module.exports = function (store, App, component) {
         },
         methods: {
             init: function init() {
-                this.page = new Page();
-                this.page.initPage();
+                this.page = new PageManager();
+                this.page.Init();
             }
         },
         mounted: function mounted() {
@@ -64982,7 +65100,7 @@ module.exports = function (store, App, component) {
 };
 
 /***/ }),
-/* 263 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -64991,35 +65109,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var PageManager = __webpack_require__(245);
 
-var Users = function () {
-    function Users() {
-        _classCallCheck(this, Users);
+var Manager = function () {
+    function Manager() {
+        _classCallCheck(this, Manager);
 
         this.page_manager = new PageManager();
     }
 
-    _createClass(Users, [{
-        key: 'initPage',
-        value: function initPage() {
-            alert('Init Users Page...');
+    _createClass(Manager, [{
+        key: 'Init',
+        value: function Init() {
+
+            this.page_manager.header.setTitle('Utilizatori');
         }
     }]);
 
-    return Users;
+    return Manager;
 }();
 
-module.exports = Users;
+module.exports = Manager;
 
 /***/ }),
-/* 264 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(265)
+var __vue_script__ = __webpack_require__(268)
 /* template */
-var __vue_template__ = __webpack_require__(266)
+var __vue_template__ = __webpack_require__(269)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65058,7 +65177,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 265 */
+/* 268 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65072,15 +65191,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: {
+        page_manager: { type: Object, required: true }
+    },
+
     components: {
-        'content-header': __webpack_require__(246)
+        'content-header': __webpack_require__(248)
     }
 });
 
 /***/ }),
-/* 266 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -65090,7 +65216,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "content-wrapper" },
-    [_c("content-header")],
+    [_c("content-header", { attrs: { title: _vm.page_manager.header.title } })],
     1
   )
 }

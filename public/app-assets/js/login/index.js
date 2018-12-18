@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 248);
+/******/ 	return __webpack_require__(__webpack_require__.s = 251);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -64655,14 +64655,17 @@ if (false) {
 /* 245 */,
 /* 246 */,
 /* 247 */,
-/* 248 */
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(249);
+module.exports = __webpack_require__(252);
 
 
 /***/ }),
-/* 249 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Launcher = __webpack_require__(149);
@@ -64672,12 +64675,12 @@ $(document).ready(function () {
     var launcher = new Launcher('ComptechApp', window);
 
     launcher.Init().RegisterApps({
-        'login': __webpack_require__(250)
+        'login': __webpack_require__(253)
     });
 });
 
 /***/ }),
-/* 250 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {

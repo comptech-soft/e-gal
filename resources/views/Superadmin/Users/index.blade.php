@@ -1,7 +1,10 @@
 @extends('adminmodern::layout.index')
 
 @section('content')
-    <users-page>
+    <users-page
+        v-if="page"
+        :page_manager="page.page_manager"
+    >
     </users-page>
 @stop
 
