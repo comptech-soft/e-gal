@@ -7,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 class AppCoreServiceProvider extends ServiceProvider {
 
     public function boot() {
-
         /**
          * Se incarca rutele definite
          */
@@ -22,6 +21,10 @@ class AppCoreServiceProvider extends ServiceProvider {
     }
 
     public function register() {
-       
+        /*
+        | Middlewares
+        */
+        $router = $this->app['router'];
+        $router->aliasMiddleware('is-superadmin', \Comptechsoft\Appcore\Middleware\IsSuperadmin::class);
     }
 }

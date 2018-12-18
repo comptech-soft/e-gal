@@ -1,5 +1,7 @@
 const Launcher = require('./../Libs/App/Launcher')
 const Sidebar = require('./../EGal/Sidebar/Sidebar')
+const AdminModern = require('comptechsoft-admin-modern').layout
+
 //  router: new VueRouter({routes: require('./routes/routes')}),   
 
 $(document).ready( () => {
@@ -19,7 +21,7 @@ $(document).ready( () => {
         el: '#app-nav',
         store,
         components: {
-            'top-navigation': require('./Nav')
+            'top-navigation': AdminModern.nav,
         },
         mounted(){
             this.$store.commit('getConfig')
@@ -30,7 +32,7 @@ $(document).ready( () => {
         el: '#left-sidebar',
         store,
         components: {
-            'left-sidebar': require('./Sidebar/Sidebar')
+            'left-sidebar': AdminModern.sidebar,
         },
         methods: {
             onSidebarClick(option) {

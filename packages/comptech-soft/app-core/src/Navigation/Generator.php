@@ -13,7 +13,10 @@ class Generator {
 
     }
 
-    public static function makesuparadminSidebar($user, $menu) {
+    /**
+     * Meniul unui superadmin
+     */
+    public static function makesuperadminSidebar($user, $menu) {
         $menu->addOption('users', self::makeUsersOptions($user, $menu) );
         return $menu;
     }
