@@ -1,24 +1,24 @@
 class Sidebar {
 
-    constructor(app, vue) {
-        this.app = app
+    constructor(App, vue) {
+        this.App = App
         this.vue = vue
     }
 
     onLogin() {
-        window[this.app.name].Http.redirect(100, this.vue.url + '/login')
+        this.App.Http.redirect(100, this.vue.url + '/login')
     }
 
     onLogout() {
-        window[this.app.name].Auth.logout(this.vue.url)
+        this.App.Auth.logout(this.vue.url)
     }
 
     onRoles() {
-        window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/roles')
+        this.App.Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/roles')
     }
 
     onUsers() {
-        window[this.app.name].Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/users')
+        this.App.Http.redirect(100, this.vue.url + '/' + this.vue.role.slug + '/users')
     }
 
     Dispatch(option) {

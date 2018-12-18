@@ -1,76 +1,86 @@
-const VueManager = require('./../Vue/Manager')
-const Http = require('./../Http/Http')
-const Auth = require('./../Auth/Auth')
-const Dom = require('./../DOM/Dom')
+/**
+ * Lodash
+ */
+window._ = require('lodash')
+
+/**
+ * Moment
+ */
+window.moment = require('moment')
+
+/**
+ * Axios
+ */
+window.axios = require('axios')
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]').content
+window.axios.defaults.baseURL = document.head.querySelector('meta[name="base-url"]').content + '/'
+
+/**
+ * Vue, Vuex, VueRouter
+ */
+window.Vue = require('vue')
+window.VueRouter = require('vue-router').default
+window.Vuex = require('vuex')
+
+window.Vue.use(window.Vuex)
+window.Vue.use(window.VueRouter)
 
 class Launcher {
 
     constructor(name, window) {
-
         this.name = name
         this.window = window
-
-        /**
-         * Lodash
-         */
-        this.window._ = require('lodash')
-
-        /**
-         * Moment
-         */
-        this.window.moment = require('moment')
-
-        /**
-         * Axios
-         */
-        this.window.axios = require('axios')
-        this.window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-        this.window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]').content
-        this.window.axios.defaults.baseURL = document.head.querySelector('meta[name="base-url"]').content + '/'
-
-        /**
-         * Vue, Vuex, VueRouter
-         */
-        this.window.Vue = require('vue')
-        this.window.VueRouter = require('vue-router').default
-        this.window.Vuex = require('vuex')
-
-        this.window.Vue.use(this.window.Vuex)
-
-
-        /**
-         * App name global scope
-         */
-        this.window[name] = {}
-        this.window[name].vuemanager = new VueManager(this.window[name])
-
-        /**
-         * Attach pugins
-         */
-        this.CreatePlugins({
-            'FormManager': require('./../Form/Manager'),
-        }, this.window[name])
     }
 
-    CreateVueObject(key, vue) {
-        this.window[this.name].vuemanager.CreateObject(key, vue)
+    /**
+     * Returneaza obiectul global al aplicatiei.
+     * Exemplu: ComptechApp
+     */
+    App() {
+        return this.window[this.name]
     }
 
-    VueMixins(mixins) {
-        _.each(mixins, mixin => {
-            Vue.mixin(mixin)
+    /**
+     * Initializeaza: clase generale, vue mixins, ...
+     */
+    Init() {
+        let 
+            VueManager = require('./../Vue/Manager'),
+            Http = require('./../Http/Http'),
+            Auth = require('./../Auth/Auth'),
+            Dom = require('./../DOM/Dom'),
+            FormManager = require('./../Form/Manager')
+
+        
+        /**
+         * Clases
+         */
+        this.window[this.name] = {}
+        this.window[this.name]['Auth'] = new Auth(this.window[this.name])
+        this.window[this.name]['DOM'] = new Dom(this.window[this.name])
+        this.window[this.name]['FormManager'] = FormManager
+        this.window[this.name]['Http'] = new Http(this.window[this.name])
+        this.window[this.name]['VueManager'] = new VueManager(this.window[this.name])
+
+        /**
+         * Vue global mixins
+         */
+        Vue.mixin(require('./Mixins/Store')(this.window[this.name]))
+
+        return this
+    }
+
+    RegisterApp(key, app) {
+        this.window[this.name]['VueManager'].CreateObject(key, app)
+        return this
+    }
+
+    RegisterApps(apps) {
+        _.each(apps, (app, key) => {
+            this.RegisterApp(key, app)
         })
-    }
-
-    CreatePlugins(plugins, app) {
-
-        app['Http'] = new Http(this.window[this.name])
-        app['Auth'] = new Auth(this.window[this.name])
-        app['DOM'] = new Dom(this.window[this.name])
-
-        for(let key in plugins) {
-            app[key] = plugins[key]
-        }
+        return this
     }
 
 }
