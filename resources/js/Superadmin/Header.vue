@@ -5,17 +5,12 @@
             <h3 class="content-header-title">{{ title }}</h3>
             
             <!-- Breadcrumbs -->
-            <div class="row breadcrumbs-top">
-                <div class="breadcrumb-wrapper col-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#">Apps</a>
-                        </li>
-                        <li class="breadcrumb-item active">Contacts
-                        </li>
-                    </ol>
-                </div>
+            <div v-if="breadcrumbs" class="row breadcrumbs-top">
+                <breadcrumbs
+                    :breadcrumbs="breadcrumbs"
+                >
+                </breadcrumbs>
+                
             </div>
         </div>
         <div class="content-header-right col-md-6 col-12">
@@ -30,7 +25,12 @@
 <script>
     export default {
         props: {
-            title: {type: String, default: 'My Page Title'}            
+            title: {type: String, default: 'My Page Title'},
+            breadcrumbs: {default: null}       
+        },
+
+        components: {
+            breadcrumbs: require('./Breadcrumbs')
         }
     }
 </script>

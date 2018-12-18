@@ -1,8 +1,11 @@
+const Breadcrumbs = require('./Breadcrumbs')
+
 class Header {
 
     constructor() {
         this.className = 'PageHeader'
         this.title = ''
+        this.breadcrumbs = new Breadcrumbs()
     }
 
     setTitle(title) {

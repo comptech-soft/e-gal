@@ -16,7 +16,7 @@ module.exports = (store, App, component) => {
         },
         methods: {
             init() {
-                this.page = new PageManager()
+                this.page = new PageManager(this)
                 this.page.Init()
             }
         },

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 263);
+/******/ 	return __webpack_require__(__webpack_require__.s = 266);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -64755,25 +64755,25 @@ module.exports = Sidebar;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Header = __webpack_require__(246);
-var Breadcrumbs = __webpack_require__(247);
 
 var Manager = function Manager() {
     _classCallCheck(this, Manager);
 
     this.className = 'PageManager';
     this.header = new Header();
-    this.breadcrumbs = new Breadcrumbs();
 };
 
 module.exports = Manager;
 
 /***/ }),
 /* 246 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Breadcrumbs = __webpack_require__(247);
 
 var Header = function () {
     function Header() {
@@ -64781,6 +64781,7 @@ var Header = function () {
 
         this.className = 'PageHeader';
         this.title = '';
+        this.breadcrumbs = new Breadcrumbs();
     }
 
     _createClass(Header, [{
@@ -64834,7 +64835,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(249)
 /* template */
-var __vue_template__ = __webpack_require__(250)
+var __vue_template__ = __webpack_require__(253)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -64902,6 +64903,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        title: { type: String, default: 'My Page Title' },
+        breadcrumbs: { default: null }
+    },
+
+    components: {
+        breadcrumbs: __webpack_require__(250)
+    }
+});
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(251)
+/* template */
+var __vue_template__ = __webpack_require__(252)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Superadmin/Breadcrumbs.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-33970973", Component.options)
+  } else {
+    hotAPI.reload("data-v-33970973", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 251 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -64910,12 +64994,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        title: { type: String, default: 'My Page Title' }
+        breadcrumbs: { type: Object }
+    },
+
+    methods: {
+        onClick: function onClick(item) {
+            if (item.click == null) {
+                return false;
+            }
+            try {
+                this.$emit('breadcrump-click', item);
+                if (_.isFunction(item.click)) {
+                    item.click(this);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 });
 
 /***/ }),
-/* 250 */
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "breadcrumb-wrapper col-12" }, [
+    _c(
+      "ol",
+      { staticClass: "breadcrumb" },
+      _vm._l(_vm.breadcrumbs, function(item, key, index) {
+        return _c(
+          "li",
+          { key: "breadcrumb-item" + key, staticClass: "breadcrumb-item" },
+          [
+            !item.active
+              ? _c(
+                  "a",
+                  {
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.onClick(item)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(item.caption) +
+                        "\n            "
+                    )
+                  ]
+                )
+              : [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(item.caption) +
+                      "\n            "
+                  )
+                ]
+          ],
+          2
+        )
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-33970973", module.exports)
+  }
+}
+
+/***/ }),
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -64928,35 +65090,20 @@ var render = function() {
         _vm._v(_vm._s(_vm.title))
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _vm.breadcrumbs
+        ? _c(
+            "div",
+            { staticClass: "row breadcrumbs-top" },
+            [_c("breadcrumbs", { attrs: { breadcrumbs: _vm.breadcrumbs } })],
+            1
+          )
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row breadcrumbs-top" }, [
-      _c("div", { staticClass: "breadcrumb-wrapper col-12" }, [
-        _c("ol", { staticClass: "breadcrumb" }, [
-          _c("li", { staticClass: "breadcrumb-item" }, [
-            _c("a", { attrs: { href: "index.html" } }, [_vm._v("Home")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "breadcrumb-item" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Apps")])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "breadcrumb-item active" }, [
-            _vm._v("Contacts\n                    ")
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -65031,9 +65178,6 @@ if (false) {
 }
 
 /***/ }),
-/* 251 */,
-/* 252 */,
-/* 253 */,
 /* 254 */,
 /* 255 */,
 /* 256 */,
@@ -65043,14 +65187,17 @@ if (false) {
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(264);
+module.exports = __webpack_require__(267);
 
 
 /***/ }),
-/* 264 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Launcher = __webpack_require__(149);
@@ -65063,15 +65210,15 @@ $(document).ready(function () {
     launcher.Init().RegisterApps({
         'app-nav': __webpack_require__(242)(store, launcher.App()),
         'left-sidebar': __webpack_require__(243)(store, launcher.App()),
-        'users': __webpack_require__(265)(store, launcher.App(), __webpack_require__(267))
+        'users': __webpack_require__(268)(store, launcher.App(), __webpack_require__(270))
     });
 });
 
 /***/ }),
-/* 265 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var PageManager = __webpack_require__(266);
+var PageManager = __webpack_require__(269);
 
 module.exports = function (store, App, component) {
 
@@ -65100,7 +65247,7 @@ module.exports = function (store, App, component) {
 };
 
 /***/ }),
-/* 266 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -65130,15 +65277,15 @@ var Manager = function () {
 module.exports = Manager;
 
 /***/ }),
-/* 267 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(268)
+var __vue_script__ = __webpack_require__(271)
 /* template */
-var __vue_template__ = __webpack_require__(269)
+var __vue_template__ = __webpack_require__(272)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -65177,7 +65324,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 268 */
+/* 271 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65206,7 +65353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 269 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
