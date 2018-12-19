@@ -1,4 +1,4 @@
-const PageManager = require('../../../../Libs/Page/Manager')
+const PageManager = require('comptechsoft-core-libs').UI.ContentManager
 
 class Manager {
 

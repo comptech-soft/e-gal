@@ -1,7 +1,5 @@
 module.exports = (app) => {
-
-    console.log(app);
-    
+  
     return {
         computed: {
     

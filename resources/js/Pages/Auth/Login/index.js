@@ -1,5 +1,4 @@
-const 
-    Launcher = require('./../../../Libs/App/Launcher')
+const Launcher = require('comptechsoft-core-libs').Launcher
     
 $(document).ready( () => {
 
@@ -7,8 +6,9 @@ $(document).ready( () => {
 
     launcher
         .Init()
+        .RegisterMixin(require('./../../../EGal/Vue/Mixins/Store'))
         .RegisterApps({
             'login': require('./../../../EGal/Vue/Apps/Login')
         })
-
+        
 })
