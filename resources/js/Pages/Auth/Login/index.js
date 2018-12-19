@@ -6,9 +6,9 @@ $(document).ready( () => {
 
     launcher
         .Init()
-        .RegisterMixin(require('./../../../EGal/Vue/Mixins/Store'))
+        .RegisterMixin(require('comptechsoft-core-libs').VUE.Mixins.Store)
         .RegisterApps({
-            'login': require('./../../../EGal/Vue/Apps/Login')
+            'login': require('./../../../App/Vue/Instances/Auth/Login')
         })
         
 })

@@ -1,5 +1,5 @@
 const AdminModern = require('comptechsoft-admin-modern').layout
-const SidebarDispatcher = require('./../../Sidebar/Dispatcher')
+const SidebarDispatcher = require('./../../../Sidebar/Dispatcher')
 
 module.exports = (store, App) => {
 

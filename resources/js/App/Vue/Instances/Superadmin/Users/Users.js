@@ -1,4 +1,4 @@
-const PageManager = require('../../Pages/Superadmin/Roles/Manager')
+const PageManager = require('./Page/Manager')
 
 module.exports = (store, App, component) => {
 
@@ -12,11 +12,11 @@ module.exports = (store, App, component) => {
         },
         store,
         components: {
-            'roles-page': component,
+            'users-page': component,
         },
         methods: {
             init() {
-                this.page = new PageManager(this)
+                this.page = new PageManager()
                 this.page.Init()
             }
         },

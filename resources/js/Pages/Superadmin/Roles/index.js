@@ -1,17 +1,48 @@
+/**
+ * Clasa care incarca toate pluginurile, defineste obiectele Vue, etc
+ * Pe baza ei se fac instantia obiectul "launcher"
+ */
 const Launcher = require('comptechsoft-core-libs').Launcher
 
 $(document).ready( () => {
 
+    /**
+     * Obiectul care porneste aplicatia
+     */
     let launcher = new Launcher('ComptechApp', window)
-    let store = new Vuex.Store(require('./../../../EGal/Store/store'))
+    launcher.Init()
+    
+    /**
+     * Obiectul global "ComptechApp"
+     * Contine Auth, Http, Dom, FormManager, VueManager etc
+     */
+    let App = launcher.App()
 
-    launcher
-        .Init()
-        .RegisterMixin(require('./../../../EGal/Vue/Mixins/Store'))
-        .RegisterApps({
-            'app-nav': require('./../../../EGal/Vue/Apps/Nav')(store, launcher.App()),
-            'left-sidebar': require('./../../../EGal/Vue/Apps/Sidebar')(store, launcher.App()),
-            'roles': require('./../../../EGal/Vue/Apps/Roles')(store, launcher.App(), require('./Roles')),
-        })
+    /**
+     * Store-ul Vue 
+     * Acesta il definesc in App pentru ca poate detine chestii specifice
+     */
+    let store = require('./../../../App/Vue/Store/store')
+    let storeInstance = new Vuex.Store(store)
+
+    /**
+     * Mixin-ul global Store
+     */
+    let storeMix = require('comptechsoft-core-libs').VUE.Mixins.Store
+    launcher.RegisterMixin(storeMix)
+
+    /**
+     * Instantele Vue
+     */
+    let vueNav = require('./../../../App/Vue/Instances/Layout/Nav')(storeInstance, App)
+    let vueSidebar = require('../../../App/Vue/Instances/Layout/Sidebar')(storeInstance, App)
+    let contentComponent = require('./../../../App/Vue/Instances/Superadmin/Roles/Component/Content')
+    let vueRoles = require('./../../../App/Vue/Instances/Superadmin/Roles/Roles')(storeInstance, App, contentComponent)
+    
+    launcher.RegisterApps({
+        'app-nav': vueNav,
+        'left-sidebar': vueSidebar,
+        'roles': vueRoles,
+    })
         
 })
