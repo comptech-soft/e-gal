@@ -14,5 +14,4 @@ $(document).ready( () => {
             'roles': require('./../../../EGal/Vue/Apps/Roles')(store, launcher.App(), require('./Roles')),
         })
         
-
 })
