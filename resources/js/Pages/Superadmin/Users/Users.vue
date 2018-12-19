@@ -3,8 +3,6 @@
     <div class="content-wrapper">
         <content-header
             :title="page_manager.header.title"
-            :breadcrumbs="page_manager.header.breadcrumbs.list"
-            :actions="page_manager.header.actions"
         >
         </content-header>    
     </div>
@@ -19,7 +17,7 @@
         },
         
         components: {
-            'content-header': require('./../Header')
+            'content-header': require('comptechsoft-admin-modern').layout.content.header
         }
     }
 </script>

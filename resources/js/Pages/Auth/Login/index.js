@@ -1,5 +1,5 @@
 const 
-    Launcher = require('./../Libs/App/Launcher')
+    Launcher = require('./../../../Libs/App/Launcher')
     
 $(document).ready( () => {
 
@@ -8,7 +8,7 @@ $(document).ready( () => {
     launcher
         .Init()
         .RegisterApps({
-            'login': require('./../EGal/Vue/Apps/Login')
+            'login': require('./../../../EGal/Vue/Apps/Login')
         })
 
 })
