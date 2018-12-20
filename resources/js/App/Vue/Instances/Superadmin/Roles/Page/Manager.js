@@ -1,4 +1,8 @@
+/**
+ * Definirea paginii (contentului) pentru Roles
+ */
 const PageManager = require('comptechsoft-core-libs').UI.ContentManager
+const VueComponents = require('comptechsoft-core-libs').VUE.Helpers.Components
 
 class Manager {
 
@@ -7,17 +11,18 @@ class Manager {
         this.page_manager = new PageManager()
     }
 
-    Init() {
-        
-        /**
-         * HEADER
-         */
+    /**
+     * HEADER
+     * ======
+     */
+    InitPageHeader() {
 
         /**
          * HEADER.Title
          */
-        this.page_manager.header.setTitle('Roluri')
         
+        this.page_manager.header.setTitle('Roluri')
+
         /**
          * HEADER. Breadcrumbs
          */
@@ -46,6 +51,91 @@ class Manager {
                 alert('Action #1')
             }
         })
+    }
+
+    InitPageBody() {
+        /**
+         * Sectiunea de filtrare
+         */
+        if( ! VueComponents.exists('roles-filter') )
+        {
+            Vue.component('roles-filter', require('./../Components/Body/Filter/Filter'))
+        }
+        this.page_manager.body.filter.setComponent('roles-filter')
+
+        /**
+         * Sectiunea de date
+         */
+        if( ! VueComponents.exists('roles-data') )
+        {
+            Vue.component('roles-data', require('./../Components/Body/Data/Data'))
+        }
+        this.page_manager.body.data.setComponent('roles-data')
+
+        /**
+         * Header title
+         */
+        this.page_manager.body.data.header.setTitle('Rolurile utilizatorilor platformei')
+        
+        /**
+         * Header toolbar
+         */
+        this.page_manager.body.data.header.toolbar.addButton('insert', {
+            color: 'btn-primary',
+            icon: 'ft-plus white',
+            caption: 'Adaugă',
+            click: () => {
+                alert('Insert....');
+            }
+        })
+        this.page_manager.body.data.header.toolbar.addButton('refresh', {
+            color: 'btn-danger',
+            icon: 'ft-trash white',
+            caption: 'Șterge tot...',
+            click: () => {
+                alert('Refresh....');
+            }
+        })
+
+        /**
+         * Header actions
+         */
+        this.page_manager.body.data.header.actions.setId('roles-actions')
+        this.page_manager.body.data.header.actions.setColor('btn-primary')
+        this.page_manager.body.data.header.actions.setIcon('ft-settings white')
+        this.page_manager.body.data.header.actions.addAction('refresh', {
+            icon: 'ft-refresh',
+            caption: 'Reîncarcă',
+            click: () => {
+                alert('Refresh...')
+            },
+        })
+        this.page_manager.body.data.header.actions.addAction('download', {
+            icon: 'ft-download',
+            caption: 'Exportă',
+            click: () => {
+                alert('Export...')
+            },
+        })
+        this.page_manager.body.data.header.actions.addAction('upload', {
+            icon: 'ft-upload',
+            caption: 'Importă',
+            click: () => {
+                alert('Imprta...')
+            },
+        })
+
+        /**
+         * Presentation
+         */
+        this.page_manager.body.data.attachPresentation('roles-presentation')
+        this.page_manager.body.data.presentation.components = ['table', 'list']
+        this.page_manager.body.data.presentation.current = 'table'
+    }
+
+    Init() {
+        this.InitPageHeader()
+        this.InitPageBody()
     }
 }
 
