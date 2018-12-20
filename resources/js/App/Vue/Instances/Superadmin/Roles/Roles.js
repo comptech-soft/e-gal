@@ -15,9 +15,15 @@ module.exports = (store, App, component) => {
             'roles-page': component,
         },
         methods: {
+
+            populate() {
+                this.page.page_manager.populate()
+            },
+
             init() {
                 this.page = new PageManager(this)
                 this.page.Init()
+                this.populate()
             }
         },
         mounted(){

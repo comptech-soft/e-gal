@@ -128,9 +128,9 @@ class Manager {
         /**
          * Presentation
          */
-        this.page_manager.body.data.attachPresentation('roles-presentation')
-        this.page_manager.body.data.presentation.components = ['table', 'list']
-        this.page_manager.body.data.presentation.current = 'table'
+        this.page_manager.body.data.attachPresentation('roles-presentation', ['table', 'list'], 'table')
+        this.page_manager.body.data.presentation.setEndpoint('superadmin/roles/get-records')
+        
     }
 
     Init() {
