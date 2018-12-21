@@ -73,14 +73,15 @@ class PageContent {
             presentation.hasOwnProperty('current') ? presentation.current : null
         )
         this.page_manager.content_body.data_section.presentation.makeTable()
+        this.page_manager.content_body.data_section.presentation.table.setDefaultOrder(presentation.table.default_order)
         _.each(presentation.table.columns, (column, key) => {
             this.page_manager.content_body.data_section.presentation.table.makeColumn(key)
             this.page_manager.content_body.data_section.presentation.table.columns[key].setWidth(column.width)
             this.page_manager.content_body.data_section.presentation.table.columns[key].header.setCaption(column.header.caption)
+            this.page_manager.content_body.data_section.presentation.table.columns[key].header.setOrderable(column.header.orderable)
             this.page_manager.content_body.data_section.presentation.table.columns[key].control.setSource(column.control.source)
         })
     }
-
 
     /** BODY */
     InitContentBody(body) {

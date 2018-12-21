@@ -30,6 +30,7 @@
                         @quick-search="onQuickSearch"
                         @content-body-actions-click="onClickDataHeaderAction"
                         @change-page="onChangePage"
+                        @order_by="onOrderBy"
                     >
                     </component>
                 </div>
@@ -62,6 +63,10 @@
 
             onChangePage(page) {
                 this.$emit('change-page', page)
+            },
+
+            onOrderBy(order) {
+                this.$emit('order_by', order)
             }
         },
     }

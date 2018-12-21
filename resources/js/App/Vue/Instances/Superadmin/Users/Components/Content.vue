@@ -25,6 +25,7 @@
             @quick-search="onQuickSearch"
             @content-body-actions-click="onClickDataHeaderAction"
             @change-page="onChangePage"
+            @order_by="onOrderBy"
         >
         </content-body> 
     </div>
@@ -65,6 +66,10 @@
 
             onChangePage(page) {
                 this.data_manager.onChangePage(page)
+            },
+
+            onOrderBy(order) {
+                this.data_manager.onOrderBy(order)
             }
         },
         

@@ -22,6 +22,7 @@
             @per_page_selected="onPerPageSelected"
             @quick-search="onQuickSearch"
             @change-page="onChangePage"
+            @order_by="onOrderBy"
         >
         </data-presentation>
     </div>
@@ -52,6 +53,10 @@
 
             onChangePage(page) {
                 this.$emit('change-page', page)
+            },
+
+            onOrderBy(order) {
+                this.$emit('order_by', order)
             }
         },
 

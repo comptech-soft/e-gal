@@ -17,6 +17,7 @@ module.exports = (store, App, component) => {
             'users-page': component,
         },
         methods: {
+
             Init() {
                 this.page_content = new PageContent()
                 this.page_content.Init()
@@ -27,7 +28,8 @@ module.exports = (store, App, component) => {
                         placeholder: 'Caută rapid aicia...',
                         fields: ['users.email'],
                         value: null,
-                    }
+                    },
+                    current_order: this.page_content.page_manager.content_body.data_section.presentation.table.default_order
                 })
                 this.data_manager.populate()
             }
