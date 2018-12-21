@@ -2,9 +2,11 @@
 
 @section('content')
     <roles-page
-        v-if="page"
-        :page_manager="page.page_manager"
-    >
+            v-if="(page_content != null) && (data_manager != null)"
+            :page_manager="page_content.page_manager"
+            :data_manager="data_manager"
+            :records="records"
+        >
     </roles-page>
 @stop
 

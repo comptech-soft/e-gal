@@ -1,14 +1,14 @@
 <template>
     <div class="content-wrapper">
-        
         <!-- 
             Headerul paginii
             Este standardizat in comptechsoft-admin-modern.layout.content.header
         -->
         <content-header
-            :title="page_manager.header.title"
-            :breadcrumbs="page_manager.header.breadcrumbs.list"
-            :actions="page_manager.header.actions"
+            :title="page_manager.content_header.title"
+            :breadcrumbs="page_manager.content_header.breadcrumbs.list"
+            :actions="page_manager.content_header.actions"
+            :records="records"
         >
         </content-header> 
 
@@ -17,8 +17,9 @@
             Inca nu este standardizat
         -->
         <content-body
-            :filter="page_manager.body.filter"
-            :data="page_manager.body.data"
+            :filter_section="page_manager.content_body.filter_section"
+            :data_section="page_manager.content_body.data_section"
+            :records="records"
         >
         </content-body> 
     </div>
@@ -26,7 +27,8 @@
 
 <script>
     /**
-     * Aceasta este componenta principala
+     * Aceasta este componenta principala "roles_page"
+     * Este imedoat sub RootApp
      * Ar trebui sa fie generala pentru pagini de acest tip
      * 
      * page_manager: vine din data() de la instanta Vue
@@ -35,7 +37,9 @@
     export default {
         
         props: {
-            page_manager: {type: Object, required: true}
+            page_manager: {type: Object, required: true},
+            data_manager: {type: Object, required: true},
+            records: {type: Array, default: () => []},
         },
         
         components: {

@@ -5,10 +5,11 @@
                 Sectiunea de filtrare
                 Am filtrare daca filter != null 
             -->
-            <section v-if="filter!=null" class="row">
+            <section v-if="filter_section!=null" class="row">
                 <div class="col-12">
                     <component 
-                        :is="filter.component"
+                        :is="filter_section.component"
+                        :records="records"
                     >
                     </component>
                 </div>
@@ -20,9 +21,10 @@
             <section class="row">
                 <div class="col-12">
                     <component 
-                        :is="data.component"
-                        :header="data.header"
-                        :presentation="data.presentation"
+                        :is="data_section.component"
+                        :header="data_section.header"
+                        :presentation="data_section.presentation"
+                        :records="records"
                     >
                     </component>
                 </div>
@@ -34,8 +36,9 @@
 <script>
     export default {
         props: {
-            filter: {required: true},
-            data: {required: true},
+            filter_section: {required: true},
+            data_section: {required: true},
+            records: {type: Array, default: () => []}
         },
     }
 </script>

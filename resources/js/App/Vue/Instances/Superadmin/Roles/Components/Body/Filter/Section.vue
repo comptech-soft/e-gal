@@ -21,3 +21,12 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: {
+            records: {type: Array, default: () => []}
+        }
+    }
+</script>
+
