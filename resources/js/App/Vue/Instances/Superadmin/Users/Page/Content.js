@@ -1,7 +1,7 @@
 module.exports = {
     /** Content Header  */
     header: {
-        title: 'Roluri',
+        title: 'Utilizatori',
         breadcrumbs: {
             'home': {
                 active: false,
@@ -10,9 +10,9 @@ module.exports = {
                     vue.app.Http.redirect(vue.url)
                 }
             },
-            'roles': {
+            'users': {
                 active: true,
-                caption: 'Roluri',
+                caption: 'Utilizatori',
                 click: null
             }
         },
@@ -38,7 +38,7 @@ module.exports = {
         data_section: {
             component: require('./../Components/Body/Data/Section'),
             header: {
-                title: 'Rolurile utilizatorilor platformei',
+                title: 'Utilizatorii platformei',
                 toolbar: {
                     'insert': {
                         color: 'btn-primary',
@@ -58,7 +58,7 @@ module.exports = {
                     },
                 },
                 actions: {
-                    'id': 'roles-actions',
+                    'id': 'users-actions',
                     'color': 'btn-primary',
                     'icon': 'ft-settings white',
                     'items': {
@@ -87,11 +87,11 @@ module.exports = {
                 }
             },
             presentation: {
-                id: 'roles-presentation',
+                id: 'users-presentation',
                 table: {
                     columns: {
                         'id': {
-                            width: 50,
+                            width: 5,
                             header: {
                                 caption: 'ID'
                             },
@@ -99,13 +99,13 @@ module.exports = {
                                 source: 'id'
                             }
                         },
-                        'slug': {
-                            width: 50,
+                        'email': {
+                            width: 95,
                             header: {
-                                caption: 'Slug'
+                                caption: 'Email'
                             },
                             control: {
-                                source: 'slug'
+                                source: 'email'
                             }
                         }
                     }

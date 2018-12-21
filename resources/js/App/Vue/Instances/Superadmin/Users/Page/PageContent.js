@@ -1,6 +1,6 @@
 /**
  * Class: ..... PageContent
- * ............ Definirea continutului paginii Roles
+ * ............ Definirea continutului paginii Users
  */
 const ContentManager = require('comptechsoft-core-libs').UI.ContentManager
 // const VueComponents = require('comptechsoft-core-libs').VUE.Helpers.Components
@@ -41,13 +41,13 @@ class PageContent {
     }
 
     setBodyFilterSection(component) {
-        Vue.component('roles-filter', component)
-        this.page_manager.content_body.filter_section.setComponent('roles-filter')
+        Vue.component('users-filter', component)
+        this.page_manager.content_body.filter_section.setComponent('users-filter')
     }
 
     setBodyDataSection(component) {
-        Vue.component('roles-data', component)
-        this.page_manager.content_body.data_section.setComponent('roles-data')
+        Vue.component('users-data', component)
+        this.page_manager.content_body.data_section.setComponent('users-data')
     }
 
     setBodyDataSectionHeader(header) {

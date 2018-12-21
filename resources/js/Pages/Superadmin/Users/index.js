@@ -36,8 +36,8 @@ $(document).ready( () => {
      */
     let vueNav = require('./../../../App/Vue/Instances/Layout/Nav')(storeInstance, App)
     let vueSidebar = require('../../../App/Vue/Instances/Layout/Sidebar')(storeInstance, App)
-    let contentComponent = require('./../../../App/Vue/Instances/Superadmin/Users/Component/Content')
-    let vueUsers = require('./../../../App/Vue/Instances/Superadmin/Users/Users')(storeInstance, App, contentComponent)
+    let contentComponent = require('./../../../App/Vue/Instances/Superadmin/Users/Components/Content')
+    let vueUsers = require('./../../../App/Vue/Instances/Superadmin/Users/Main')(storeInstance, App, contentComponent)
     
     launcher.RegisterApps({
         'app-nav': vueNav,

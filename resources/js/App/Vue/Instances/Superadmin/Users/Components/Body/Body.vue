@@ -25,7 +25,9 @@
                         :header="data_section.header"
                         :presentation="data_section.presentation"
                         :records="records"
+                        :data_manager="data_manager"
                         @per_page_selected="onPerPageSelected"
+                        @quick-search="onQuickSearch"
                     >
                     </component>
                 </div>
@@ -39,13 +41,17 @@
         props: {
             filter_section: {required: true},
             data_section: {required: true},
-            records: {type: Array, default: () => []}
+            records: {type: Array, default: () => []},
+            data_manager: {type: Object, required: true},
         },
 
         methods: {
             onPerPageSelected(per_page) {
+                this.$emit('per_page_selected', per_page)
+            },
 
-                alert('Hmmm... ' + per_page)
+            onQuickSearch(searched) {
+                this.$emit('quick-search', searched)
             }
         },
     }

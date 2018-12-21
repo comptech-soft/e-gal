@@ -14,15 +14,20 @@ module.exports = (store, App, component) => {
         },
         store,
         components: {
-            'roles-page': component,
+            'users-page': component,
         },
         methods: {
             Init() {
                 this.page_content = new PageContent()
                 this.page_content.Init()
                 this.data_manager = new this.app.DataManager(this, {
-                    endpoint: 'superadmin/roles/get-records',
-                    per_page: 1,
+                    endpoint: 'superadmin/users/get-records',
+                    per_page: 20,
+                    searchable: {
+                        placeholder: 'Caută rapid aicia...',
+                        fields: ['users.email'],
+                        value: null,
+                    }
                 })
                 this.data_manager.populate()
             }
@@ -30,6 +35,6 @@ module.exports = (store, App, component) => {
         mounted(){
             this.Init()
         },
-        name: 'roles-root-app'
+        name: 'users-root-app'
     }
 }

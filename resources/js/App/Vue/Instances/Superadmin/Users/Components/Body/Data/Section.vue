@@ -17,7 +17,9 @@
         <data-presentation
             :presentation="presentation"
             :records="records"
+            :data_manager="data_manager"
             @per_page_selected="onPerPageSelected"
+            @quick-search="onQuickSearch"
         >
         </data-presentation>
     </div>
@@ -29,13 +31,17 @@
         props: {
             header: {required: true},
             presentation: {required: true},
-            records: {type: Array, default: []}
+            records: {type: Array, default: []},
+            data_manager: {type: Object, required: true},
         },
 
         methods: {
             onPerPageSelected(per_page) {
+                this.$emit('per_page_selected', per_page)
+            },
 
-                alert('Hmmm... ' + per_page)
+            onQuickSearch(searched) {
+                this.$emit('quick-search', searched)
             }
         },
 
