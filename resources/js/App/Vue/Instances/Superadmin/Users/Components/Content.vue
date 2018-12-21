@@ -23,6 +23,8 @@
             :records="records"
             @per_page_selected="onPerPageSelected"
             @quick-search="onQuickSearch"
+            @content-body-actions-click="onClickDataHeaderAction"
+            @change-page="onChangePage"
         >
         </content-body> 
     </div>
@@ -52,6 +54,17 @@
 
             onQuickSearch(searched) {
                 this.data_manager.onQuickSearch(searched)
+            },
+
+            onClickDataHeaderAction(event) {
+                if( event == 'refresh')
+                {
+                    this.data_manager.populate()
+                }
+            },
+
+            onChangePage(page) {
+                this.data_manager.onChangePage(page)
             }
         },
         

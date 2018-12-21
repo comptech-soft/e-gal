@@ -28,6 +28,8 @@
                         :data_manager="data_manager"
                         @per_page_selected="onPerPageSelected"
                         @quick-search="onQuickSearch"
+                        @content-body-actions-click="onClickDataHeaderAction"
+                        @change-page="onChangePage"
                     >
                     </component>
                 </div>
@@ -52,6 +54,14 @@
 
             onQuickSearch(searched) {
                 this.$emit('quick-search', searched)
+            },
+
+            onClickDataHeaderAction(event) {
+                this.$emit('content-body-actions-click', event)
+            },
+
+            onChangePage(page) {
+                this.$emit('change-page', page)
             }
         },
     }

@@ -63,15 +63,14 @@ module.exports = {
                     'icon': 'ft-settings white',
                     'items': {
                         'refresh': {
-                            icon: 'ft-refresh',
+                            icon: 'ft-refresh-cw',
                             caption: 'Reîncarcă',
-                            click: () => {
-                                alert('Refresh...')
-                            },
+                            click: null,
                         },
                         'download': {
                             icon: 'ft-download',
                             caption: 'Exportă',
+                            event: 'refresh',
                             click: () => {
                                 alert('Export...')
                             },

@@ -8,6 +8,7 @@
             :toolbar="header.toolbar"
             :actions="header.actions"
             :records="records"
+            @content-body-actions-click="onClickDataHeaderAction"
         >
         </data-header>
 
@@ -20,6 +21,7 @@
             :data_manager="data_manager"
             @per_page_selected="onPerPageSelected"
             @quick-search="onQuickSearch"
+            @change-page="onChangePage"
         >
         </data-presentation>
     </div>
@@ -42,6 +44,14 @@
 
             onQuickSearch(searched) {
                 this.$emit('quick-search', searched)
+            },
+
+            onClickDataHeaderAction(event) {
+                this.$emit('content-body-actions-click', event)
+            },
+
+            onChangePage(page) {
+                this.$emit('change-page', page)
             }
         },
 
