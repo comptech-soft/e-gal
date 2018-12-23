@@ -8,7 +8,7 @@ $(document).ready( () => {
         .Init()
         .RegisterMixin(require('comptechsoft-core-libs').VUE.Mixins.Store)
         .RegisterApps({
-            'login': require('./../../../App/Vue/Instances/Auth/Login')
+            'login': require('./App/Create')
         })
         
 })

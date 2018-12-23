@@ -7,9 +7,9 @@
                         <div class="position-relative">
                             <input 
                                 type="search" 
-                                id="search-roles" 
+                                id="search-users" 
                                 class="form-control" 
-                                placeholder="Caută în roluri..."
+                                placeholder="Caută în utilizatori..."
                             />
                             <div class="form-control-position">
                                 <i class="la la-search text-size-base text-muted la-rotate-270"></i>
@@ -29,4 +29,3 @@
         }
     }
 </script>
-

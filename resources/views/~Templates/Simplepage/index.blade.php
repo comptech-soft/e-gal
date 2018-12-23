@@ -2,8 +2,8 @@
 
 @section('content')
     <simple-page
-        v-if="(page_content != null) && (data_manager != null)"
-        :page_manager="page_content.page_manager"
+        v-if="(page_manager != null) && (data_manager != null)"
+        :page_manager="page_manager"
         :data_manager="data_manager"
         :records="records"
     >
