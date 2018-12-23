@@ -4,5 +4,5 @@ mix.js('resources/js/Pages/Auth/Login/index.js', 'public/app-assets/js/login/ind
 
 mix.js('resources/js/Pages/Welcome/index.js', 'public/app-assets/js/welcome/index.js');
 
-mix.js('resources/js/Pages/Superadmin/Roles/index.js', 'public/app-assets/js/superadmin/roles/index.js');
-mix.js('resources/js/Pages/Superadmin/Users/index.js', 'public/app-assets/js/superadmin/users/index.js');
+mix.js('resources/js/Pages/Simple/Superadmin/Roles/index.js', 'public/app-assets/js/superadmin/roles/index.js');
+mix.js('resources/js/Pages/Simple/Superadmin/Users/index.js', 'public/app-assets/js/superadmin/users/index.js');

@@ -1,3 +1,4 @@
+
 const PageContent = require('./Page/PageContent')
 
 module.exports = (store, App, component) => {
@@ -14,7 +15,7 @@ module.exports = (store, App, component) => {
         },
         store,
         components: {
-            'roles-page': component,
+            'simple-page': component,
         },
         methods: {
             Init() {

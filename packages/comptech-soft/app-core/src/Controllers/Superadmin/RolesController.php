@@ -9,7 +9,9 @@ use Comptechsoft\Usermanagement\Models\Roles\Role;
 class RolesController extends Controller
 {
     public function index(Request $request) {
-        return view(config('comptechsoft.core.roles.index.view'));
+        $view = config('comptechsoft.core.roles.index.view');
+        $script = config('comptechsoft.core.roles.index.script');
+        return view($view )->withScript($script);
     }
 
     public function getRecords(Request $request) {

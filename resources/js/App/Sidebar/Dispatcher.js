@@ -1,7 +1,11 @@
 class Sidebar {
 
-    constructor(App, vue) {
+    constructor(App) {
         this.App = App
+        // this.vue = vue
+    }
+
+    attachVue(vue) {
         this.vue = vue
     }
 

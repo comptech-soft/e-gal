@@ -78,6 +78,6 @@
             'content-body': require('./Body/Body')
         },
 
-        name: 'superadmin-roles-page'
+        name: 'superadmin-users-page'
     }
 </script>

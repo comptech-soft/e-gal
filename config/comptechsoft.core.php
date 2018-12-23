@@ -8,13 +8,15 @@ return [
 
     'roles' => [
         'index' => [
-            'view' => 'Superadmin.Roles.index'
+            'view' => 'Superadmin.Roles.index',
+            'script' => config('app.url') . '/app-assets/js/superadmin/roles/index.js',
         ]
     ],
 
     'users' => [
         'index' => [
-            'view' => 'Superadmin.Users.index'
+            'view' => 'Superadmin.Users.index',
+            'script' => config('app.url') . '/app-assets/js/superadmin/users/index.js',
         ]
     ]
 

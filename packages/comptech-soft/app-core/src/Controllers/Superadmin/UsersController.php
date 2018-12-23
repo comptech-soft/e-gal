@@ -10,7 +10,9 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        return view(config('comptechsoft.core.users.index.view'));
+        $view = config('comptechsoft.core.users.index.view');
+        $script = config('comptechsoft.core.users.index.script');
+        return view($view )->withScript($script);
     }
 
     public function getRecords(Request $request) {
