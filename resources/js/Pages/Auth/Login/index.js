@@ -1,14 +1,5 @@
-const Launcher = require('comptechsoft-core-libs').Launcher
-    
-$(document).ready( () => {
+const 
+    Run = require('comptechsoft-apps').Auth.Login,
+    store = new Vuex.Store(require('./../../../App/Store/store'))
 
-    let launcher = new Launcher('ComptechApp', window)
-
-    launcher
-        .Init()
-        .RegisterMixin(require('comptechsoft-core-libs').VUE.Mixins.Store)
-        .RegisterApps({
-            'login': require('./App/Create')
-        })
-        
-})
+Run('ComptechApp', window, store)

@@ -10,13 +10,13 @@ const
     /**
      * Store-ul comun
      */
-    store = require('../../../../App/Store/store'),
+    store = require('../../../App/Store/store'),
 
     /**
      * Sidebarul comun
      */
     sidebar = {
-        dispatcher: require('../../../../App/Sidebar/Dispatcher')
+        dispatcher: require('../../../App/Sidebar/Dispatcher')
     },
 
     /**

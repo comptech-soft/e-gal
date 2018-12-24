@@ -21,7 +21,7 @@ module.exports = {
                 }
             },
             'slug': {
-                width: 95,
+                width: 35,
                 header: {
                     caption: 'Slug',
                     orderable: {
@@ -31,6 +31,32 @@ module.exports = {
                 },
                 control: {
                     source: 'slug'
+                }
+            },
+            'name': {
+                width: 40,
+                header: {
+                    caption: 'Nume',
+                    orderable: {
+                        fields: ['roles.name'],
+                        direction: 'asc',
+                    }
+                },
+                control: {
+                    source: 'name'
+                }
+            },
+            'created_at': {
+                width: 10,
+                header: {
+                    caption: 'Creat la',
+                    orderable: {
+                        fields: ['roles.created_at'],
+                        direction: 'asc',
+                    }
+                },
+                control: {
+                    source: 'created_at'
                 }
             }
         }
