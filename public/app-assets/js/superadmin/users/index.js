@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 357);
+/******/ 	return __webpack_require__(__webpack_require__.s = 358);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -61175,8 +61175,9 @@ class Manager {
         return this
     }
 
-    setFormComponent(component) {
-        this.content_body.form_section.setComponent(component)
+    setForm(form) {
+        this.content_body.form_section.setComponent(form.component)
+        this.content_body.form_section.setActions(form.actions)
         return this
     }
     
@@ -61636,6 +61637,7 @@ class Control {
         this.type = 'field'
         this.source = null
         this.click = null
+        this.actions = null
     }
 
     setComponent(component) {
@@ -61672,10 +61674,16 @@ class Form {
         this.visible = false
         this.action = null
         this.record = null
+        this.actions = null
     }
 
     setComponent(component) {
         this.component = component
+        return this
+    }
+
+    setActions(actions) {
+        this.actions = actions
         return this
     }
 
@@ -65622,6 +65630,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 
 exports.default = {
@@ -65663,6 +65672,13 @@ exports.default = {
                 action.item.click(this);
             } catch (error) {
                 console.log('Main.vue::onHeaderActionClick > ' + error.message);
+            }
+        },
+        onCellActionClick: function onCellActionClick(event) {
+            try {
+                event.action.click(this, event.record);
+            } catch (error) {
+                console.log('Main.vue::onCellActionClick > ' + error.message);
             }
         }
     },
@@ -66230,6 +66246,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -66269,6 +66286,9 @@ exports.default = {
         },
         onOrderBy: function onOrderBy(order) {
             this.$emit('order_by', order);
+        },
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
         }
     }
 };
@@ -66337,7 +66357,8 @@ var render = function() {
                       "quick-search": _vm.onQuickSearch,
                       "content-body-actions-click": _vm.onClickDataHeaderAction,
                       "change-page": _vm.onChangePage,
-                      order_by: _vm.onOrderBy
+                      order_by: _vm.onOrderBy,
+                      "cell-action-click": _vm.onCellActionClick
                     }
                   })
                 ],
@@ -66395,7 +66416,8 @@ var render = function() {
           "content-body-actions-click": _vm.onClickDataHeaderAction,
           "change-page": _vm.onChangePage,
           order_by: _vm.onOrderBy,
-          "close-form": _vm.hideForm
+          "close-form": _vm.hideForm,
+          "cell-action-click": _vm.onCellActionClick
         }
       })
     ],
@@ -66494,11 +66516,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
 
 exports.default = {
 
@@ -66524,13 +66541,15 @@ exports.default = {
         },
         onOrderBy: function onOrderBy(order) {
             this.$emit('order_by', order);
+        },
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
         }
     },
 
     components: {
-        'data-header': __webpack_require__(155), //require('comptechsoft-admin-modern').layout.body.data.header,
+        'data-header': __webpack_require__(155),
         'data-presentation': __webpack_require__(156)
-        // require('comptechsoft-admin-modern').layout.presentation
     }
 };
 
@@ -66912,6 +66931,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -66943,6 +66963,9 @@ exports.default = {
         },
         onOrderBy: function onOrderBy(order) {
             this.$emit('order_by', order);
+        },
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
         }
     },
 
@@ -68055,6 +68078,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -68090,6 +68114,9 @@ exports.default = {
     methods: {
         onOrderBy: function onOrderBy(order) {
             this.$emit('order_by', order);
+        },
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
         }
     },
 
@@ -68504,6 +68531,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -68511,6 +68539,12 @@ exports.default = {
         records: { type: Array, default: function _default() {
                 return [];
             } }
+    },
+
+    methods: {
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
+        }
     },
 
     components: {
@@ -68590,12 +68624,19 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
         columns: { required: true },
         row: { required: true },
         record: { required: true }
+    },
+
+    methods: {
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
+        }
     },
 
     components: {
@@ -68673,6 +68714,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -68691,6 +68733,12 @@ exports.default = {
             var r = {};
             r['width'] = this.column.width + '%';
             return r;
+        }
+    },
+
+    methods: {
+        onCellActionClick: function onCellActionClick(event) {
+            this.$emit('cell-action-click', event);
         }
     },
 
@@ -68880,11 +68928,36 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
         control: { required: true },
         record: { required: true }
+    },
+
+    computed: {
+        has_actions: function has_actions() {
+            return _.keys(this.actions).length > 0;
+        },
+        actions: function actions() {
+            return this.control.actions;
+        }
     },
 
     methods: {
@@ -68903,109 +68976,72 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", { staticClass: "dropdown" }, [
-    _c(
-      "a",
-      {
-        staticClass: "dropdown-toggle dropdown-menu-right",
-        attrs: {
-          id: "btn-" + _vm.record.id,
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [_c("i", { staticClass: "la la-ellipsis-v" })]
-    ),
-    _vm._v(" "),
-    _c(
-      "span",
-      {
-        staticClass: "dropdown-menu mt-1 dropdown-menu-right",
-        staticStyle: {
-          position: "absolute",
-          "will-change": "transform",
-          top: "0px",
-          left: "0px",
-          transform: "translate3d(26px, 19px, 0px)"
-        },
-        attrs: {
-          "aria-labelledby": "btn-" + _vm.record.id,
-          "x-placement": "bottom-end"
-        }
-      },
-      [
-        _vm._m(0),
+  return _vm.has_actions
+    ? _c("span", { staticClass: "dropdown" }, [
+        _c(
+          "a",
+          {
+            staticClass: "dropdown-toggle dropdown-menu-right",
+            attrs: {
+              id: "btn-" + _vm.record.id,
+              "data-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_c("i", { staticClass: "la la-ellipsis-v" })]
+        ),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _vm._m(5)
-      ]
-    )
-  ])
+        _c(
+          "span",
+          {
+            staticClass: "dropdown-menu mt-1 dropdown-menu-right",
+            staticStyle: {
+              position: "absolute",
+              "will-change": "transform",
+              top: "0px",
+              left: "0px",
+              transform: "translate3d(26px, 19px, 0px)"
+            },
+            attrs: {
+              "aria-labelledby": "btn-" + _vm.record.id,
+              "x-placement": "bottom-end"
+            }
+          },
+          _vm._l(_vm.actions, function(action, key) {
+            return _c(
+              "a",
+              {
+                key: "cell-action-" + key + "-" + _vm.record.id,
+                staticClass: "dropdown-item",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$emit("cell-action-click", {
+                      key: key,
+                      action: action,
+                      record: _vm.record
+                    })
+                  }
+                }
+              },
+              [
+                _c("i", { class: action.icon }),
+                _vm._v(
+                  " \n            " +
+                    _vm._s(action.caption(_vm.record)) +
+                    "\n        "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item" }, [
-      _c("i", { staticClass: "ft-edit-2" }),
-      _vm._v("Edit")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "ft-trash-2" }),
-      _vm._v(" Delete")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "ft-plus-circle primary" }),
-      _vm._v(" Projects")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "ft-plus-circle info" }),
-      _vm._v(" Team")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "ft-plus-circle warning" }),
-      _vm._v(" Clients")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "ft-plus-circle success" }),
-      _vm._v(" Friends")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -69029,7 +69065,8 @@ var render = function() {
     [
       _c("cell-" + _vm.control.component, {
         tag: "component",
-        attrs: { control: _vm.control, record: _vm.record }
+        attrs: { control: _vm.control, record: _vm.record },
+        on: { "cell-action-click": _vm.onCellActionClick }
       })
     ],
     1
@@ -69064,7 +69101,8 @@ var render = function() {
           index: index,
           row: _vm.row,
           record: _vm.record
-        }
+        },
+        on: { "cell-action-click": _vm.onCellActionClick }
       })
     }),
     1
@@ -69093,7 +69131,8 @@ var render = function() {
     _vm._l(_vm.records, function(record, row) {
       return _c("table-row", {
         key: "table-row-" + row,
-        attrs: { record: record, columns: _vm.columns, row: row }
+        attrs: { record: record, columns: _vm.columns, row: row },
+        on: { "cell-action-click": _vm.onCellActionClick }
       })
     }),
     1
@@ -69130,7 +69169,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("table-body", {
-        attrs: { columns: _vm.columns, records: _vm.records }
+        attrs: { columns: _vm.columns, records: _vm.records },
+        on: { "cell-action-click": _vm.onCellActionClick }
       })
     ],
     1
@@ -69413,7 +69453,10 @@ var render = function() {
                           records: _vm.records,
                           current_order: _vm.data_manager.current_order
                         },
-                        on: { order_by: _vm.onOrderBy }
+                        on: {
+                          order_by: _vm.onOrderBy,
+                          "cell-action-click": _vm.onCellActionClick
+                        }
                       })
                     ],
                     1
@@ -69468,7 +69511,8 @@ var render = function() {
           per_page_selected: _vm.onPerPageSelected,
           "quick-search": _vm.onQuickSearch,
           "change-page": _vm.onChangePage,
-          order_by: _vm.onOrderBy
+          order_by: _vm.onOrderBy,
+          "cell-action-click": _vm.onCellActionClick
         }
       })
     ],
@@ -69720,14 +69764,15 @@ module.exports = Sidebar;
 /* 354 */,
 /* 355 */,
 /* 356 */,
-/* 357 */
+/* 357 */,
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(358);
+module.exports = __webpack_require__(359);
 
 
 /***/ }),
-/* 358 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69762,7 +69807,7 @@ sidebar = {
  */
 apps = {
     'roles': {
-        creator: __webpack_require__(359),
+        creator: __webpack_require__(360),
         component: __webpack_require__(8).pages.simple.MainComponent
     }
 },
@@ -69772,9 +69817,9 @@ apps = {
  * Components
  */
 components = {
-    'simple-page-filter': __webpack_require__(366),
+    'simple-page-filter': __webpack_require__(367),
     'simple-page-data': __webpack_require__(8).pages.simple.DataComponent,
-    'user-form': __webpack_require__(369)
+    'user-form': __webpack_require__(370)
 },
 
 
@@ -69786,7 +69831,7 @@ Index = __webpack_require__(8).pages.simple.Index;
 Index.Run($, window, { name: name, store: store, sidebar: sidebar, apps: apps, components: components });
 
 /***/ }),
-/* 359 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69800,11 +69845,49 @@ var ContentManager = __webpack_require__(6).UI.ContentManager,
 
 var content_manager = new ContentManager();
 
-content_manager.setHeaderTitle('Utilizatori').setHeaderBreadcrumbs(__webpack_require__(360)).setHeaderActions(__webpack_require__(361)).setBodyDataHeader({
+content_manager.setHeaderTitle('Utilizatori').setHeaderBreadcrumbs(__webpack_require__(361)).setHeaderActions(__webpack_require__(362)).setBodyDataHeader({
     title: 'Utilizatorii platformei',
-    toolbar: __webpack_require__(362),
-    actions: __webpack_require__(363)
-}).setFilterComponent('simple-page-filter').setFormComponent('user-form').setBodyDataPresentation(__webpack_require__(364));
+    toolbar: __webpack_require__(363),
+    actions: __webpack_require__(364)
+}).setFilterComponent('simple-page-filter').setForm({
+    component: 'user-form',
+    actions: {
+        insert: {
+            header: {
+                title: 'Adăugare',
+                icon: 'la la-plus'
+            },
+            button: {
+                caption: 'Salvează',
+                icon: 'la la-save',
+                color: 'btn-primary'
+            }
+
+        },
+        update: {
+            header: {
+                title: 'Modificare',
+                icon: 'la la-pencil'
+            },
+            button: {
+                caption: 'Salvează',
+                icon: 'la la-save',
+                color: 'btn-primary'
+            }
+        },
+        delete: {
+            header: {
+                title: 'Ștergere',
+                icon: 'la la-trash'
+            },
+            button: {
+                caption: 'Șterge',
+                icon: 'la la-trash',
+                color: 'btn-danger'
+            }
+        }
+    }
+}).setBodyDataPresentation(__webpack_require__(365));
 
 var form_manager = 'I am the form manager....';
 
@@ -69813,11 +69896,11 @@ module.exports = CreateApp.Create({
     per_page: 20,
     content_manager: content_manager,
     form_manager: form_manager,
-    searchable: __webpack_require__(365)
+    searchable: __webpack_require__(366)
 });
 
 /***/ }),
-/* 360 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69839,7 +69922,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 361 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69860,7 +69943,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 362 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69886,7 +69969,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 363 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69921,7 +70004,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 364 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69983,7 +70066,26 @@ module.exports = {
                 control: {
                     component: 'actions',
                     type: null,
-                    source: 'aaaaaaaa'
+                    actions: {
+                        update: {
+                            icon: 'ft-edit-2',
+                            caption: function caption(record) {
+                                return 'Editează #' + record.id;
+                            },
+                            click: function click(vue, record) {
+                                vue.showForm('update', record);
+                            }
+                        },
+                        delete: {
+                            icon: 'ft-trash-2 danger',
+                            caption: function caption(record) {
+                                return 'Șterge #' + record.id;
+                            },
+                            click: function click(vue, record) {
+                                vue.showForm('delete', record);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -69991,7 +70093,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 365 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70004,15 +70106,15 @@ module.exports = {
 };
 
 /***/ }),
-/* 366 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(367)
+var __vue_script__ = __webpack_require__(368)
 /* template */
-var __vue_template__ = __webpack_require__(368)
+var __vue_template__ = __webpack_require__(369)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -70051,7 +70153,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 367 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70094,7 +70196,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 368 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70147,15 +70249,15 @@ if (false) {
 }
 
 /***/ }),
-/* 369 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(370)
+var __vue_script__ = __webpack_require__(371)
 /* template */
-var __vue_template__ = __webpack_require__(371)
+var __vue_template__ = __webpack_require__(372)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -70194,7 +70296,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 370 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70234,15 +70336,57 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
         form: { required: true }
+    },
+
+    computed: {
+        action: function action() {
+            return this.form.action;
+        },
+        hicon: function hicon() {
+            return this.action ? this.form.actions[this.action].header.icon : null;
+        },
+        htitle: function htitle() {
+            return this.action ? this.form.actions[this.action].header.title : null;
+        },
+        bicon: function bicon() {
+            return this.action ? this.form.actions[this.action].button.icon : null;
+        },
+        bcolor: function bcolor() {
+            return this.action ? this.form.actions[this.action].button.color : null;
+        },
+        bcaption: function bcaption() {
+            return this.action ? this.form.actions[this.action].button.caption : null;
+        }
     }
 };
 
 /***/ }),
-/* 371 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -70251,7 +70395,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v("Project Info")]),
+      _c("h4", { staticClass: "card-title" }, [
+        _c("i", { class: _vm.hicon }),
+        _vm._v("\n                " + _vm._s(_vm.htitle) + "\n            ")
+      ]),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
@@ -70278,19 +70425,54 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card-content" }, [
       _c("div", { staticClass: "card-body" }, [
-        _c("h4", { staticClass: "card-title info" }, [
-          _vm._v("Text Align Left")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.form))]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-outline-info", attrs: { href: "#" } }, [
-          _vm._v("Go somewhere")
-        ])
+        _vm._v(
+          "\n               \n                " +
+            _vm._s(_vm.form) +
+            "\n\n            "
+        )
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "div",
+      {
+        staticClass:
+          "card-footer border-top-blue-grey border-top-lighten-5 text-muted"
+      },
+      [
+        _c("div", { staticClass: "form-group mb-0" }, [
+          _c(
+            "button",
+            {
+              class: "btn " + _vm.bcolor + " btn-min-width btn-glow mr-1",
+              attrs: { type: "button" }
+            },
+            [
+              _c("i", { class: _vm.bicon }),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.bcaption) +
+                  "\n                "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary btn-min-width btn-glow mr-1",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.$emit("close")
+                }
+              }
+            },
+            [_vm._v("\n                    Renunță\n                ")]
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -70301,28 +70483,6 @@ var staticRenderFns = [
     return _c("a", { staticClass: "heading-elements-toggle" }, [
       _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "card-footer border-top-blue-grey border-top-lighten-5 text-muted"
-      },
-      [
-        _c("span", { staticClass: "float-left" }, [_vm._v("3 hours ago")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "float-right" }, [
-          _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-            _vm._v("Read More "),
-            _c("i", { staticClass: "la la-angle-right" })
-          ])
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

@@ -54,7 +54,26 @@ module.exports = {
                 control: {
                     component: 'actions',
                     type: null,
-                    source: 'aaaaaaaa'
+                    actions: {
+                        update: {
+                            icon: 'ft-edit-2',
+                            caption: record  => {
+                                return 'Editează #' + record.id 
+                            },
+                            click: (vue, record) => {
+                                vue.showForm('update', record)
+                            }
+                        },
+                        delete: {
+                            icon: 'ft-trash-2 danger',
+                            caption: record => {
+                                return 'Șterge #' + record.id 
+                            },
+                            click: (vue, record) => {
+                                vue.showForm('delete', record)
+                            }
+                        }
+                    }
                 }
             }
         }

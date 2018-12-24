@@ -17,7 +17,45 @@ content_manager
         actions: require('./Page/DActions'),
     })
     .setFilterComponent('simple-page-filter')
-    .setFormComponent('user-form')
+    .setForm({
+        component: 'user-form',
+        actions: {
+            insert: {
+                header: {
+                    title: 'Adăugare',
+                    icon: 'la la-plus'
+                },
+                button: {
+                    caption: 'Salvează',
+                    icon: 'la la-save',
+                    color: 'btn-primary',
+                }
+
+            },
+            update: {
+                header: {
+                    title: 'Modificare',
+                    icon: 'la la-pencil'
+                },
+                button: {
+                    caption: 'Salvează',
+                    icon: 'la la-save',
+                    color: 'btn-primary',
+                }
+            },
+            delete: {
+                header: {
+                    title: 'Ștergere',
+                    icon: 'la la-trash',
+                },
+                button: {
+                    caption: 'Șterge',
+                    icon: 'la la-trash',
+                    color: 'btn-danger',
+                }
+            },
+        }
+    })
     .setBodyDataPresentation(require('./Page/DPresentation'))
 
 let form_manager = 'I am the form manager....'
