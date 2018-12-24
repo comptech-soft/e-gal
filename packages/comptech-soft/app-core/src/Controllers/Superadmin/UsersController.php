@@ -18,4 +18,8 @@ class UsersController extends Controller
     public function getRecords(Request $request) {
         return User::getRecords($request->all());
     }
+
+    public function actionDispatch($action, Request $request) {
+        return User::actionDispatch($action, $request->all());
+    }
 }

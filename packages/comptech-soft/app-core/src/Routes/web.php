@@ -30,6 +30,8 @@ Route::middleware('web')->group(function(){
                  */
                 Route::get('users', 'UsersController@index')->name('users-index');
                 Route::post('users/get-records', 'UsersController@getRecords')->name('users-get-records');
+
+                Route::post('users/{action}', 'UsersController@actionDispatch')->name('users-actions');
             });
 
         });

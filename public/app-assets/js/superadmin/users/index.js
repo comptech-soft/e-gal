@@ -5343,6 +5343,63 @@ module.exports = g;
 
 module.exports = {
 
+    components: {
+        'vt-alert': __webpack_require__(140),
+        'vt-card': __webpack_require__(141),
+        'vt-form': __webpack_require__(142),
+        
+        // 'vt-loader': require('./../src/components/Loader'),
+
+        'vt-button': __webpack_require__(143),
+        'vt-checkbox': __webpack_require__(144),
+        'vt-link': __webpack_require__(145),
+        'vt-password': __webpack_require__(146),
+        'vt-textbox': __webpack_require__(148),
+
+        'vt-img': __webpack_require__(149),
+        
+    },
+
+    pages: {
+        'login': __webpack_require__(231),
+        'simple': {
+            'Index': __webpack_require__(234),
+            'CreateApp': __webpack_require__(262),
+            'MainComponent': __webpack_require__(263),
+            'DataComponent': __webpack_require__(277),
+        },
+        Vue: {
+            Apps: {
+                Layout: {
+                    Nav: __webpack_require__(150),
+                    Sidebar: __webpack_require__(152)
+                }
+            }
+        }
+    },
+
+    layout: {
+        'nav': __webpack_require__(151),
+        'sidebar': __webpack_require__(153),
+        'content': {
+            'header': __webpack_require__(154),
+        },
+        'body': {
+            'data' : {
+                'header': __webpack_require__(155),
+                
+            },
+        },
+        'presentation': __webpack_require__(156),
+    }
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+
     'Launcher': __webpack_require__(157),
     'UI': {
         'ContentManager': __webpack_require__(191),
@@ -5358,7 +5415,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5460,63 +5517,6 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(135)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-
-    components: {
-        'vt-alert': __webpack_require__(140),
-        'vt-card': __webpack_require__(141),
-        'vt-form': __webpack_require__(142),
-        
-        // 'vt-loader': require('./../src/components/Loader'),
-
-        'vt-button': __webpack_require__(143),
-        'vt-checkbox': __webpack_require__(144),
-        'vt-link': __webpack_require__(145),
-        'vt-password': __webpack_require__(146),
-        'vt-textbox': __webpack_require__(148),
-
-        'vt-img': __webpack_require__(149),
-        
-    },
-
-    pages: {
-        'login': __webpack_require__(231),
-        'simple': {
-            'Index': __webpack_require__(234),
-            'CreateApp': __webpack_require__(262),
-            'MainComponent': __webpack_require__(263),
-            'DataComponent': __webpack_require__(277),
-        },
-        Vue: {
-            Apps: {
-                Layout: {
-                    Nav: __webpack_require__(150),
-                    Sidebar: __webpack_require__(152)
-                }
-            }
-        }
-    },
-
-    layout: {
-        'nav': __webpack_require__(151),
-        'sidebar': __webpack_require__(153),
-        'content': {
-            'header': __webpack_require__(154),
-        },
-        'body': {
-            'data' : {
-                'header': __webpack_require__(155),
-                
-            },
-        },
-        'presentation': __webpack_require__(156),
-    }
-}
 
 /***/ }),
 /* 9 */
@@ -36233,7 +36233,7 @@ module.exports = __webpack_require__(161);
 var utils = __webpack_require__(2);
 var bind = __webpack_require__(134);
 var Axios = __webpack_require__(163);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 
 /**
  * Create an instance of Axios
@@ -36316,7 +36316,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(172);
 var dispatchRequest = __webpack_require__(173);
@@ -36855,7 +36855,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(174);
 var isCancel = __webpack_require__(138);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var isAbsoluteURL = __webpack_require__(175);
 var combineURLs = __webpack_require__(176);
 
@@ -52099,7 +52099,6 @@ class Manager {
 
     constructor(vue, endpoint, onSuccess = null, onFail = null) {
 
-        this.className = 'form-manager'
         /**
          * Initialization
          */
@@ -52164,7 +52163,7 @@ class Manager {
         _.each(response, (item, key) => {
             if( ! this.hasOwnProperty(key) )
             {
-                throw 'FormManager::' + key + ' not exist.'
+                throw 'FormManager::processingResponse(). The field [' + key + '] not exists in response.'
             }
             this[key] = item
         })
@@ -62251,7 +62250,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nfieldset.has-danger input[data-v-f121a644] {\n  border-color: #ff4961 !important;\n}\n", ""]);
+exports.push([module.i, "\nfieldset .has-danger input[data-v-f121a644] {\n  border-color: #ff4961 !important;\n}\nfieldset .form-control-position[data-v-f121a644] {\n  top: 0 !important;\n}\n", ""]);
 
 // exports
 
@@ -62319,12 +62318,31 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
         id: { type: String, required: true },
         placeholder: { type: String, required: true },
-        value: {}
+        value: {},
+        icon: { type: String, default: '' }
+    },
+
+    computed: {
+        fieldsetClass: function fieldsetClass() {
+            var r = {
+                'form-group': true,
+                'position-relative': true,
+                'mb-0': true
+            };
+            if (this.icon) {
+                r['has-icon-left'] = true;
+            }
+            if (this.has_error) {
+                r['has-danger'] = true;
+            }
+            return r;
+        }
     },
 
     mixins: [__webpack_require__(147)]
@@ -62338,45 +62356,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "fieldset",
-    {
-      class:
-        "form-group position-relative has-icon-left" +
-        (_vm.has_error ? " has-danger" : "")
-    },
-    [
-      _c("input", {
-        staticClass: "form-control form-control-lg input-lg",
-        attrs: {
-          type: "password",
-          id: _vm.id,
-          placeholder: _vm.placeholder,
-          required: ""
-        },
-        domProps: { value: _vm.value },
-        on: {
-          input: function($event) {
-            _vm.$emit("input", $event.target.value)
-          }
+  return _c("fieldset", { class: _vm.fieldsetClass }, [
+    _c("input", {
+      staticClass: "form-control form-control-lg input-lg",
+      attrs: {
+        type: "password",
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        required: ""
+      },
+      domProps: { value: _vm.value },
+      on: {
+        input: function($event) {
+          _vm.$emit("input", $event.target.value)
         }
-      }),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
-    ]
-  )
+      }
+    }),
+    _vm._v(" "),
+    _vm.icon
+      ? _c("div", { staticClass: "form-control-position" }, [
+          _c("i", { class: _vm.icon })
+        ])
+      : _vm._e(),
+    _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-control-position" }, [
-      _c("i", { staticClass: "la la-key" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -62421,7 +62426,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nfieldset.has-danger input[data-v-5976fa8b] {\n  border-color: #ff4961 !important;\n}\n", ""]);
+exports.push([module.i, "\nfieldset .has-danger input[data-v-5976fa8b] {\n  border-color: #ff4961 !important;\n}\nfieldset .form-control-position[data-v-5976fa8b] {\n  top: 0 !important;\n}\n", ""]);
 
 // exports
 
@@ -62461,7 +62466,25 @@ exports.default = {
     props: {
         id: { type: String, required: true },
         placeholder: { type: String, required: true },
-        value: {}
+        value: {},
+        icon: { type: String, default: '' }
+    },
+
+    computed: {
+        fieldsetClass: function fieldsetClass() {
+            var r = {
+                'form-group': true,
+                'position-relative': true,
+                'mb-0': true
+            };
+            if (this.icon) {
+                r['has-icon-left'] = true;
+            }
+            if (this.has_error) {
+                r['has-danger'] = true;
+            }
+            return r;
+        }
     },
 
     mixins: [__webpack_require__(147)]
@@ -62475,45 +62498,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "fieldset",
-    {
-      class:
-        "form-group position-relative has-icon-left mb-0" +
-        (_vm.has_error ? " has-danger" : "")
-    },
-    [
-      _c("input", {
-        staticClass: "form-control form-control-lg input-lg",
-        attrs: {
-          type: "text",
-          id: _vm.id,
-          placeholder: _vm.placeholder,
-          required: ""
-        },
-        domProps: { value: _vm.value },
-        on: {
-          input: function($event) {
-            _vm.$emit("input", $event.target.value)
-          }
+  return _c("fieldset", { class: _vm.fieldsetClass }, [
+    _c("input", {
+      staticClass: "form-control form-control-lg input-lg",
+      attrs: {
+        type: "text",
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        required: ""
+      },
+      domProps: { value: _vm.value },
+      on: {
+        input: function($event) {
+          _vm.$emit("input", $event.target.value)
         }
-      }),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
-    ]
-  )
+      }
+    }),
+    _vm._v(" "),
+    _vm.icon
+      ? _c("div", { staticClass: "form-control-position" }, [
+          _c("i", { class: _vm.icon })
+        ])
+      : _vm._e(),
+    _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-control-position" }, [
-      _c("i", { staticClass: "ft-user" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -62742,6 +62752,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 
 exports.default = {
@@ -62782,11 +62793,10 @@ exports.default = {
     },
 
     mounted: function mounted() {
-        /**
-         * ????? Referire la ComptechApp
-         */
-        this.formManager = new ComptechApp.FormManager(this, 'login', function (data) {
-            ComptechApp.Http.redirect();
+        var _this = this;
+
+        this.formManager = new this.app.FormManager(this, 'login', function (data) {
+            _this.app.Http.redirect();
         }, function (data) {
             console.log(data);
         });
@@ -62881,9 +62891,10 @@ var render = function() {
                       [
                         _c("vt-textbox", {
                           attrs: {
-                            id: "user-name",
+                            id: "user-email",
                             field: "email",
-                            placeholder: "Your user name",
+                            placeholder: "Adresa de email",
+                            icon: "ft-user",
                             show_error: false,
                             errors: _vm.formManager
                               ? _vm.formManager.getErrors()
@@ -62902,7 +62913,7 @@ var render = function() {
                           attrs: {
                             id: "user-password",
                             field: "password",
-                            placeholder: "Your password",
+                            placeholder: "Parola",
                             show_error: false,
                             errors: _vm.formManager
                               ? _vm.formManager.getErrors()
@@ -63050,7 +63061,7 @@ if (false) {
 /* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const Launcher = __webpack_require__(6).Launcher
+const Launcher = __webpack_require__(7).Launcher
 
 const Index = {
 
@@ -63070,7 +63081,7 @@ const Index = {
         let App = launcher.App()
         let store = new Vuex.Store(options.store)
 
-        launcher.RegisterMixin(__webpack_require__(6).VUE.Mixins.Store)
+        launcher.RegisterMixin(__webpack_require__(7).VUE.Mixins.Store)
 
         let apps = _.extend({
                 'app-nav': __webpack_require__(150)(store),
@@ -69808,7 +69819,7 @@ sidebar = {
 apps = {
     'roles': {
         creator: __webpack_require__(360),
-        component: __webpack_require__(8).pages.simple.MainComponent
+        component: __webpack_require__(6).pages.simple.MainComponent
     }
 },
 
@@ -69818,7 +69829,7 @@ apps = {
  */
 components = {
     'simple-page-filter': __webpack_require__(367),
-    'simple-page-data': __webpack_require__(8).pages.simple.DataComponent,
+    'simple-page-data': __webpack_require__(6).pages.simple.DataComponent,
     'user-form': __webpack_require__(370)
 },
 
@@ -69826,7 +69837,7 @@ components = {
 /**
  * Main Index
  */
-Index = __webpack_require__(8).pages.simple.Index;
+Index = __webpack_require__(6).pages.simple.Index;
 
 Index.Run($, window, { name: name, store: store, sidebar: sidebar, apps: apps, components: components });
 
@@ -69840,8 +69851,8 @@ Index.Run($, window, { name: name, store: store, sidebar: sidebar, apps: apps, c
 /**
  * Elementele definitorii paginii
  */
-var ContentManager = __webpack_require__(6).UI.ContentManager,
-    CreateApp = __webpack_require__(8).pages.simple.CreateApp;
+var ContentManager = __webpack_require__(7).UI.ContentManager,
+    CreateApp = __webpack_require__(6).pages.simple.CreateApp;
 
 var content_manager = new ContentManager();
 
@@ -69853,6 +69864,7 @@ content_manager.setHeaderTitle('Utilizatori').setHeaderBreadcrumbs(__webpack_req
     component: 'user-form',
     actions: {
         insert: {
+            endpoint: 'superadmin/users/insert',
             header: {
                 title: 'Adăugare',
                 icon: 'la la-plus'
@@ -69865,6 +69877,7 @@ content_manager.setHeaderTitle('Utilizatori').setHeaderBreadcrumbs(__webpack_req
 
         },
         update: {
+            endpoint: 'superadmin/users/update',
             header: {
                 title: 'Modificare',
                 icon: 'la la-pencil'
@@ -69876,6 +69889,7 @@ content_manager.setHeaderTitle('Utilizatori').setHeaderBreadcrumbs(__webpack_req
             }
         },
         delete: {
+            endpoint: 'superadmin/users/delete',
             header: {
                 title: 'Ștergere',
                 icon: 'la la-trash'
@@ -70357,15 +70371,88 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
         form: { required: true }
     },
 
+    data: function data() {
+        return {
+            record: {
+                email: null,
+                password: null,
+                first_name: null,
+                last_name: null
+            },
+
+            /**
+             * Intr-un formular tre sa pun un obiect FormManager
+             * Acestuia i se transmite o referinta catre componenta
+             * Componenta tre sa aiba "record"
+             */
+            formManager: null
+        };
+    },
+
+
     computed: {
         action: function action() {
             return this.form.action;
+        },
+        endpoint: function endpoint() {
+            return this.action ? this.form.actions[this.action].endpoint : null;
+        },
+        errors: function errors() {
+            return this.formManager ? this.formManager.getErrors() : null;
         },
         hicon: function hicon() {
             return this.action ? this.form.actions[this.action].header.icon : null;
@@ -70382,6 +70469,34 @@ exports.default = {
         bcaption: function bcaption() {
             return this.action ? this.form.actions[this.action].button.caption : null;
         }
+    },
+
+    methods: {
+        onClickCommit: function onClickCommit() {
+            this.formManager.onSubmit();
+        }
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        this.formManager = new this.app.FormManager(this, this.endpoint, function (data) {
+            console.log('Successs', data);
+            if (data.success) {
+                var t = setTimeout(function () {
+                    _this.$emit('close');
+                }, 1000);
+            }
+        }, function (data) {
+            console.log('Error', data);
+        });
+    },
+
+
+    components: {
+        'vt-form': __webpack_require__(6).components['vt-form'],
+        'vt-textbox': __webpack_require__(6).components['vt-textbox'],
+        'vt-password': __webpack_require__(6).components['vt-password']
     }
 };
 
@@ -70424,13 +70539,122 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-content" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _vm._v(
-          "\n               \n                " +
-            _vm._s(_vm.form) +
-            "\n\n            "
-        )
-      ])
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "div",
+            { staticStyle: { "background-color": "#000", color: "yellow" } },
+            [
+              _vm._v("\n                    Action: " + _vm._s(_vm.action)),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                    Original record: " +
+                  _vm._s(_vm.form.record)
+              ),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                    Current record: " + _vm._s(_vm.record)
+              ),
+              _c("br"),
+              _c("br")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "vt-form",
+            {
+              attrs: {
+                result: _vm.formManager ? _vm.formManager.result : null
+              },
+              on: {
+                close: function($event) {
+                  _vm.formManager.result = null
+                }
+              }
+            },
+            [
+              _c(
+                "template",
+                { slot: "form-controls" },
+                [
+                  _c("vt-textbox", {
+                    attrs: {
+                      id: "user-email",
+                      field: "email",
+                      icon: "la la-user",
+                      placeholder: "Emailul utilizatorululi",
+                      errors: _vm.errors
+                    },
+                    model: {
+                      value: _vm.record.email,
+                      callback: function($$v) {
+                        _vm.$set(_vm.record, "email", $$v)
+                      },
+                      expression: "record.email"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("vt-textbox", {
+                    attrs: {
+                      id: "user-last-name",
+                      field: "last_name",
+                      placeholder: "Numele utilizatorululi",
+                      errors: _vm.errors
+                    },
+                    model: {
+                      value: _vm.record.last_name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.record, "last_name", $$v)
+                      },
+                      expression: "record.last_name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("vt-textbox", {
+                    attrs: {
+                      id: "user-first-name",
+                      field: "first_name",
+                      placeholder: "Prenumele utilizatorululi",
+                      errors: _vm.errors
+                    },
+                    model: {
+                      value: _vm.record.first_name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.record, "first_name", $$v)
+                      },
+                      expression: "record.first_name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("vt-password", {
+                    attrs: {
+                      id: "user-password",
+                      field: "password",
+                      icon: "la la-key",
+                      placeholder: "Parola",
+                      errors: _vm.errors
+                    },
+                    model: {
+                      value: _vm.record.password,
+                      callback: function($$v) {
+                        _vm.$set(_vm.record, "password", $$v)
+                      },
+                      expression: "record.password"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            2
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -70445,7 +70669,8 @@ var render = function() {
             "button",
             {
               class: "btn " + _vm.bcolor + " btn-min-width btn-glow mr-1",
-              attrs: { type: "button" }
+              attrs: { type: "button" },
+              on: { click: _vm.onClickCommit }
             },
             [
               _c("i", { class: _vm.bicon }),

@@ -21,6 +21,7 @@ content_manager
         component: 'user-form',
         actions: {
             insert: {
+                endpoint: 'superadmin/users/insert',
                 header: {
                     title: 'Adăugare',
                     icon: 'la la-plus'
@@ -33,6 +34,7 @@ content_manager
 
             },
             update: {
+                endpoint: 'superadmin/users/update',
                 header: {
                     title: 'Modificare',
                     icon: 'la la-pencil'
@@ -44,6 +46,7 @@ content_manager
                 }
             },
             delete: {
+                endpoint: 'superadmin/users/delete',
                 header: {
                     title: 'Ștergere',
                     icon: 'la la-trash',
