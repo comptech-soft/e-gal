@@ -25,8 +25,16 @@ const
     apps = {
         'roles': {
             creator: require('./App/Create'),
-            component: require('comptechsoft-admin-modern').pages.simple.MainComponent
+            component: require('comptechsoft-admin-modern').pages.simple.MainComponent,
         }
+    },
+
+    /**
+     * Components
+     */
+    components = {
+        // 'simple-page-filter': require('./App/Components/Filter'),
+        'simple-page-data': require('comptechsoft-admin-modern').pages.simple.DataComponent
     },
 
     /**
@@ -34,4 +42,4 @@ const
      */
     Index = require('comptechsoft-admin-modern').pages.simple.Index
 
-Index.Run($, window, {name, store, sidebar, apps})
+Index.Run($, window, {name, store, sidebar, apps, components})

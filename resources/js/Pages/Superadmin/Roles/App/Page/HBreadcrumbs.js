@@ -8,7 +8,7 @@ module.exports = {
     },
     'users': {
         active: true,
-        caption: 'Utilizatori',
+        caption: 'Roluri',
         click: null
     }
 }

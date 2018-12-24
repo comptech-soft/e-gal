@@ -30,8 +30,17 @@ const
     },
 
     /**
+     * Components
+     */
+    components = {
+        'simple-page-filter': require('./App/Components/Filter'),
+        'simple-page-data': require('comptechsoft-admin-modern').pages.simple.DataComponent,
+        'user-form': require('./App/Components/Form'),
+    },
+
+    /**
      * Main Index
      */
     Index = require('comptechsoft-admin-modern').pages.simple.Index
 
-Index.Run($, window, {name, store, sidebar, apps})
+Index.Run($, window, {name, store, sidebar, apps, components})
