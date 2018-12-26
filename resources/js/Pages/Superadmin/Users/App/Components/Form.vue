@@ -19,7 +19,6 @@
 	        </div>
 	    </div>
 
-
         <div class="card-content">
             <div class="card-body">
 
@@ -34,40 +33,57 @@
                     @close="formManager.result = null"
                 >
                     <template slot="form-controls">
-                        <vt-textbox 
-                            id="user-email"
-                            field="email"
-                            icon="la la-user"
-                            placeholder="Emailul utilizatorululi"
-                            v-model="record.email"
-                            :errors="errors"
-                        />
 
-                        <vt-textbox 
-                            id="user-last-name"
-                            field="last_name"
-                            placeholder="Numele utilizatorululi"
-                            v-model="record.last_name"
-                            :errors="errors"
-                        />
+                        <div class="row">
+                            <div class="col">
+                                <vt-textbox 
+                                    id="user-email"
+                                    field="email"
+                                    icon="la la-user"
+                                    placeholder="Emailul utilizatorululi"
+                                    v-model="record.email"
+                                    :errors="errors"
+                                >
+                                </vt-textbox>
+                            </div>
+                        </div>
 
-                        <vt-textbox 
-                            id="user-first-name"
-                            field="first_name"
-                            placeholder="Prenumele utilizatorululi"
-                            v-model="record.first_name"
-                            :errors="errors"
-                        />
+                        <div class="row">
+                            <div class="col">
+                                <vt-textbox 
+                                    id="user-last-name"
+                                    field="last_name"
+                                    placeholder="Numele utilizatorululi"
+                                    v-model="record.last_name"
+                                    :errors="errors"
+                                >
+                                </vt-textbox>
+                            </div>
+                            <div class="col">
+                                <vt-textbox 
+                                    id="user-first-name"
+                                    field="first_name"
+                                    placeholder="Prenumele utilizatorululi"
+                                    v-model="record.first_name"
+                                    :errors="errors"
+                                >
+                                </vt-textbox>
+                            </div>
+                        </div>
 
-                        <vt-password
-                            id="user-password"
-                            field="password"
-                            icon="la la-key"
-                            placeholder="Parola"
-                            v-model="record.password"
-                            :errors="errors"
-                        >
-                        </vt-password>
+                        <div class="row">
+                            <div class="col">
+                                <vt-password
+                                    id="user-password"
+                                    field="password"
+                                    icon="la la-key"
+                                    placeholder="Parola"
+                                    v-model="record.password"
+                                    :errors="errors"
+                                >
+                                </vt-password>
+                            </div>
+                        </div>
 
                     </template>
                 </vt-form>

@@ -18319,9 +18319,13 @@ module.exports = {
 
     computed: {
         has_error() {
+            if( ! this.show_error )
+            {
+                return false
+            }
             if( this.errors == null )
             {
-                return false;
+                return false
             }
             return this.errors.has(this.field)
         },
@@ -18329,11 +18333,11 @@ module.exports = {
         error_to_string() {
             if( ! this.show_error )
             {
-                return '';
+                return ''
             }
             if( (this.errors == null) || (! this.errors.has(this.field) ) )
             {
-                return '';
+                return ''
             }
             return this.errors.collect(this.field).toString();
         }
@@ -61977,7 +61981,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "form",
-    { staticClass: "form-horizontal form-simple", attrs: { novalidate: "" } },
+    { staticClass: "form-horizontal", attrs: { novalidate: "" } },
     [
       _vm.result
         ? _c("vt-alert", {
@@ -62250,7 +62254,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nfieldset .has-danger input[data-v-f121a644] {\n  border-color: #ff4961 !important;\n}\nfieldset .form-control-position[data-v-f121a644] {\n  top: 0 !important;\n}\n", ""]);
+exports.push([module.i, "\nfieldset[data-v-f121a644] {\n  margin-bottom: 0.5rem;\n}\nfieldset .form-control-position[data-v-f121a644] {\n    top: 0 !important;\n}\nfieldset.has-danger input[data-v-f121a644] {\n  border-color: #ff4961 !important;\n}\n", ""]);
 
 // exports
 
@@ -62298,6 +62302,8 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
 //
 //
 //
@@ -62378,7 +62384,12 @@ var render = function() {
           _c("i", { class: _vm.icon })
         ])
       : _vm._e(),
-    _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
+    _vm._v(" "),
+    _vm.has_error
+      ? _c("small", { staticClass: "danger text-muted" }, [
+          _vm._v("\n        " + _vm._s(_vm.error_to_string) + "\n    ")
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -62426,7 +62437,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nfieldset .has-danger input[data-v-5976fa8b] {\n  border-color: #ff4961 !important;\n}\nfieldset .form-control-position[data-v-5976fa8b] {\n  top: 0 !important;\n}\n", ""]);
+exports.push([module.i, "\nfieldset[data-v-5976fa8b] {\n  margin-bottom: 0.5rem;\n}\nfieldset .form-control-position[data-v-5976fa8b] {\n    top: 0 !important;\n}\nfieldset.has-danger input[data-v-5976fa8b] {\n  border-color: #ff4961 !important;\n}\n", ""]);
 
 // exports
 
@@ -62461,6 +62472,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     props: {
@@ -62475,7 +62489,7 @@ exports.default = {
             var r = {
                 'form-group': true,
                 'position-relative': true,
-                'mb-0': true
+                'mb-0': false
             };
             if (this.icon) {
                 r['has-icon-left'] = true;
@@ -62520,7 +62534,12 @@ var render = function() {
           _c("i", { class: _vm.icon })
         ])
       : _vm._e(),
-    _vm._v("\n\n    " + _vm._s(_vm.error_to_string) + "\n")
+    _vm._v(" "),
+    _vm.has_error
+      ? _c("small", { staticClass: "danger text-muted" }, [
+          _vm._v("\n        " + _vm._s(_vm.error_to_string) + "\n    ")
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -62637,6 +62656,14 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -62885,92 +62912,104 @@ var render = function() {
                     slot: "card-body"
                   },
                   [
-                    _c(
-                      "template",
-                      { slot: "form-controls" },
-                      [
-                        _c("vt-textbox", {
-                          attrs: {
-                            id: "user-email",
-                            field: "email",
-                            placeholder: "Adresa de email",
-                            icon: "ft-user",
-                            show_error: false,
-                            errors: _vm.formManager
-                              ? _vm.formManager.getErrors()
-                              : null
-                          },
-                          model: {
-                            value: _vm.record.email,
-                            callback: function($$v) {
-                              _vm.$set(_vm.record, "email", $$v)
-                            },
-                            expression: "record.email"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("vt-password", {
-                          attrs: {
-                            id: "user-password",
-                            field: "password",
-                            placeholder: "Parola",
-                            show_error: false,
-                            errors: _vm.formManager
-                              ? _vm.formManager.getErrors()
-                              : null
-                          },
-                          model: {
-                            value: _vm.record.password,
-                            callback: function($$v) {
-                              _vm.$set(_vm.record, "password", $$v)
-                            },
-                            expression: "record.password"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group row" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "col-md-6 col-12 text-center text-md-left"
-                            },
-                            [
-                              _c("vt-checkbox", {
-                                attrs: {
-                                  id: "remember-me",
-                                  label: "Tine-mă minte!"
+                    _c("template", { slot: "form-controls" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col" },
+                          [
+                            _c("vt-textbox", {
+                              attrs: {
+                                id: "user-email",
+                                field: "email",
+                                placeholder: "Adresa de email",
+                                icon: "ft-user",
+                                errors: _vm.formManager
+                                  ? _vm.formManager.getErrors()
+                                  : null
+                              },
+                              model: {
+                                value: _vm.record.email,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.record, "email", $$v)
                                 },
-                                model: {
-                                  value: _vm.record.remember_me,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.record, "remember_me", $$v)
-                                  },
-                                  expression: "record.remember_me"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "col-md-6 col-12 text-center text-md-right"
-                            },
-                            [
-                              _c("vt-link", {
-                                attrs: { caption: "Ai uitat parola?" },
-                                on: { click: _vm.onClickForgetPassword }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ],
-                      1
-                    ),
+                                expression: "record.email"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col" },
+                          [
+                            _c("vt-password", {
+                              attrs: {
+                                id: "user-password",
+                                field: "password",
+                                icon: "la la-key",
+                                placeholder: "Parola",
+                                errors: _vm.formManager
+                                  ? _vm.formManager.getErrors()
+                                  : null
+                              },
+                              model: {
+                                value: _vm.record.password,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.record, "password", $$v)
+                                },
+                                expression: "record.password"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row mt-1" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-md-6 col-12 text-center text-md-left"
+                          },
+                          [
+                            _c("vt-checkbox", {
+                              attrs: {
+                                id: "remember-me",
+                                label: "Tine-mă minte!"
+                              },
+                              model: {
+                                value: _vm.record.remember_me,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.record, "remember_me", $$v)
+                                },
+                                expression: "record.remember_me"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-md-6 col-12 text-center text-md-right"
+                          },
+                          [
+                            _c("vt-link", {
+                              attrs: { caption: "Ai uitat parola?" },
+                              on: { click: _vm.onClickForgetPassword }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c(
                       "template",
@@ -70419,6 +70458,22 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -70577,78 +70632,107 @@ var render = function() {
               }
             },
             [
-              _c(
-                "template",
-                { slot: "form-controls" },
-                [
-                  _c("vt-textbox", {
-                    attrs: {
-                      id: "user-email",
-                      field: "email",
-                      icon: "la la-user",
-                      placeholder: "Emailul utilizatorululi",
-                      errors: _vm.errors
-                    },
-                    model: {
-                      value: _vm.record.email,
-                      callback: function($$v) {
-                        _vm.$set(_vm.record, "email", $$v)
-                      },
-                      expression: "record.email"
-                    }
-                  }),
+              _c("template", { slot: "form-controls" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-textbox", {
+                        attrs: {
+                          id: "user-email",
+                          field: "email",
+                          icon: "la la-user",
+                          placeholder: "Emailul utilizatorululi",
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "email", $$v)
+                          },
+                          expression: "record.email"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-textbox", {
+                        attrs: {
+                          id: "user-last-name",
+                          field: "last_name",
+                          placeholder: "Numele utilizatorululi",
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.last_name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "last_name", $$v)
+                          },
+                          expression: "record.last_name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("vt-textbox", {
-                    attrs: {
-                      id: "user-last-name",
-                      field: "last_name",
-                      placeholder: "Numele utilizatorululi",
-                      errors: _vm.errors
-                    },
-                    model: {
-                      value: _vm.record.last_name,
-                      callback: function($$v) {
-                        _vm.$set(_vm.record, "last_name", $$v)
-                      },
-                      expression: "record.last_name"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("vt-textbox", {
-                    attrs: {
-                      id: "user-first-name",
-                      field: "first_name",
-                      placeholder: "Prenumele utilizatorululi",
-                      errors: _vm.errors
-                    },
-                    model: {
-                      value: _vm.record.first_name,
-                      callback: function($$v) {
-                        _vm.$set(_vm.record, "first_name", $$v)
-                      },
-                      expression: "record.first_name"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("vt-password", {
-                    attrs: {
-                      id: "user-password",
-                      field: "password",
-                      icon: "la la-key",
-                      placeholder: "Parola",
-                      errors: _vm.errors
-                    },
-                    model: {
-                      value: _vm.record.password,
-                      callback: function($$v) {
-                        _vm.$set(_vm.record, "password", $$v)
-                      },
-                      expression: "record.password"
-                    }
-                  })
-                ],
-                1
-              )
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-textbox", {
+                        attrs: {
+                          id: "user-first-name",
+                          field: "first_name",
+                          placeholder: "Prenumele utilizatorululi",
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.first_name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "first_name", $$v)
+                          },
+                          expression: "record.first_name"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-password", {
+                        attrs: {
+                          id: "user-password",
+                          field: "password",
+                          icon: "la la-key",
+                          placeholder: "Parola",
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.password,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "password", $$v)
+                          },
+                          expression: "record.password"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
             ],
             2
           )
