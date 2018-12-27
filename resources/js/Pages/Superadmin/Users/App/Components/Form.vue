@@ -28,6 +28,12 @@
                     Current record: {{ record }}<br/><br/>
                 </div>
 
+                <div v-if="is_delete_action" class="alert alert-danger border-0 alert-dismissible mb-2" role="alert">
+                    <h4 class="alert-heading mb-0">
+                        Sunteți sigur că doriți ștergerea înregistrarii?
+                    </h4>
+                </div>
+
                 <vt-form 
                     :result="formManager ? formManager.result : null"
                     @close="formManager.result = null"
@@ -40,7 +46,8 @@
                                     id="user-email"
                                     field="email"
                                     icon="la la-user"
-                                    placeholder="Emailul utilizatorululi"
+                                    placeholder="Adresa de email"
+                                    :disabled="is_delete_action"
                                     v-model="record.email"
                                     :errors="errors"
                                 >
@@ -53,7 +60,8 @@
                                 <vt-textbox 
                                     id="user-last-name"
                                     field="last_name"
-                                    placeholder="Numele utilizatorululi"
+                                    placeholder="Numele"
+                                    :disabled="is_delete_action"
                                     v-model="record.last_name"
                                     :errors="errors"
                                 >
@@ -63,7 +71,8 @@
                                 <vt-textbox 
                                     id="user-first-name"
                                     field="first_name"
-                                    placeholder="Prenumele utilizatorululi"
+                                    placeholder="Prenumele"
+                                    :disabled="is_delete_action"
                                     v-model="record.first_name"
                                     :errors="errors"
                                 >
@@ -71,13 +80,14 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div v-if="is_insert_action" class="row">
                             <div class="col">
                                 <vt-password
                                     id="user-password"
                                     field="password"
                                     icon="la la-key"
                                     placeholder="Parola"
+                                    :disabled="is_delete_action"
                                     v-model="record.password"
                                     :errors="errors"
                                 >
@@ -123,6 +133,7 @@
         data() {
             return {
                 record: {
+                    id: null,
                     email: null,
                     password: null,
                     first_name: null,
@@ -141,6 +152,14 @@
         computed: {
             action() {
                 return this.form.action
+            },
+
+            is_insert_action() {
+                return this.action == 'insert'
+            },
+
+            is_delete_action() {
+                return this.action == 'delete'
             },
 
             endpoint() {
@@ -173,6 +192,19 @@
         },
 
         methods: {
+            fillRecord() {
+
+                if( this.form.record )
+                {
+                    _.each(this.record, (value, field) => {
+                        if(this.form.record.hasOwnProperty(field) )
+                        {
+                            this.record[field] = this.form.record[field]
+                        }
+                    })
+                }
+            },
+
             onClickCommit() {
                 this.formManager.onSubmit()
             }
@@ -180,16 +212,18 @@
 
         mounted() {
             this.formManager = new this.app.FormManager(this, this.endpoint, data => {
-                console.log('Successs', data)
                 if( data.success )
                 {
                     let t = setTimeout( () => {
-                        this.$emit('close');
+                        this.$emit('close', {afterClose: (vue) => {
+                            vue.data_manager.populate()
+                        }});
                     }, 1000)
                 }
             }, data => {
                 console.log('Error', data)
             })
+            this.fillRecord()
         },
 
         components: {

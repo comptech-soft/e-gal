@@ -61,12 +61,15 @@ content_manager
     })
     .setBodyDataPresentation(require('./Page/DPresentation'))
 
-let form_manager = 'I am the form manager....'
-
 module.exports = CreateApp.Create({
     endpoint: 'superadmin/users/get-records',
     per_page: 20,
     content_manager,
-    form_manager,
-    searchable: require('./Page/DSearcheable')
+    searchable: require('./Page/DSearcheable'),
+    conditions: {
+        role_id: {
+            where: 'role_users.role_id=[value]',
+            value: null,
+        }
+    }
 })

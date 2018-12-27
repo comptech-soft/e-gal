@@ -1,6 +1,7 @@
 /**
- * Crearea si executia aplicatiei "Users"
+ * Aplicatie Vue ...... : "Users"
  */
+
 const 
     /**
      * Numele global
