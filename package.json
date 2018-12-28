@@ -17,6 +17,7 @@
         "comptechsoft-admin-modern": "^1.0.24",
         "comptechsoft-apps": "^1.0.5",
         "comptechsoft-core-libs": "^1.0.20",
+        "comptechsoft-vue-controls": "^1.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",

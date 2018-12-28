@@ -5312,33 +5312,6 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -5393,6 +5366,33 @@ module.exports = {
         'presentation': __webpack_require__(156),
     }
 }
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 7 */
@@ -35949,7 +35949,7 @@ module.exports = Launcher
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(10)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(10)(module)))
 
 /***/ }),
 /* 159 */
@@ -48204,7 +48204,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(180).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(180).setImmediate))
 
 /***/ }),
 /* 180 */
@@ -48274,7 +48274,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 181 */
@@ -48467,7 +48467,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(136)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(136)))
 
 /***/ }),
 /* 182 */
@@ -70219,53 +70219,44 @@ module.exports = __webpack_require__(357);
 
 
 /**
- * Crearea si executia aplicatiei "Users"
+ * Vue root application ...... : "Roles"
  */
+
 var
-/**
- * Numele global
- */
+
+/** Numele global al containerilui */
 name = 'ComptechApp',
 
 
-/**
- * Store-ul comun
- */
+/** Store-ul comun */
 store = __webpack_require__(343),
 
 
-/**
- * Sidebarul comun
- */
+/** Sidebarul comun */
 sidebar = {
     dispatcher: __webpack_require__(348)
 },
 
 
-/**
- * Aplicatii Vue
- */
+/** Vue root apps */
 apps = {
     'roles': {
         creator: __webpack_require__(358),
-        component: __webpack_require__(6).pages.simple.MainComponent
+        component: __webpack_require__(5).pages.simple.MainComponent
     }
 },
 
 
-/**
- * Components
- */
+/** Vue Components */
 components = {
-    // 'simple-page-filter': require('./App/Components/Filter'),
-    'simple-page-data': __webpack_require__(6).pages.simple.DataComponent
+    'simple-page-filter': null,
+    'simple-page-data': __webpack_require__(5).pages.simple.DataComponent,
+    'role-form': __webpack_require__(365)
 },
 
 
-/**
- * Main Index
- */
-Index = __webpack_require__(6).pages.simple.Index;
+/** Main Index launcher */
+Index = __webpack_require__(5).pages.simple.Index;
 
 Index.Run($, window, { name: name, store: store, sidebar: sidebar, apps: apps, components: components });
 
@@ -70276,20 +70267,87 @@ Index.Run($, window, { name: name, store: store, sidebar: sidebar, apps: apps, c
 "use strict";
 
 
-/**
- * Elementele definitorii paginii
- */
-var ContentManager = __webpack_require__(7).UI.ContentManager,
-    CreateApp = __webpack_require__(6).pages.simple.CreateApp;
+var
 
+/** User Interface - Content Manager Class */
+ContentManager = __webpack_require__(7).UI.ContentManager,
+
+
+/** Simple Page Vue Root App Creator */
+CreateApp = __webpack_require__(5).pages.simple.CreateApp;
+
+/** Content Manager Instance */
 var content_manager = new ContentManager();
 
-content_manager.setHeaderTitle('Roluri').setHeaderBreadcrumbs(__webpack_require__(359)).setHeaderActions(__webpack_require__(360)).setBodyDataHeader({
+content_manager
+
+/** Simple Page Header. Title */
+.setHeaderTitle('Roluri')
+
+/** Simple Page Header. Breadcrumbs */
+.setHeaderBreadcrumbs(__webpack_require__(359))
+
+/** Simple Page Header. Toolbar actions */
+.setHeaderActions(__webpack_require__(360))
+
+/** Simple Page Body: title, toolbar, dropdown actions */
+.setBodyDataHeader({
     title: 'Rourile utilizate în platformă',
     toolbar: __webpack_require__(361),
     actions: __webpack_require__(362)
-}).setBodyDataPresentation(__webpack_require__(363));
+})
 
+/** Simple Page Body: filter section component */
+.setFilterComponent(null)
+
+/** Simple Page Body: form section component */
+.setForm({
+    component: 'role-form',
+    actions: {
+        insert: {
+            endpoint: 'superadmin/roles/insert',
+            header: {
+                title: 'Adăugare',
+                icon: 'la la-plus'
+            },
+            button: {
+                caption: 'Salvează',
+                icon: 'la la-save',
+                color: 'btn-primary'
+            }
+
+        },
+        update: {
+            endpoint: 'superadmin/roles/update',
+            header: {
+                title: 'Modificare',
+                icon: 'la la-pencil'
+            },
+            button: {
+                caption: 'Salvează',
+                icon: 'la la-save',
+                color: 'btn-primary'
+            }
+        },
+        delete: {
+            endpoint: 'superadmin/roles/delete',
+            header: {
+                title: 'Ștergere',
+                icon: 'la la-trash'
+            },
+            button: {
+                caption: 'Șterge',
+                icon: 'la la-trash',
+                color: 'btn-danger'
+            }
+        }
+    }
+})
+
+/** Simple Page Body: data grid (table) or list */
+.setBodyDataPresentation(__webpack_require__(363));
+
+/** Export the created Vue root app */
 module.exports = CreateApp.Create({
     endpoint: 'superadmin/roles/get-records',
     per_page: 20,
@@ -70308,8 +70366,8 @@ module.exports = {
     'home': {
         active: false,
         caption: 'Dashboard',
-        click: function click(vue) {
-            vue.app.Http.redirect(vue.url);
+        click: function click(v) {
+            return v.app.Http.redirect(v.url);
         }
     },
     'users': {
@@ -70330,11 +70388,21 @@ module.exports = {
     title: null,
     icon: 'ft-more-horizontal',
     items: {
-        'one': {
-            caption: 'Action #1',
-            icon: 'la la-user',
-            click: function click() {
-                alert('Action #1');
+        insert: {
+            title: 'Adaugă un rol nou',
+            caption: null,
+            color: 'primary',
+            icon: 'la la-file',
+            is_visible: true,
+            is_enabled: true,
+            click: function click(v) {
+                return v.showForm('insert', null);
+            },
+            visible: function visible(v) {
+                return true;
+            },
+            enabled: function enabled(v) {
+                return !v.page_manager.content_body.form_section.visible;
             }
         }
     }
@@ -70348,14 +70416,6 @@ module.exports = {
 
 
 module.exports = {
-    'insert': {
-        color: 'btn-primary',
-        icon: 'ft-plus white',
-        caption: 'Adaugă',
-        click: function click() {
-            alert('Insert....');
-        }
-    },
     'delete-all': {
         color: 'btn-danger',
         icon: 'ft-trash white',
@@ -70431,7 +70491,7 @@ module.exports = {
                 }
             },
             'slug': {
-                width: 35,
+                width: 25,
                 header: {
                     caption: 'Slug',
                     orderable: {
@@ -70444,7 +70504,7 @@ module.exports = {
                 }
             },
             'name': {
-                width: 40,
+                width: 35,
                 header: {
                     caption: 'Nume',
                     orderable: {
@@ -70468,6 +70528,49 @@ module.exports = {
                 control: {
                     source: 'created_at'
                 }
+            },
+            'updated_at': {
+                width: 10,
+                header: {
+                    caption: 'Modificat la',
+                    orderable: {
+                        fields: ['roles.updated_at'],
+                        direction: 'asc'
+                    }
+                },
+                control: {
+                    source: 'updated_at'
+                }
+            },
+            'actions': {
+                width: 5,
+                header: {
+                    caption: 'Acțiuni'
+                },
+                control: {
+                    component: 'actions',
+                    type: null,
+                    actions: {
+                        update: {
+                            icon: 'ft-edit-2',
+                            caption: function caption(record) {
+                                return 'Editează #' + record.id;
+                            },
+                            click: function click(vue, record) {
+                                vue.showForm('update', record);
+                            }
+                        },
+                        delete: {
+                            icon: 'ft-trash-2 danger',
+                            caption: function caption(record) {
+                                return 'Șterge #' + record.id;
+                            },
+                            click: function click(vue, record) {
+                                vue.showForm('delete', record);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -70485,6 +70588,493 @@ module.exports = {
     fields: ['roles.slug', 'roles.name'],
     value: null
 };
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(366)
+/* template */
+var __vue_template__ = __webpack_require__(368)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Pages/Superadmin/Roles/App/Components/Form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-072e43aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-072e43aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var Controls = __webpack_require__(367);
+
+console.log(Controls);
+
+exports.default = {
+    props: {
+        form: { required: true }
+    },
+
+    data: function data() {
+        return {
+            record: {
+                id: null,
+                slug: null,
+                name: null
+            },
+
+            /**
+             * Intr-un formular tre sa pun un obiect FormManager
+             * Acestuia i se transmite o referinta catre componenta
+             * Componenta tre sa aiba "record"
+             */
+            formManager: null
+        };
+    },
+
+
+    computed: {
+        action: function action() {
+            return this.form.action;
+        },
+        is_insert_action: function is_insert_action() {
+            return this.action == 'insert';
+        },
+        is_delete_action: function is_delete_action() {
+            return this.action == 'delete';
+        },
+        endpoint: function endpoint() {
+            return this.action ? this.form.actions[this.action].endpoint : null;
+        },
+        errors: function errors() {
+            return this.formManager ? this.formManager.getErrors() : null;
+        },
+        hicon: function hicon() {
+            return this.action ? this.form.actions[this.action].header.icon : null;
+        },
+        htitle: function htitle() {
+            return this.action ? this.form.actions[this.action].header.title : null;
+        },
+        bicon: function bicon() {
+            return this.action ? this.form.actions[this.action].button.icon : null;
+        },
+        bcolor: function bcolor() {
+            return this.action ? this.form.actions[this.action].button.color : null;
+        },
+        bcaption: function bcaption() {
+            return this.action ? this.form.actions[this.action].button.caption : null;
+        }
+    },
+
+    methods: {
+        fillRecord: function fillRecord() {
+            var _this = this;
+
+            if (this.form.record) {
+                _.each(this.record, function (value, field) {
+                    if (_this.form.record.hasOwnProperty(field)) {
+                        _this.record[field] = _this.form.record[field];
+                    }
+                });
+            }
+        },
+        onClickCommit: function onClickCommit() {
+            this.formManager.onSubmit();
+        }
+    },
+
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.formManager = new this.app.FormManager(this, this.endpoint, function (data) {
+            if (data.success) {
+                var t = setTimeout(function () {
+                    _this2.$emit('close', { afterClose: function afterClose(vue) {
+                            vue.data_manager.populate();
+                        } });
+                }, 1000);
+            }
+        }, function (data) {
+            console.log('Error', data);
+        });
+        this.fillRecord();
+    },
+
+
+    components: {
+        'vt-form': __webpack_require__(5).components['vt-form'],
+        'vt-textbox': __webpack_require__(5).components['vt-textbox']
+        // 'vt-password': require('comptechsoft-admin-modern').components['vt-password'],
+    }
+};
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports) {
+
+module.exports = {
+    test: 'I am a test...'
+}
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "card-title" }, [
+        _c("i", { class: _vm.hicon }),
+        _vm._v("\n                " + _vm._s(_vm.htitle) + "\n            ")
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "heading-elements" }, [
+        _c("ul", { staticClass: "list-inline mb-0" }, [
+          _c("li", [
+            _c(
+              "a",
+              {
+                attrs: { "data-action": "close" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$emit("close")
+                  }
+                }
+              },
+              [_c("i", { staticClass: "ft-x" })]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-content" }, [
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c(
+            "div",
+            { staticStyle: { "background-color": "#000", color: "yellow" } },
+            [
+              _vm._v("\n                    Action: " + _vm._s(_vm.action)),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                    Original record: " +
+                  _vm._s(_vm.form.record)
+              ),
+              _c("br"),
+              _c("br"),
+              _vm._v(
+                "\n                    Current record: " + _vm._s(_vm.record)
+              ),
+              _c("br"),
+              _c("br")
+            ]
+          ),
+          _vm._v(" "),
+          _vm.is_delete_action
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "alert alert-danger border-0 alert-dismissible mb-2",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("h4", { staticClass: "alert-heading mb-0" }, [
+                    _vm._v(
+                      "\n                        Sunteți sigur că doriți ștergerea înregistrarii?\n                    "
+                    )
+                  ])
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "vt-form",
+            {
+              attrs: {
+                result: _vm.formManager ? _vm.formManager.result : null
+              },
+              on: {
+                close: function($event) {
+                  _vm.formManager.result = null
+                }
+              }
+            },
+            [
+              _c("template", { slot: "form-controls" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-textbox", {
+                        attrs: {
+                          id: "role-slug",
+                          field: "slug",
+                          placeholder: "Cod",
+                          disabled: _vm.is_delete_action,
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.slug,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "slug", $$v)
+                          },
+                          expression: "record.slug"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col" },
+                    [
+                      _c("vt-textbox", {
+                        attrs: {
+                          id: "role-name",
+                          field: "name",
+                          placeholder: "Nume",
+                          disabled: _vm.is_delete_action,
+                          errors: _vm.errors
+                        },
+                        model: {
+                          value: _vm.record.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.record, "name", $$v)
+                          },
+                          expression: "record.name"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "card-footer border-top-blue-grey border-top-lighten-5 text-muted"
+      },
+      [
+        _c("div", { staticClass: "form-group mb-0" }, [
+          _c(
+            "button",
+            {
+              class: "btn " + _vm.bcolor + " btn-min-width btn-glow mr-1",
+              attrs: { type: "button" },
+              on: { click: _vm.onClickCommit }
+            },
+            [
+              _c("i", { class: _vm.bicon }),
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.bcaption) +
+                  "\n                "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary btn-min-width btn-glow mr-1",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.$emit("close")
+                }
+              }
+            },
+            [_vm._v("\n                    Renunță\n                ")]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-072e43aa", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

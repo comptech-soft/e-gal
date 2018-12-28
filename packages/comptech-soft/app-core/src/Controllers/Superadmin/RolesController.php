@@ -17,4 +17,8 @@ class RolesController extends Controller
     public function getRecords(Request $request) {
         return Role::getRecords($request->all());
     }
+
+    public function actionDispatch($action, Request $request) {
+        return Role::actionDispatch($action, $request->all());
+    }
 }

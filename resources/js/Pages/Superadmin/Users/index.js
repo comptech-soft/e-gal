@@ -1,28 +1,21 @@
 /**
- * Aplicatie Vue ...... : "Users"
+ * Vue root application ...... : "Users"
  */
 
 const 
-    /**
-     * Numele global
-     */
+
+    /** Numele global al containerilui */
     name = 'ComptechApp',
 
-    /**
-     * Store-ul comun
-     */
+    /** Store-ul comun */
     store = require('../../../App/Store/store'),
 
-    /**
-     * Sidebarul comun
-     */
+    /** Sidebarul comun */
     sidebar = {
         dispatcher: require('../../../App/Sidebar/Dispatcher')
     },
 
-    /**
-     * Aplicatii Vue
-     */
+    /** Vue root apps */
     apps = {
         'roles': {
             creator: require('./App/Create'),
@@ -30,9 +23,7 @@ const
         }
     },
 
-    /**
-     * Components
-     */
+    /** Vue Components */
     components = {
         'simple-page-filter': require('./App/Components/Filter'),
         'simple-page-data': require('comptechsoft-admin-modern').pages.simple.DataComponent,

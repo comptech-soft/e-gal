@@ -24,13 +24,13 @@ Route::middleware('web')->group(function(){
                  */
                 Route::get('roles', 'RolesController@index')->name('roles-index');
                 Route::post('roles/get-records', 'RolesController@getRecords')->name('roles-get-records');
+                Route::post('roles/{action}', 'RolesController@actionDispatch')->name('roles-actions');
 
                 /**
                  * Users
                  */
                 Route::get('users', 'UsersController@index')->name('users-index');
                 Route::post('users/get-records', 'UsersController@getRecords')->name('users-get-records');
-
                 Route::post('users/{action}', 'UsersController@actionDispatch')->name('users-actions');
             });
 

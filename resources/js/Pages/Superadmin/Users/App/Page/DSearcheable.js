@@ -1,5 +1,5 @@
 module.exports = {
     placeholder: 'Caută rapid...',
-    fields: ['users.email'],
+    fields: ['users.email', 'users.first_name', 'users.last_name'],
     value: null,
 }

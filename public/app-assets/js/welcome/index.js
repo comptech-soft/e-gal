@@ -5312,33 +5312,6 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -5393,6 +5366,33 @@ module.exports = {
         'presentation': __webpack_require__(156),
     }
 }
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 7 */
@@ -35949,7 +35949,7 @@ module.exports = Launcher
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(10)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(10)(module)))
 
 /***/ }),
 /* 159 */
@@ -48204,7 +48204,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(180).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(180).setImmediate))
 
 /***/ }),
 /* 180 */
@@ -48274,7 +48274,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 181 */
@@ -48467,7 +48467,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(136)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(136)))
 
 /***/ }),
 /* 182 */
@@ -70228,7 +70228,7 @@ module.exports = (name, window, store) => {
                 el: '#app',
                 store,
                 components: {
-                    'login-form': __webpack_require__(6).pages.login,
+                    'login-form': __webpack_require__(5).pages.login,
                 },
                 mounted(){
                     this.$store.commit('getConfig')
@@ -70243,7 +70243,7 @@ module.exports = (name, window, store) => {
 
 module.exports = (name, $, window, store, sidebar, apps) => {
 
-    const Index = __webpack_require__(6).pages.simple.Index
+    const Index = __webpack_require__(5).pages.simple.Index
 
     Index.Run($, window, {name, store, sidebar, apps})
 }

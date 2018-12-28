@@ -34,6 +34,27 @@ return [
             'last_name.required' => 'Numele trebuie completat.',
             'password.required' => 'Trebuie să completați parola.'
         ]
+    ],
+
+    'role' => [
+        'rules' => [
+            'insert' => [
+                'slug' => 'required|unique:roles,slug',
+                'name' => 'required|unique:roles,name',
+            ],
+            'update' => [
+                'slug' => 'required|unique:roles,slug',
+                'name' => 'required|unique:roles,name',
+            ],
+            'delete' => [],
+        ],
+
+        'messages' =>[
+            'slug.required' => 'Codul trebuie completat.',
+            'slug.unique' => 'Acest cod este deja folosit.',
+            'name.required' => 'Numele trebuie completat.',
+            'name.unique' => 'Acest nume este deja folosit.',
+        ]
     ]
 
 ];

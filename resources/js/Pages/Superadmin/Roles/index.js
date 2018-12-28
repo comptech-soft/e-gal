@@ -1,27 +1,21 @@
 /**
- * Crearea si executia aplicatiei "Users"
+ * Vue root application ...... : "Roles"
  */
+
 const 
-    /**
-     * Numele global
-     */
+
+    /** Numele global al containerilui */
     name = 'ComptechApp',
 
-    /**
-     * Store-ul comun
-     */
+    /** Store-ul comun */
     store = require('../../../App/Store/store'),
 
-    /**
-     * Sidebarul comun
-     */
+    /** Sidebarul comun */
     sidebar = {
         dispatcher: require('../../../App/Sidebar/Dispatcher')
     },
 
-    /**
-     * Aplicatii Vue
-     */
+    /** Vue root apps */
     apps = {
         'roles': {
             creator: require('./App/Create'),
@@ -29,17 +23,14 @@ const
         }
     },
 
-    /**
-     * Components
-     */
+    /** Vue Components */
     components = {
-        // 'simple-page-filter': require('./App/Components/Filter'),
-        'simple-page-data': require('comptechsoft-admin-modern').pages.simple.DataComponent
+        'simple-page-filter': null,
+        'simple-page-data': require('comptechsoft-admin-modern').pages.simple.DataComponent,
+        'role-form': require('./App/Components/Form'),
     },
 
-    /**
-     * Main Index
-     */
+    /** Main Index launcher */
     Index = require('comptechsoft-admin-modern').pages.simple.Index
 
 Index.Run($, window, {name, store, sidebar, apps, components})
