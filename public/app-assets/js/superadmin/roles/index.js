@@ -66051,6 +66051,7 @@ module.exports = {
         error_to_string() {
             return (! this.has_error) ? '' : this.errors.collect(this.field).toString() 
         }
+        
     }
 }
 
@@ -70934,7 +70935,7 @@ module.exports = {
                 }
             },
             'slug': {
-                width: 25,
+                width: 20,
                 header: {
                     caption: 'Slug',
                     orderable: {
@@ -70947,7 +70948,7 @@ module.exports = {
                 }
             },
             'name': {
-                width: 35,
+                width: 30,
                 header: {
                     caption: 'Nume',
                     orderable: {
@@ -70957,6 +70958,22 @@ module.exports = {
                 },
                 control: {
                     source: 'name'
+                }
+            },
+            'users_count': {
+                width: 10,
+                header: {
+                    caption: 'Utilizatori',
+                    orderable: {
+                        fields: ['roles.name'],
+                        direction: 'asc'
+                    }
+                },
+                control: {
+                    style: {
+                        'text-align': 'right'
+                    },
+                    source: 'users_count'
                 }
             },
             'created_at': {

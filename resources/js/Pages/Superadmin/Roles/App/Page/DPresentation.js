@@ -21,7 +21,7 @@ module.exports = {
                 }
             },
             'slug': {
-                width: 25,
+                width: 20,
                 header: {
                     caption: 'Slug',
                     orderable: {
@@ -34,7 +34,7 @@ module.exports = {
                 }
             },
             'name': {
-                width: 35,
+                width: 30,
                 header: {
                     caption: 'Nume',
                     orderable: {
@@ -44,6 +44,22 @@ module.exports = {
                 },
                 control: {
                     source: 'name'
+                }
+            },
+            'users_count': {
+                width: 10,
+                header: {
+                    caption: 'Utilizatori',
+                    orderable: {
+                        fields: ['users_count'],
+                        direction: 'asc',
+                    }
+                },
+                control: {
+                    style: {
+                        'text-align': 'right'
+                    },
+                    source: 'users_count'
                 }
             },
             'created_at': {
