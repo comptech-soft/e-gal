@@ -15,15 +15,6 @@ class RolesController extends Controller
     }
 
     public function getRecords(Request $request) {
-
-//         \DB::enableQueryLog();
-
-//         Role::getRecords($request->all());
-
-// $query = \DB::getQueryLog();
-
-// dd($query);
-
         return Role::getRecords($request->all());
     }
 

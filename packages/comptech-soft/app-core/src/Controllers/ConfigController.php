@@ -30,9 +30,9 @@ class ConfigController extends Controller
         ];
     }
 
-    public function getLeftSidebar(Request $r) {
-        list($class, $method) = explode('@', config('comptechsoft.core.left-sidebar.generator'));
-        return call_user_func([$class, $method], \Sentinel::check());
-    }
+    // public function getLeftSidebar(Request $r) {
+    //     list($class, $method) = explode('@', config('comptechsoft.core.left-sidebar.generator'));
+    //     return call_user_func([$class, $method], \Sentinel::check());
+    // }
 
 }

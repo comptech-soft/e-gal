@@ -11,9 +11,7 @@ const
     store = require('../../../App/Store/store'),
 
     /** Sidebarul comun */
-    sidebar = {
-        dispatcher: require('../../../App/Sidebar/Dispatcher')
-    },
+    sidebar = null,
 
     /** Vue root apps */
     apps = {

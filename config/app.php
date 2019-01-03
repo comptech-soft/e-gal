@@ -57,7 +57,11 @@ return [
          */
         Comptechsoft\Appcore\Providers\AppCoreServiceProvider::class,
         Comptechsoft\Usermanagement\Providers\UsersManagementServiceProvider::class,
+        Comptechsoft\Geomanagement\Providers\GeoManagementServiceProvider::class,
         Comptechsoft\Adminmodern\Providers\AdminmodernServiceProvider::class,
+        
+
+        Baum\Providers\BaumServiceProvider::class,
 
         /*
          * Application Service Providers...
