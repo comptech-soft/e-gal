@@ -1,6 +1,7 @@
 {
     "/app-assets/js/superadmin/users/index.js": "/app-assets/js/superadmin/users/index.js",
     "/app-assets/js/superadmin/roles/index.js": "/app-assets/js/superadmin/roles/index.js",
+    "/app-assets/js/superadmin/locations/index.js": "/app-assets/js/superadmin/locations/index.js",
     "/app-assets/js/welcome/index.js": "/app-assets/js/welcome/index.js",
     "/app-assets/js/login/index.js": "/app-assets/js/login/index.js"
 }

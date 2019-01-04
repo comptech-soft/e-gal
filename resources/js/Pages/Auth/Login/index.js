@@ -1,5 +1,22 @@
+/**
+ * Login
+ */
 const 
-    Run = require('comptechsoft-apps').Auth.Login,
-    store = new Vuex.Store(require('./../../../App/Store/store'))
+    Runer = require('comptechsoft-core-libs').Runer,
+    store = new Vuex.Store(require('../../../App/Store/store')) 
 
-Run('ComptechApp', window, store)
+Runer.Run($, window, {
+    name: 'ComptechApp',
+    apps: {
+        'login': {
+            el: '#app',
+            store,
+            components: {
+                'login-form': require('comptechsoft-admin-modern').pages.login,
+            },
+            mounted(){
+                this.$store.commit('getConfig')
+            },
+        }
+    }
+})

@@ -1,1 +1,1 @@
-Hi
+@extends('~Templates.Simplepage.index')

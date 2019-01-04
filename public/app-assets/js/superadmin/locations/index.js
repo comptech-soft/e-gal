@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 364);
+/******/ 	return __webpack_require__(__webpack_require__.s = 389);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70890,40 +70890,173 @@ if (false) {
 }
 
 /***/ }),
-/* 364 */
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(365);
+module.exports = __webpack_require__(390);
 
 
 /***/ }),
-/* 365 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 /**
- * Login
+ * Locations
  */
 var Runer = __webpack_require__(6).Runer,
+    ModernAdminApps = __webpack_require__(8).Apps,
     store = new Vuex.Store(__webpack_require__(210));
 
 Runer.Run($, window, {
     name: 'ComptechApp',
+    sidebar: null,
     apps: {
-        'login': {
-            el: '#app',
-            store: store,
-            components: {
-                'login-form': __webpack_require__(8).pages.login
-            },
-            mounted: function mounted() {
-                this.$store.commit('getConfig');
-            }
-        }
+        'nav': ModernAdminApps.Nav(store),
+        'sidebar': ModernAdminApps.Sidebar(store),
+        'locations': __webpack_require__(391)(store)
+    },
+    components: {
+        'simple-page-filter': __webpack_require__(392),
+        'simple-page-data': __webpack_require__(8).pages.simple.DataComponent,
+        'user-form': __webpack_require__(393)
     }
 });
+
+/***/ }),
+/* 391 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Page = __webpack_require__(156).Page;
+
+var page = new Page();
+page.header.setTitle('Localitati, Regiuni, Judete, Tari');
+
+console.log(page);
+
+module.exports = function (store) {
+
+    return {
+        el: '#app',
+        data: {
+            layout: null,
+            data_manager: null,
+            records: []
+        },
+        store: store,
+        components: {
+            'simple-page': __webpack_require__(8).pages.simple.MainComponent
+        },
+        methods: {
+            Init: function Init() {
+                this.layout = page;
+                this.data_manager = new this.app.DataManager(this, {
+                    // endpoint: options.endpoint,
+                    // per_page: options.per_page,
+                    // searchable: options.searchable,
+                    // conditions: options.conditions,
+                    // current_order: this.page_manager.content_body.data_section.defaultOrder()
+                });
+                this.data_manager.populate();
+            }
+        },
+        mounted: function mounted() {
+            this.Init();
+        },
+
+        name: 'simple-page-root-app'
+    };
+};
+
+/***/ }),
+/* 392 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Pages/Superadmin/Locations/App/Components/Filter.vue"
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 393 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/Pages/Superadmin/Locations/App/Components/Form.vue"
+
+module.exports = Component.exports
+
 
 /***/ })
 /******/ ]);

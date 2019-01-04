@@ -2,8 +2,8 @@
 
 @section('content')
     <simple-page
-        v-if="(page_manager != null) && (data_manager != null)"
-        :page_manager="page_manager"
+        v-if="(layout != null) && (data_manager != null)"
+        :layout="layout"
         :data_manager="data_manager"
         :records="records"
     >
@@ -11,6 +11,5 @@
 @stop
 
 @section('scripts')
-    <script src="{{ $script }}">
-    </script>
+    <script src="{{ $script }}"></script>
 @stop
