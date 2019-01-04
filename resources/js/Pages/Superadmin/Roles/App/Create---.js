@@ -11,14 +11,7 @@ let content_manager = new ContentManager()
 
 content_manager
 
-    /** Simple Page Header. Title */
-    .setHeaderTitle('Roluri')
 
-    /** Simple Page Header. Breadcrumbs */
-    .setHeaderBreadcrumbs(require('./Page/HBreadcrumbs'))
-    
-    /** Simple Page Header. Toolbar actions */
-    .setHeaderActions(require('./Page/HActions'))
 
     /** Simple Page Body: title, toolbar, dropdown actions */
     .setBodyDataHeader({

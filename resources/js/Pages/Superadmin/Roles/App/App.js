@@ -2,7 +2,11 @@ const Page = require('comptechsoft-ui').Page
 const Menu = require('comptechsoft-ui').Menu
 
 let page = new Page()
+
+/** Header title */
 page.header.setTitle('Roluri')
+
+/** Header actions */
 page.header.actions.AddOption('insert', () => {
     let option = new Menu('login')
     option
@@ -18,6 +22,8 @@ page.header.actions.AddOption('insert', () => {
         .Enabled(null/* v => ! v.formVisible() */)
     return option
 })
+
+/** Header breadcrumbs */
 page.header.breadcrumbs.AddOption('home', () => {
     let option = new Menu('home')
     option
@@ -35,6 +41,62 @@ page.header.breadcrumbs.AddOption('home', () => {
 })
 
 
+page.body.data
+    .Tag('simple-page-data')
+    .With('title', 'Rourile utilizate în platformă')
+    .With('toolbar', () => {
+        let option = new Menu('toolbar')
+        option.AddOption('delete-all', () => {
+            let option = new Menu('delete-all')
+            option
+                .Icon('ft-trash white')
+                .Caption('Șterge tot')
+                .Title('Șterge toate înregistrarile')
+                .SetClass({
+                    'btn': true,
+                    'btn-data-toolbar': true,
+                    'btn-sm': true,
+                    'btn-danger': true,
+                })
+                .Click(v => {alert('Ai grijeeee!!!!')})
+            return option
+        })
+        return option
+    })
+    .With('actions', () => {
+        let option = new Menu('roles-actions')
+        option
+            .Icon('ft-settings white')
+            .SetClass({
+                'btn': true,
+                'btn-primary': true,
+                'dropdown-toggle': true,
+                'dropdown-menu-right': true,
+                'btn-sm': true,
+            })
+            .AddOption('refresh', () => {
+                let option = new Menu('refresh')
+                option
+                    .Icon('ft-refresh-cw')
+                    .Caption('Reîncarcă')
+                return option
+            })
+            .AddOption('download', () => {
+                let option = new Menu('download')
+                option
+                    .Icon('ft-download')
+                    .Caption('Exportă')
+                return option
+            })
+            .AddOption('upload', () => {
+                let option = new Menu('upload')
+                option
+                    .Icon('ft-upload')
+                    .Caption('Importă')
+                return option
+            })
+        return option
+    })
 
 module.exports = (store) => {
 
