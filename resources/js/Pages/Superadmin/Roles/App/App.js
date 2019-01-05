@@ -51,6 +51,8 @@ page.header.breadcrumbs.AddOption('home', () => {
  */
 page.body.data
     .Tag('simple-page-data')
+    .VisibleCallback(v => ! v.form_is_visible)
+    .Visible(true)
     .With('title', 'Rourile utilizate în platformă')
     .With('toolbar', () => {
         let option = new Menu('toolbar')
@@ -163,6 +165,13 @@ page.body.form.Show = (action, record) => {
     page.body.form.record = record
     page.body.form.visible = true
 }
+
+page.body.form.Hide = () => {
+    page.body.form.action = null
+    page.body.form.record = null
+    page.body.form.visible = false
+}
+
 /**
  * Data Manager
  */
@@ -255,9 +264,8 @@ let manager = {
                                 option
                                     .Icon('ft-edit-2')
                                     .Caption( record => 'Editează #' + record.id)
-                                    .Click( (v, record) => {
-                                        alert('Update' + record.id)
-                                    })
+                                    .Type('event')
+                                    .Click( (v, record) => v.FormShow('update', record))
                                 return option
                             })
                             .AddOption('delete', () => {
@@ -265,9 +273,8 @@ let manager = {
                                 option
                                     .Icon('ft-trash-2 danger')
                                     .Caption( record => 'Șterge #' + record.id)
-                                    .Click( (v, record) => {
-                                        alert('Delete' + record.id)
-                                    })
+                                    .Type('event')
+                                    .Click( (v, record) => v.FormShow('delete', record))
                                 return option
                             })
                         return menu

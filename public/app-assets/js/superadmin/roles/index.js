@@ -18275,7 +18275,7 @@ module.exports = {
     SimplePage: __webpack_require__(223),
 
     /**
-     * Data section
+     * Data section pe o pagina
      */
     Data: __webpack_require__(238),
 
@@ -61609,6 +61609,16 @@ class Section {
         return this
     }
 
+    VisibleCallback(visible) {
+        this.is_visible = visible
+        return this
+    }
+
+    Visible(visible) {
+        this.visible = visible
+        return this
+    }
+
     IsVisible(v) {
         if( (this.tag === null) && (this.visible === false) )
         {
@@ -61856,6 +61866,7 @@ module.exports = Component.exports
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
 //
 //
 //
@@ -62219,12 +62230,16 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
 
 exports.default = {
     props: {
         color: { type: String, required: true },
         icon: { type: String, required: true },
-        caption: { type: String, required: true }
+        caption: { type: String, required: true },
+        processing: { type: Boolean, required: false }
     }
 };
 
@@ -62244,13 +62259,17 @@ var render = function() {
         attrs: { type: "button" },
         on: {
           click: function($event) {
-            _vm.$emit("submit")
+            !_vm.processing ? _vm.$emit("submit") : null
           }
         }
       },
       [
-        _c("i", { class: _vm.icon }),
-        _vm._v("\n        " + _vm._s(_vm.caption) + "\n    ")
+        !_vm.processing
+          ? _c("span", [
+              _c("i", { class: _vm.icon }),
+              _vm._v("\n            " + _vm._s(_vm.caption) + "\n        ")
+            ])
+          : _c("i", { staticClass: "la la-refresh spinner" })
       ]
     ),
     _vm._v(" "),
@@ -62627,7 +62646,8 @@ var render = function() {
               slot: "card-footer",
               icon: _vm.footer.icon,
               caption: _vm.footer.caption,
-              color: _vm.footer.color
+              color: _vm.footer.color,
+              processing: _vm.formManager.processing
             },
             on: { close: _vm.onCloseForm, submit: _vm.onClickSubmit },
             slot: "card-footer"
@@ -62753,6 +62773,10 @@ exports.default = {
     },
 
     methods: {
+
+        /**
+         * Actions
+         */
         onPageHeaderActionClick: function onPageHeaderActionClick(action) {
             try {
                 action.onClick(this);
@@ -62767,14 +62791,19 @@ exports.default = {
                 console.log('Main.vue::onHeaderActionClick > ' + error.message);
             }
         },
+
+
+        /**
+         * Form
+         */
         FormShow: function FormShow(action, record) {
             this.layout.body.form.Show(action, record);
         },
-        hideForm: function hideForm(e) {
+        FormHide: function FormHide(e) {
             if (e != undefined && e.hasOwnProperty('afterClose')) {
                 e.afterClose(this);
             }
-            this.layout.content_body.form_section.hideForm();
+            this.layout.body.form.Hide();
         },
         showFilter: function showFilter() {
             this.layout.content_body.filter_section.show();
@@ -62798,9 +62827,9 @@ exports.default = {
         onOrderBy: function onOrderBy(order) {
             this.data_manager.onOrderBy(order);
         },
-        onCellActionClick: function onCellActionClick(event) {
+        onCellActionClick: function onCellActionClick(action) {
             try {
-                event.action.click(this, event.record);
+                action.event.onClick(this, action.record);
             } catch (error) {
                 console.log('Main.vue::onCellActionClick > ' + error.message);
             }
@@ -63428,10 +63457,14 @@ exports.default = {
             return this.form.IsVisible(this);
         },
         filter_is_visible: function filter_is_visible() {
-            return this.filter.component != null && this.filter.visible && !this.form_is_visible;
+            return this.filter.IsVisible(this);
+
+            // return (this.filter.component != null) && this.filter.visible && ! this.form_is_visible
         },
         data_is_visible: function data_is_visible() {
-            return true; //! this.form_is_visible
+            return this.data.IsVisible(this);
+
+            // return true; //! this.form_is_visible
         }
     },
 
@@ -63597,7 +63630,7 @@ var render = function() {
           "filter-changed": _vm.onFilterChanged,
           "change-page": _vm.onChangePage,
           order_by: _vm.onOrderBy,
-          "close-form": _vm.hideForm,
+          "close-form": _vm.FormHide,
           "cell-action-click": _vm.onCellActionClick,
           "close-filter": _vm.hideFilter
         }
@@ -65667,7 +65700,7 @@ exports.default = {
             return this.column.header;
         },
         has_orderable: function has_orderable() {
-            return this.header.orderable != null;
+            return this.header.orderable != null && this.header.orderable.fields.length > 0 && this.header.orderable.direction != null;
         },
         cellStyle: function cellStyle() {
             var r = {};
@@ -66100,7 +66133,10 @@ exports.default = {
 
     methods: {
         onCellActionClick: function onCellActionClick(event) {
-            this.$emit('cell-action-click', event);
+            this.$emit('cell-action-click', {
+                event: event,
+                record: this.record
+            });
         }
     },
 
@@ -66380,11 +66416,7 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.$emit("cell-action-click", {
-                      key: key,
-                      action: action,
-                      record: _vm.record
-                    })
+                    _vm.onClickOption(action.option)
                   }
                 }
               },
@@ -66428,7 +66460,7 @@ var render = function() {
       _c("cell-" + _vm.control.component, {
         tag: "component",
         attrs: { control: _vm.control, record: _vm.record },
-        on: { "cell-action-click": _vm.onCellActionClick }
+        on: { click: _vm.onCellActionClick }
       })
     ],
     1
@@ -70708,7 +70740,9 @@ page.header.breadcrumbs.AddOption('home', function () {
 /**
  * Body. Data
  */
-page.body.data.Tag('simple-page-data').With('title', 'Rourile utilizate în platformă').With('toolbar', function () {
+page.body.data.Tag('simple-page-data').VisibleCallback(function (v) {
+    return !v.form_is_visible;
+}).Visible(true).With('title', 'Rourile utilizate în platformă').With('toolbar', function () {
     var option = new Menu('toolbar');
     option.AddOption('delete-all', function () {
         var option = new Menu('delete-all');
@@ -70775,6 +70809,13 @@ page.body.form.Show = function (action, record) {
     page.body.form.record = record;
     page.body.form.visible = true;
 };
+
+page.body.form.Hide = function () {
+    page.body.form.action = null;
+    page.body.form.record = null;
+    page.body.form.visible = false;
+};
+
 /**
  * Data Manager
  */
@@ -70827,16 +70868,16 @@ var manager = {
                     var option = new Menu('update');
                     option.Icon('ft-edit-2').Caption(function (record) {
                         return 'Editează #' + record.id;
-                    }).Click(function (v, record) {
-                        alert('Update' + record.id);
+                    }).Type('event').Click(function (v, record) {
+                        return v.FormShow('update', record);
                     });
                     return option;
                 }).AddOption('delete', function () {
                     var option = new Menu('delete');
                     option.Icon('ft-trash-2 danger').Caption(function (record) {
                         return 'Șterge #' + record.id;
-                    }).Click(function (v, record) {
-                        alert('Delete' + record.id);
+                    }).Type('event').Click(function (v, record) {
+                        return v.FormShow('delete', record);
                     });
                     return option;
                 });
