@@ -1,68 +1,12 @@
 module.exports = {
     id: 'users-presentation',
     table: {
-        default_order: {
-            key: 'slug',
-            fields: ['roles.slug'],
-            direction: 'asc'
-        },
         columns: {
-            'id': {
-                width: 5,
-                header: {
-                    caption: 'ID',
-                    orderable: {
-                        fields: ['roles.id'],
-                        direction: 'asc',
-                    }
-                },
-                control: {
-                    source: 'id'
-                }
-            },
-            'slug': {
-                width: 20,
-                header: {
-                    caption: 'Slug',
-                    orderable: {
-                        fields: ['roles.slug'],
-                        direction: 'asc',
-                    }
-                },
-                control: {
-                    source: 'slug'
-                }
-            },
-            'name': {
-                width: 30,
-                header: {
-                    caption: 'Nume',
-                    orderable: {
-                        fields: ['roles.name'],
-                        direction: 'asc',
-                    }
-                },
-                control: {
-                    source: 'name'
-                }
-            },
-            'users_count': {
-                width: 10,
-                header: {
-                    caption: 'Utilizatori',
-                    orderable: {
-                        fields: ['users_count'],
-                        direction: 'asc',
-                    }
-                },
-                control: {
-                    style: {
-                        'text-align': 'right'
-                    },
-                    source: 'users_count'
-                }
-            },
-            'created_at': {
+            
+
+
+
+            '': {
                 width: 10,
                 header: {
                     caption: 'Creat la',
@@ -91,7 +35,7 @@ module.exports = {
             'actions': {
                 width: 5,
                 header: {
-                    caption: 'Acțiuni',
+                    caption: '',
                 },
                 control: {
                     component: 'actions',

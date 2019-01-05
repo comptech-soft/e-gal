@@ -12,14 +12,6 @@ let content_manager = new ContentManager()
 content_manager
 
 
-
-    /** Simple Page Body: title, toolbar, dropdown actions */
-    .setBodyDataHeader({
-        title: 'Rourile utilizate în platformă',
-        toolbar: require('./Page/DToolbar'),
-        actions: require('./Page/DActions'),
-    })
-
     /** Simple Page Body: filter section component */
     .setFilterComponent(null)
 
@@ -70,11 +62,4 @@ content_manager
     /** Simple Page Body: data grid (table) or list */
     .setBodyDataPresentation(require('./Page/DPresentation'))
 
-/** Export the created Vue root app */
-module.exports = CreateApp.Create({
-    endpoint: 'superadmin/roles/get-records',
-    per_page: 20,
-    content_manager,
-    searchable: require('./Page/DSearcheable')
-})
 

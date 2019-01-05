@@ -5,6 +5,7 @@
         v-if="(layout != null) && (data_manager != null)"
         :layout="layout"
         :data_manager="data_manager"
+        :grid="grid"
         :records="records"
     >
     </simple-page>
