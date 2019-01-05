@@ -21,6 +21,7 @@ page.header.actions.AddOption('insert', () => {
             'btn-sm': true,
             'btn-primary': true,
         })
+        .Type('event')
         .Click(v => v.formShow('insert', null))
         .Enabled(null/* v => ! v.formVisible() */)
     return option
@@ -32,6 +33,7 @@ page.header.breadcrumbs.AddOption('home', () => {
     option
         .Title('Pagina principală')
         .Caption('Dashboard')
+        .Type('click')
         .Click(v => v.app.Http.redirect(v.url))
     return option
 }).AddOption('roles', () => {
@@ -61,6 +63,7 @@ page.body.data
                     'btn-sm': true,
                     'btn-danger': true,
                 })
+                .Type('click')
                 .Click(v => {alert('Ai grijeeee!!!!')})
             return option
         })
@@ -82,6 +85,9 @@ page.body.data
                 option
                     .Icon('ft-refresh-cw')
                     .Caption('Reîncarcă')
+                    .Type('event')
+                    .Event('action-click')
+                    .Click(v => v.data_manager.populate())
                 return option
             })
             .AddOption('download', () => {
@@ -227,7 +233,7 @@ module.exports = (store) => {
         },
         store,
         components: {
-            'simple-page': require('comptechsoft-admin-modern').pages.simple.MainComponent,
+            'simple-page': require('comptechsoft-admin-modern').SimplePage,
         },
         methods: {
             Init() {
