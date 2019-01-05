@@ -2,7 +2,8 @@ const
     Page = require('comptechsoft-ui').Page,
     Menu = require('comptechsoft-ui').Menu,
     Grid = require('comptechsoft-ui').Grid,
-    Column = require('comptechsoft-ui').Column
+    Column = require('comptechsoft-ui').Column,
+    FormAction = require('comptechsoft-ui').FormAction
 
 let page = new Page()
 
@@ -22,7 +23,7 @@ page.header.actions.AddOption('insert', () => {
             'btn-primary': true,
         })
         .Type('event')
-        .Click(v => v.formShow('insert', null))
+        .Click(v => v.FormShow('insert', null))
         .Enabled(null/* v => ! v.formVisible() */)
     return option
 })
@@ -45,7 +46,9 @@ page.header.breadcrumbs.AddOption('home', () => {
     return option
 })
 
-
+/**
+ * Body. Data
+ */
 page.body.data
     .Tag('simple-page-data')
     .With('title', 'Rourile utilizate în platformă')
@@ -107,7 +110,62 @@ page.body.data
         return option
     })
 
+/**
+ * Body. Form
+ */
+page.body.form
+    .Tag('role-form')
+    .With('actions', () => {
 
+        let insertAction = new FormAction('insert')
+        insertAction
+            .Endpoint('superadmin/roles/insert')
+            .HeaderCaption('Adăugare')
+            .HeaderTitle('Adăugare')
+            .HeaderIcon('la la-plus')
+            .ButtonCaption('Salvează')
+            .ButtonTitle('Salvează')
+            .ButtonIcon('la la-save')
+            .ButtonColor('btn-primary')
+
+        let updateAction = new FormAction('update')
+        updateAction
+            .Endpoint('superadmin/roles/update')
+            .HeaderCaption('Modificare')
+            .HeaderTitle('Modificare')
+            .HeaderIcon('la la-pencil')
+            .ButtonCaption('Salvează')
+            .ButtonTitle('Salvează')
+            .ButtonIcon('la la-save')
+            .ButtonColor('btn-primary')
+
+        let deleteAction = new FormAction('delete')
+        deleteAction
+            .Endpoint('superadmin/roles/delete')
+            .HeaderCaption('Ștergere')
+            .HeaderTitle('Ștergere')
+            .HeaderIcon('la la-trash')
+            .ButtonCaption('Șterge')
+            .ButtonTitle('Șterge')
+            .ButtonIcon('la la-trash')
+            .ButtonColor('btn-danger')
+
+        return {
+            insert: insertAction, 
+            update: updateAction, 
+            delete: deleteAction
+        }
+
+    })
+
+page.body.form.Show = (action, record) => {
+    page.body.form.action = action
+    page.body.form.record = record
+    page.body.form.visible = true
+}
+/**
+ * Data Manager
+ */
 let manager = {
     endpoint: 'superadmin/roles/get-records',
     per_page: 20,
