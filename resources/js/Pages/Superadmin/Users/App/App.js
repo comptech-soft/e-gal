@@ -1,0 +1,1 @@
+module.exports = (store) => require('../../../../Helpers/VueSimplePageApp')(store, page, manager)

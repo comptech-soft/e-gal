@@ -1,181 +1,50 @@
 const 
-    Page = require('comptechsoft-ui').Page,
+    CreatePageLayout = require('./../../../../Helpers/CreatePageLayout'),
+    CreateDataManager = require('./../../../../Helpers/CreateDataManager'),
+    MenuOptions = require('./../../../../Helpers/MenuOptions'),
     Menu = require('comptechsoft-ui').Menu,
-    Grid = require('comptechsoft-ui').Grid,
-    Column = require('comptechsoft-ui').Column,
-    FormAction = require('comptechsoft-ui').FormAction
+    Column = require('comptechsoft-ui').Column
 
-let page = new Page()
+let page = CreatePageLayout({
 
-/** Header title */
-page.header.setTitle('Roluri')
-
-/** Header actions */
-page.header.actions.AddOption('insert', () => {
-    let option = new Menu('login')
-    option
-        .Title('Adaugă un rol nou')
-        .Icon('la la-file')
-        .SetClass({
-            'btn': true,
-            'btn-icon': true,
-            'btn-sm': true,
-            'btn-primary': true,
-        })
-        .Type('event')
-        .Click(v => v.FormShow('insert', null))
-        .Enabled(null/* v => ! v.formVisible() */)
-    return option
-})
-
-/** Header breadcrumbs */
-page.header.breadcrumbs.AddOption('home', () => {
-    let option = new Menu('home')
-    option
-        .Title('Pagina principală')
-        .Caption('Dashboard')
-        .Type('click')
-        .Click(v => v.app.Http.redirect(v.url))
-    return option
-}).AddOption('roles', () => {
-    let option = new Menu('roles')
-    option
-        .Title('Pagina curentă')
-        .Caption('Roluri')
-        .Enabled(false)
-    return option
-})
-
-/**
- * Body. Data
- */
-page.body.data
-    .Tag('simple-page-data')
-    .VisibleCallback(v => ! v.form_is_visible)
-    .Visible(true)
-    .With('title', 'Rourile utilizate în platformă')
-    .With('toolbar', () => {
-        let option = new Menu('toolbar')
-        option.AddOption('delete-all', () => {
-            let option = new Menu('delete-all')
-            option
-                .Icon('ft-trash white')
-                .Caption('Șterge tot')
-                .Title('Șterge toate înregistrarile')
-                .SetClass({
-                    'btn': true,
-                    'btn-data-toolbar': true,
-                    'btn-sm': true,
-                    'btn-danger': true,
-                })
-                .Type('click')
-                .Click(v => {alert('Ai grijeeee!!!!')})
-            return option
-        })
-        return option
-    })
-    .With('actions', () => {
-        let option = new Menu('roles-actions')
-        option
-            .Icon('ft-settings white')
-            .SetClass({
-                'btn': true,
-                'btn-primary': true,
-                'dropdown-toggle': true,
-                'dropdown-menu-right': true,
-                'btn-sm': true,
-            })
-            .AddOption('refresh', () => {
-                let option = new Menu('refresh')
-                option
-                    .Icon('ft-refresh-cw')
-                    .Caption('Reîncarcă')
-                    .Type('event')
-                    .Event('action-click')
-                    .Click(v => v.data_manager.populate())
-                return option
-            })
-            .AddOption('download', () => {
-                let option = new Menu('download')
-                option
-                    .Icon('ft-download')
-                    .Caption('Exportă')
-                return option
-            })
-            .AddOption('upload', () => {
-                let option = new Menu('upload')
-                option
-                    .Icon('ft-upload')
-                    .Caption('Importă')
-                return option
-            })
-        return option
-    })
-
-/**
- * Body. Form
- */
-page.body.form
-    .Tag('role-form')
-    .With('actions', () => {
-
-        let insertAction = new FormAction('insert')
-        insertAction
-            .Endpoint('superadmin/roles/insert')
-            .HeaderCaption('Adăugare')
-            .HeaderTitle('Adăugare')
-            .HeaderIcon('la la-plus')
-            .ButtonCaption('Salvează')
-            .ButtonTitle('Salvează')
-            .ButtonIcon('la la-save')
-            .ButtonColor('btn-primary')
-
-        let updateAction = new FormAction('update')
-        updateAction
-            .Endpoint('superadmin/roles/update')
-            .HeaderCaption('Modificare')
-            .HeaderTitle('Modificare')
-            .HeaderIcon('la la-pencil')
-            .ButtonCaption('Salvează')
-            .ButtonTitle('Salvează')
-            .ButtonIcon('la la-save')
-            .ButtonColor('btn-primary')
-
-        let deleteAction = new FormAction('delete')
-        deleteAction
-            .Endpoint('superadmin/roles/delete')
-            .HeaderCaption('Ștergere')
-            .HeaderTitle('Ștergere')
-            .HeaderIcon('la la-trash')
-            .ButtonCaption('Șterge')
-            .ButtonTitle('Șterge')
-            .ButtonIcon('la la-trash')
-            .ButtonColor('btn-danger')
-
-        return {
-            insert: insertAction, 
-            update: updateAction, 
-            delete: deleteAction
+    header: {
+        title: 'Roluri',
+        actions: {
+            insert: MenuOptions.insert('Adaugă un rol nou')
+        },
+        breadcrumbs: {
+            home: MenuOptions.home(),
+            current: MenuOptions.current('Roluri')
         }
+    },
 
-    })
+    data: {
+        title: 'Rourile utilizate în platformă',
+        toolbar: {
+            'delete-all': MenuOptions.deleteAll()
+        },
+        actions: {
+            refresh: MenuOptions.refresh(),
+            download: MenuOptions.download(),
+            upload: MenuOptions.upload()
+        }
+    },
 
-page.body.form.Show = (action, record) => {
-    page.body.form.action = action
-    page.body.form.record = record
-    page.body.form.visible = true
-}
+    form: {
+        insert: {
+            endpoint: 'superadmin/roles/insert'
+        },
+        update: {
+            endpoint: 'superadmin/roles/update'
+        },
+        delete: {
+            endpoint: 'superadmin/roles/delete'
+        }
+    }
 
-page.body.form.Hide = () => {
-    page.body.form.action = null
-    page.body.form.record = null
-    page.body.form.visible = false
-}
+})
 
-/**
- * Data Manager
- */
-let manager = {
+let manager = CreateDataManager({
     endpoint: 'superadmin/roles/get-records',
     per_page: 20,
     searchable: {
@@ -184,140 +53,102 @@ let manager = {
         value: null,
     },
     conditions: null,
-    grid: (() => {
-        let grid = new Grid('grid-roles')
-        grid
-            .DefaultOrder({
-                key: 'slug',
-                fields: ['roles.slug'],
-                direction: 'asc'
-            })
-            .AddColumn('id', () => {
-                let column = new Column('id')
-                column
-                    .Width(5)
-                    .Caption('ID')
-                    .OrderBy(['roles.id'], 'asc')
-                    .Source('id')
-                return column
-            })
-            .AddColumn('slug', () => {
-                let column = new Column('slug')
-                column
-                    .Width(20)
-                    .Caption('Slug')
-                    .OrderBy(['roles.slug'], 'asc')
-                    .Source('slug')
-                return column
-            })
-            .AddColumn('name', () => {
-                let column = new Column('name')
-                column
-                    .Width(30)
-                    .Caption('Nume')
-                    .OrderBy(['roles.name'], 'asc')
-                    .Source('name')
-                return column
-            })
-            .AddColumn('users_count', () => {
-                let column = new Column('users_count')
-                column
-                    .Width(10)
-                    .Caption('Utilizatori')
-                    .OrderBy(['users_count'], 'asc')
-                    .Source('users_count')
-                    .ControlStyle({
-                        'text-align': 'right'
-                    })
-                return column
-            })
-            .AddColumn('created_at', () => {
-                let column = new Column('created_at')
-                column
-                    .Width(10)
-                    .Caption('Creat...')
-                    .OrderBy(['roles.created_at'], 'asc')
-                    .Source('created_at')
-                return column
-            })
-            .AddColumn('updated_at', () => {
-                let column = new Column('updated_at')
-                column
-                    .Width(10)
-                    .Caption('Modificat...')
-                    .OrderBy(['roles.updated_at'], 'asc')
-                    .Source('updated_at')
-                return column
-            })
-            .AddColumn('actions', () => {
-                let column = new Column('actions')
-                column
-                    .Width(5)
-                    .Caption('Acțiuni')
-                    .Component('actions')
-                    .Type(null)
-                    .Actions( () => {
-                        let menu = new Menu('record-actions')
-                        menu
-                            .AddOption('update', () => {
-                                let option = new Menu('update')
-                                option
-                                    .Icon('ft-edit-2')
-                                    .Caption( record => 'Editează #' + record.id)
-                                    .Type('event')
-                                    .Click( (v, record) => v.FormShow('update', record))
-                                return option
-                            })
-                            .AddOption('delete', () => {
-                                let option = new Menu('delete')
-                                option
-                                    .Icon('ft-trash-2 danger')
-                                    .Caption( record => 'Șterge #' + record.id)
-                                    .Type('event')
-                                    .Click( (v, record) => v.FormShow('delete', record))
-                                return option
-                            })
-                        return menu
-                    })
-                return column
-            })
-
-        return grid
-    })()
-}
-
-module.exports = (store) => {
-
-    return {
-        el: '#app',
-        data: {
-            layout: null,
-            grid: null,
-            data_manager: null,
-            records: [],
+    default_order: {
+        key: 'slug',
+        fields: ['roles.slug'],
+        direction: 'asc'
+    },
+    columns: {
+        id: () => {
+            let column = new Column('id')
+            column
+                .Width(5)
+                .Caption('ID')
+                .OrderBy(['roles.id'], 'asc')
+                .Source('id')
+            return column
         },
-        store,
-        components: {
-            'simple-page': require('comptechsoft-admin-modern').SimplePage,
+        slug: () => {
+            let column = new Column('slug')
+            column
+                .Width(20)
+                .Caption('Slug')
+                .OrderBy(['roles.slug'], 'asc')
+                .Source('slug')
+            return column
         },
-        methods: {
-            Init() {
-                this.layout = page
-                this.grid = manager.grid
-                this.data_manager = new this.app.DataManager(this, {
-                    endpoint: manager.endpoint,
-                    per_page: manager.per_page,
-                    searchable: manager.searchable,
-                    conditions: manager.conditions,
-                    current_order: manager.grid.default_order
+        name: () => {
+            let column = new Column('name')
+            column
+                .Width(30)
+                .Caption('Nume')
+                .OrderBy(['roles.name'], 'asc')
+                .Source('name')
+            return column
+        },
+        users_count: () => {
+            let column = new Column('users_count')
+            column
+                .Width(10)
+                .Caption('Utilizatori')
+                .OrderBy(['users_count'], 'asc')
+                .Source('users_count')
+                .ControlStyle({
+                    'text-align': 'right'
                 })
-                this.data_manager.populate()
-            }
+            return column
         },
-        mounted(){
-            this.Init()
+        created_at: () => {
+            let column = new Column('created_at')
+            column
+                .Width(10)
+                .Caption('Creat...')
+                .OrderBy(['roles.created_at'], 'asc')
+                .Source('created_at')
+            return column
         },
-        name: 'simple-page-root-app'
+        updated_at: () => {
+            let column = new Column('updated_at')
+            column
+                .Width(10)
+                .Caption('Modificat...')
+                .OrderBy(['roles.updated_at'], 'asc')
+                .Source('updated_at')
+            return column
+        },
+        actions: () => {
+            let column = new Column('actions')
+            column
+                .Width(5)
+                .Caption('Acțiuni')
+                .Component('actions')
+                .Type(null)
+                .Actions( () => {
+                    let menu = new Menu('record-actions')
+                    menu
+                        .AddOption('update', () => {
+                            let option = new Menu('update')
+                            option
+                                .Icon('ft-edit-2')
+                                .Caption( record => 'Editează #' + record.id)
+                                .Type('event')
+                                .Click( (v, record) => v.FormShow('update', record))
+                            return option
+                        })
+                        .AddOption('delete', () => {
+                            let option = new Menu('delete')
+                            option
+                                .Icon('ft-trash-2 danger')
+                                .Caption( record => 'Șterge #' + record.id)
+                                .Type('event')
+                                .Click( (v, record) => v.FormShow('delete', record))
+                            return option
+                        })
+                    return menu
+                })
+            return column
+        }
     }
+})
 
-}
+module.exports = (store) => require('../../../../Helpers/VueSimplePageApp')(store, page, manager)

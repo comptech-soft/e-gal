@@ -1,4 +1,4 @@
-module.exports = (store) => {
+const VueApp = (store, page, manager) => {
 
     return {
         el: '#app',
@@ -31,5 +31,6 @@ module.exports = (store) => {
         },
         name: 'simple-page-root-app'
     }
-
 }
+
+module.exports = VueApp
