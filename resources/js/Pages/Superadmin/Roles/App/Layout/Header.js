@@ -1,12 +1,12 @@
-const MenuOptions = require('./../../../../../Helpers/Menu/MenuOptions')
+const Options = require('comptechsoft-ui').Menus.DefaultOptions
 
 module.exports = {
     title: 'Roluri',
     actions: {
-        insert: MenuOptions.insert('Adaugă un rol nou')
+        insert: Options.insert('Adaugă un rol nou')
     },
     breadcrumbs: {
-        home: MenuOptions.home(),
-        current: MenuOptions.current('Roluri')
+        home: Options.home(),
+        current: Options.current('Roluri')
     }
 }

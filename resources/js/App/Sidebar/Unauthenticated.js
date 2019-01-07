@@ -1,15 +1,10 @@
-const Menu = require('comptechsoft-ui').Menu
+const CreateMenu = require('comptechsoft-ui').Menus.Create
 
-let sidebar = new Menu('sidebar')
-
-sidebar.AddOption('menu-login', () => {
-    let option = new Menu('login')
-    option
-        .Caption('Login')
-        .Icon('la la-sign-in')
-        .Click(v => v.app.Http.redirect(100, v.url + '/login'))
-        .Type('click')
-    return option
-})
-
-module.exports = sidebar
+module.exports = 
+    CreateMenu('sidebar', {})
+    .AddOption('login', CreateMenu('login', {
+        caption: 'Login',
+        icon: 'la la-sign-in',
+        clicktype: 'click',
+        onClick: v => v.app.Http.redirect(100, v.url + '/login')
+    }))

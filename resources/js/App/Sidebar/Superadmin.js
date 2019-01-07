@@ -1,51 +1,30 @@
-const Menu = require('comptechsoft-ui').Menu
+const CreateMenu = require('comptechsoft-ui').Menus.Create
 
-let sidebar = new Menu('sidebar')
-
-sidebar
-    .AddOption('menu-users', () => {
-        let menu = new Menu('users')
-        menu
-            .Caption('Utilizatori')
-            .Icon('la la-users')
-            .AddOption('option-roles', () => {
-                let option = new Menu('roles')
-                option
-                    .Caption('Roluri')
-                    .Icon('la la-file-text')
-                    .Type('click')
-                    .Click(v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/roles'))
-                return option
-            })
-            .AddOption('option-users', () => {
-                let option = new Menu('users')
-                option
-                    .Caption('Utilizatori')
-                    .Icon('la la-users')
-                    .Type('click')
-                    .Click(v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/users'))
-                return option
-            })
-        return menu
-    })
-    .AddOption('menu-locations', () => {
-        let option = new Menu('locations')
-        option
-            .Caption('Țări, Localități, ...')
-            .Icon('la la-map-marker')
-            .Type('click')
-            .Click(v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/locations'))
-        return option
-    })
-    .AddOption('menu-logout', () => {
-        let option = new Menu('logout')
-        option
-            .Caption('Logout')
-            .Icon('la la-sign-out')
-            .Type('click')
-            .Click(v => v.app.Auth.logout(v.url))
-            
-        return option
-    })
-
-module.exports = sidebar
+module.exports = 
+    CreateMenu('sidebar', {})
+    .AddOption('users', 
+        CreateMenu('users', {caption: 'Utilizatori', icon: 'la la-users'})
+        .AddOption('option-roles', CreateMenu('roles', {
+            caption: 'Roluri',
+            icon: 'la la-file-text',
+            clicktype: 'click',
+            onClick: v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/roles')
+        }))
+        .AddOption('option-users', CreateMenu('users', {
+            caption: 'Utilizatori',
+            icon: 'la la-users',
+            clicktype: 'click',
+            onClick: v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/users')
+        })))
+    .AddOption('locations', CreateMenu('locations', {
+        caption: 'Țări, Localități, ...',
+        icon: 'la la-map-marker',
+        clicktype: 'click',
+        onClick: v => v.app.Http.redirect(100, v.url + '/' + v.role.slug + '/locations')
+    }))
+    .AddOption('logout', CreateMenu('logout', {
+        caption: 'Logout',
+        icon: 'la la-sign-out',
+        clicktype: 'click',
+        onClick: v => v.app.Auth.logout(v.url)
+    }))

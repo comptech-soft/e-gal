@@ -1,13 +1,13 @@
-const MenuOptions = require('./../../../../../Helpers/Menu/MenuOptions')
+const Options = require('comptechsoft-ui').Menus.DefaultOptions
 
 module.exports = {
     title: 'Rourile utilizate în platformă',
     toolbar: {
-        'delete-all': MenuOptions.deleteAll()
+        'delete-all': Options.deleteAll()
     },
     actions: {
-        refresh: MenuOptions.refresh(),
-        download: MenuOptions.download(),
-        upload: MenuOptions.upload()
+        refresh: Options.refresh(),
+        download: Options.download(),
+        upload: Options.upload()
     }
 }
