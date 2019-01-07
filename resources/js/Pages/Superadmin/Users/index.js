@@ -1,16 +1,22 @@
-/**
- * Users
+/** 
+ * Superadmin. Users page 
  */
-const 
-    Run = require('./../../../Helpers/Run'),
-    apps = {
-        'users': require('./App/App')
-    },
-    components = {
-        'simple-page-data': require('comptechsoft-admin-modern').Data,
-        'simple-page-filter': null,
-        'simple-page-form': require('./App/Components/Form'),
-    }
+
+/** The runner */
+const Boot = require('comptechsoft-admin-modern').Boot
+const Run = Boot('ComptechApp', require('./../../../App/Store/store') )
+
+/** Vue Apps */
+// const apps = {
+//     'users': require('./App/App')
+// }
+
+/** Vue components */
+// const components = {
+//     'simple-page-data': require('comptechsoft-admin-modern').Data,
+//     'simple-page-filter': null,
+//     'simple-page-form': require('./App/Components/Form'),
+// }
 
 Run(apps, components)
 
