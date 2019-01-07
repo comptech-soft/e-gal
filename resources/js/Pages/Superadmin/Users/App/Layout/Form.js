@@ -1,4 +1,4 @@
-const root = 'superadmin/roles/'
+const root = 'superadmin/users/'
 
 module.exports = {
     insert: {

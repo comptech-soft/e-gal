@@ -1,6 +1,7 @@
 const 
     Column = require('comptechsoft-ui').Grid.CreateColumn,
-    CreateMenu = require('comptechsoft-ui').Menus.Create
+    CreateMenu = require('comptechsoft-ui').Menus.Create,
+    Options = require('comptechsoft-ui').Menus.DefaultOptions
 
 module.exports = {
     id: () => Column('id', {
@@ -62,18 +63,8 @@ module.exports = {
             type: null,
             actions: () => 
                 CreateMenu('actions', {})
-                .AddOption('update', CreateMenu('update', {
-                    caption: record => 'Editează #' + record.id,
-                    icon: 'ft-edit-2',
-                    clicktype: 'event',
-                    onClick: (v, record) => v.FormShow('update', record)
-                }))
-                .AddOption('delete', CreateMenu('delete', {
-                    caption: record => 'Șterge #' + record.id,
-                    icon: 'ft-edit-2',
-                    clicktype: 'event',
-                    onClick: (v, record) => v.FormShow('delete', record)
-                }))
+                .AddOption('update', Options.update)
+                .AddOption('delete', Options.delete)
         })
         return column
     }
