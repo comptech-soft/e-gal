@@ -1,21 +1,25 @@
-/**
- * Locations
+/** 
+ * Superadmin. Locations 
  */
-const 
-    Runer = require('comptechsoft-core-libs').Runer,
-    ModernAdminApps = require('comptechsoft-admin-modern').Apps,
-    store = new Vuex.Store(require('../../../App/Store/store')) 
 
-Runer.Run($, window, {
-    name: 'ComptechApp',
-    apps: {
-        'nav': ModernAdminApps.Nav(store),
-        'sidebar': ModernAdminApps.Sidebar(store),
-        'locations': require('./App/App')(store)
+const 
+    /** Boot the system */
+    Boot = require('comptechsoft-admin-modern').Boot,
+    
+    /** Runer function */
+    Run = Boot('ComptechApp', require('./../../../App/Store/store') ),
+    
+    /** Vue Apps */
+    apps = {
+        'roles': require('./App/App')
     },
-    components: {
-        'simple-page-filter': null,
+    
+    /** Vue components */
+    components = {
         'simple-page-data': require('comptechsoft-admin-modern').Data,
-        'location-form': require('./App/Components/Form'),
+        'simple-page-filter': null,
+        'simple-page-form': require('./App/Components/Form'),
     }
-})
+
+/** Call the Runner function */
+Run(apps, components)

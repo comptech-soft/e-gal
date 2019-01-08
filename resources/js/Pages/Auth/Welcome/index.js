@@ -1,15 +1,19 @@
-/**
- * Welcome
+/** 
+ * Welcome page 
  */
-const 
-    Runer = require('comptechsoft-core-libs').Runer,
-    ModernAdminApps = require('comptechsoft-admin-modern').Apps,
-    store = new Vuex.Store(require('../../../App/Store/store')) 
 
-Runer.Run($, window, {
-    name: 'ComptechApp',
-    apps: {
-        'nav': ModernAdminApps.Nav(store),
-        'sidebar': ModernAdminApps.Sidebar(store),
-    }
-})
+const 
+    /** Boot the system */
+    Boot = require('comptechsoft-admin-modern').Boot,
+    
+    /** Runer function */
+    Run = Boot('ComptechApp', require('./../../../App/Store/store') ),
+    
+    /** Vue Apps */
+    apps = {},
+    
+    /** Vue components */
+    components = {}
+
+/** Call the Runner function */
+Run(apps, components)

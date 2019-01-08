@@ -5010,7 +5010,7 @@ module.exports = {
      * Menus and options
      */
     Menus: {
-        Menu: __webpack_require__(8),
+        Menu: __webpack_require__(9),
         DefaultOptions: __webpack_require__(198),
         Create: __webpack_require__(145),
     },
@@ -5383,6 +5383,84 @@ module.exports = g;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = {
+
+    /**
+     * Entry pointul pentru o pagina
+     */
+    Boot: __webpack_require__(217),
+
+    /**
+     * Nav: Vue App 
+     * Meniul din header
+     */
+    NavApp: __webpack_require__(148),
+
+    /**
+     * Sidebar: Vue App
+     */
+    SidebarApp: __webpack_require__(149),
+
+    /**
+     * Create a SimplePage Vue App
+     */
+    SimplePage: {
+        /** Creator */
+        App: __webpack_require__(247),
+        
+        /** Layout */
+        PageLayout: __webpack_require__(263),
+
+        // /** Component */
+        // Component: require('./../src/SimplePage/Main'),
+    },
+
+    /**
+     * Data: Vue Component
+     * Are la randul ei header, grid, etc
+     */
+    Data: __webpack_require__(264),
+
+
+    /**
+     * Card: Vue Component
+     */
+    Card: __webpack_require__(10),
+    
+    /**
+     * CardForm: Vue Component
+     */
+    CardForm: __webpack_require__(328),
+
+
+
+    components: {
+
+        
+
+        
+        'vt-link': __webpack_require__(151),
+        'vt-button': __webpack_require__(152),
+
+        'vt-checkbox': __webpack_require__(153),
+
+        'vt-remote-select': __webpack_require__(348),
+        
+
+
+        'vt-img': __webpack_require__(154),
+    },
+
+    pages: {
+        'login': __webpack_require__(356),
+    },
+
+}
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -5484,7 +5562,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(139)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 class Menu {
@@ -5607,84 +5685,6 @@ class Menu {
 }
 
 module.exports = Menu
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-
-    /**
-     * Entry pointul pentru o pagina
-     */
-    Boot: __webpack_require__(217),
-
-    /**
-     * Nav: Vue App 
-     * Meniul din header
-     */
-    NavApp: __webpack_require__(148),
-
-    /**
-     * Sidebar: Vue App
-     */
-    SidebarApp: __webpack_require__(149),
-
-    /**
-     * Create a SimplePage Vue App
-     */
-    SimplePage: {
-        /** Creator */
-        App: __webpack_require__(247),
-        
-        /** Layout */
-        PageLayout: __webpack_require__(263),
-
-        // /** Component */
-        // Component: require('./../src/SimplePage/Main'),
-    },
-
-    /**
-     * Data: Vue Component
-     * Are la randul ei header, grid, etc
-     */
-    Data: __webpack_require__(264),
-
-
-    /**
-     * Card: Vue Component
-     */
-    Card: __webpack_require__(10),
-    
-    /**
-     * CardForm: Vue Component
-     */
-    CardForm: __webpack_require__(328),
-
-
-
-    components: {
-
-        
-
-        
-        'vt-link': __webpack_require__(151),
-        'vt-button': __webpack_require__(152),
-
-        'vt-checkbox': __webpack_require__(153),
-
-        'vt-remote-select': __webpack_require__(348),
-        
-
-
-        'vt-img': __webpack_require__(154),
-    },
-
-    pages: {
-        'login': __webpack_require__(356),
-    },
-
-}
 
 /***/ }),
 /* 10 */
@@ -18357,7 +18357,7 @@ module.exports = (app) => {
 /* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const Menu = __webpack_require__(8)
+const Menu = __webpack_require__(9)
 
 module.exports = (name, properties, vue = null) => {
 
@@ -18798,6 +18798,14 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
+    'cs-textbox': __webpack_require__(358)
+}
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
 
     'Launcher': __webpack_require__(12),
     'Runer': __webpack_require__(190),
@@ -18814,14 +18822,6 @@ module.exports = {
             'Components': __webpack_require__(192), 
         }
     }
-}
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-    'cs-textbox': __webpack_require__(358)
 }
 
 /***/ }),
@@ -36225,7 +36225,7 @@ module.exports = __webpack_require__(160);
 var utils = __webpack_require__(2);
 var bind = __webpack_require__(138);
 var Axios = __webpack_require__(162);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 
 /**
  * Create an instance of Axios
@@ -36308,7 +36308,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var utils = __webpack_require__(2);
 var InterceptorManager = __webpack_require__(171);
 var dispatchRequest = __webpack_require__(172);
@@ -36847,7 +36847,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(2);
 var transformData = __webpack_require__(173);
 var isCancel = __webpack_require__(142);
-var defaults = __webpack_require__(7);
+var defaults = __webpack_require__(8);
 var isAbsoluteURL = __webpack_require__(174);
 var combineURLs = __webpack_require__(175);
 
@@ -61869,7 +61869,7 @@ module.exports = Page
 /* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const Menu = __webpack_require__(8)
+const Menu = __webpack_require__(9)
 
 class Header {
 
@@ -62053,7 +62053,7 @@ module.exports = {
 module.exports = (name, store_object) => {
 
     /** Init main Javascript object  */
-    const Runer = __webpack_require__(155).Runer
+    const Runer = __webpack_require__(156).Runer
     
     /** Create the store */
     const store = new Vuex.Store(store_object)
@@ -70593,7 +70593,7 @@ exports.default = {
         'vt-checkbox': __webpack_require__(153),
         'vt-link': __webpack_require__(151),
 
-        'cs-textbox': __webpack_require__(156)['cs-textbox']
+        'cs-textbox': __webpack_require__(155)['cs-textbox']
         // 'vt-textbox': require('./../../controls/Texts/Textbox'),
     }
 };
@@ -71154,7 +71154,7 @@ module.exports = __webpack_require__(371);
 
 var
 /** Boot the system */
-Boot = __webpack_require__(9).Boot,
+Boot = __webpack_require__(7).Boot,
 
 
 /** Runer function */
@@ -71169,7 +71169,7 @@ apps = {
 
 /** Vue components */
 components = {
-    'simple-page-data': __webpack_require__(9).Data,
+    'simple-page-data': __webpack_require__(7).Data,
     'simple-page-filter': null,
     'simple-page-form': __webpack_require__(379)
 
@@ -71185,7 +71185,7 @@ components = {
 
 var
 /** Simple page App Creator */
-SimplePageApp = __webpack_require__(9).SimplePage.App,
+SimplePageApp = __webpack_require__(7).SimplePage.App,
 
 
 /** Roles Page Layout definition */
@@ -71207,7 +71207,7 @@ module.exports = function (store) {
 "use strict";
 
 
-var CreatePageLayout = __webpack_require__(9).SimplePage.PageLayout;
+var CreatePageLayout = __webpack_require__(7).SimplePage.PageLayout;
 
 module.exports = CreatePageLayout({
     header: __webpack_require__(374),
@@ -71534,8 +71534,8 @@ exports.default = {
     },
 
     components: {
-        'card-form': __webpack_require__(9).CardForm,
-        'cs-textbox': __webpack_require__(156)['cs-textbox']
+        'card-form': __webpack_require__(7).CardForm,
+        'cs-textbox': __webpack_require__(155)['cs-textbox']
     }
 };
 

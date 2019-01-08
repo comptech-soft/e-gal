@@ -7,7 +7,19 @@
         @error="onError"
     >
         <template slot="form-controls">
-            Controalele pentru locations
+            <div class="form-row">
+                <div class="col">
+                    <cs-textbox
+                        id="name"
+                        field="name"
+                        placeholder="Denumire"
+                        :disabled="is_delete"
+                        v-model="record.name"
+                        :errors="errors"
+                    >
+                    </cs-textbox>
+                </div>
+            </div>
         </template>
     </card-form>
 </template>
@@ -24,8 +36,8 @@
             return {
                 record: {
                     id: null,
-                    slug: null,
                     name: null,
+                    type: 'country',
                 },
                 errors: null,
             }

@@ -1,5 +1,5 @@
 /**
- * Login
+ * Login page
  */
 const 
     Runer = require('comptechsoft-core-libs').Runer,
